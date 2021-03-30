@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/newsFeedFragment"
+        android:title="@string/news_feed" />
+    <item
+        android:id="@+id/newsReadLaterFragment"
+        android:title="@string/read_later" />
+</menu>

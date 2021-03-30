@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.orlovvv.yandex.newsapp.util.Constants.Companion.BASE_URL
 
-class Retrofit {
+class RetrofitInstance {
     companion object {
 
         private val retrofit by lazy {

@@ -1,7 +1,7 @@
 package ru.orlovvv.peter.newsapp.models
 
 data class NewsResponse(
-    val articles: List<Article>,
-    val status: String,
-    val totalResults: Int
+    val articles: List<Article>?,
+    val status: String?,
+    val totalResults: Int?
 )

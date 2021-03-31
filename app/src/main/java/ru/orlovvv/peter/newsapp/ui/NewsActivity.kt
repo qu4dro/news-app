@@ -14,8 +14,6 @@ class NewsActivity : AppCompatActivity() {
     private lateinit var _newsViewModel: NewsViewModel
     val newsViewModel: NewsViewModel
         get() = _newsViewModel
-    private lateinit var newsRepository: NewsRepository
-    private lateinit var newsViewModelProviderFactory: NewsViewModelProviderFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +21,8 @@ class NewsActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        newsRepository = NewsRepository()
-        newsViewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
+        val newsRepository = NewsRepository()
+        val newsViewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
         _newsViewModel =
             ViewModelProvider(this, newsViewModelProviderFactory).get(NewsViewModel::class.java)
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ru.orlovvv.peter.newsapp.R
+import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
 import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
 import ru.orlovvv.peter.newsapp.repository.NewsRepository
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
@@ -18,7 +19,7 @@ import ru.orlovvv.peter.newsapp.util.Resource
 
 class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
-    lateinit var newsViewModel: NewsViewModel
+    private lateinit var newsViewModel: NewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,26 +29,26 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
         newsViewModel = (activity as NewsActivity).newsViewModel
 
-        val binding = FragmentNewsFeedBinding.inflate(inflater, container, false)
+        val binding = FragmentNewsFeedBinding.inflate(inflater)
 
         binding.apply {
             lifecycleOwner = this@NewsFeedFragment
             viewModel = newsViewModel
+            rvNewsFeed.adapter = NewsAdapter()
 
         }
 
-        newsViewModel.topNews.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
-                is Resource.Success -> {
-                    //TODO PROGRESS HIDE
-                    response.data?.let { newsResponse ->
-                        Log.d("123", "onCreateView: ${newsResponse.articles.toString()}")
-                    }
 
-                }
-            }
-
-        })
+//        newsViewModel.topNews.observe(viewLifecycleOwner, Observer { response ->
+//            when (response) {
+//                is Resource.Success -> {
+//                    //TODO PROGRESS HIDE
+//                    newsViewModel.topNewsArticlesList.value = response.data?.articles
+//
+//                }
+//            }
+//
+//        })
 
         return binding.root
     }

@@ -1,4 +1,4 @@
-package ru.orlovvv.yandex.newsapp.api
+package ru.orlovvv.peter.newsapp.api
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import ru.orlovvv.yandex.newsapp.util.Constants.Companion.BASE_URL
+import ru.orlovvv.peter.newsapp.util.Constants.Companion.BASE_URL
 
 class RetrofitInstance {
     companion object {

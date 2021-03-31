@@ -1,4 +1,4 @@
-package ru.orlovvv.yandex.newsapp.util
+package ru.orlovvv.peter.newsapp.util
 
 class Constants {
     companion object {

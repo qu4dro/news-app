@@ -1,4 +1,4 @@
-package ru.orlovvv.yandex.newsapp.models
+package ru.orlovvv.peter.newsapp.models
 
 data class NewsResponse(
     val articles: List<Article>,

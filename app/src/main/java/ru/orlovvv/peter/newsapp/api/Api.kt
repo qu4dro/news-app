@@ -1,10 +1,10 @@
-package ru.orlovvv.yandex.newsapp.api
+package ru.orlovvv.peter.newsapp.api
 
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.orlovvv.yandex.newsapp.models.NewsResponse
-import ru.orlovvv.yandex.newsapp.util.ApiKey.Companion.DEVELOPER_API_KEY
+import ru.orlovvv.peter.newsapp.models.NewsResponse
+import ru.orlovvv.peter.newsapp.util.ApiKey.Companion.DEVELOPER_API_KEY
 
 interface Api {
 

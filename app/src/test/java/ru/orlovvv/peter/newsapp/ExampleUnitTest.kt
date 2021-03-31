@@ -1,4 +1,4 @@
-package ru.orlovvv.yandex.newsapp
+package ru.orlovvv.peter.newsapp
 
 import org.junit.Test
 

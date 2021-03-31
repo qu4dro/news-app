@@ -10,54 +10,67 @@
             type="ru.orlovvv.peter.newsapp.models.Article" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="16dp"
+             >
 
-        <ImageView
-            android:id="@+id/iv_article_image"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:background="@color/teal_200"
-            app:imageUrl="@{article.urlToImage}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+             <ImageView
+                 android:id="@+id/iv_article_image"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:adjustViewBounds="true"
+                 android:scaleType="fitXY"
+                 tools:srcCompat="@tools:sample/backgrounds/scenic"
+                 app:imageUrl="@{article.urlToImage}"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:text="@{article.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_article_image"
-            tools:text="Article some information exampleArticle some information exampleArticle some information example" />
+             <TextView
+                 android:id="@+id/tv_title"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:paddingTop="16dp"
+                 android:paddingBottom="16dp"
+                 android:text="@{article.title}"
+                 android:textFontWeight="700"
+                 android:textSize="16sp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/iv_article_image"
+                 tools:text="Articleeеееe some information exampleArticle some information exampleArticle some information example" />
 
-        <TextView
-            android:id="@+id/tv_source_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{article.source.name}"
-            app:layout_constraintEnd_toStartOf="@id/tv_published_at"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="Source Media" />
+             <TextView
+                 android:id="@+id/tv_source_name"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:text="@{article.source.name}"
+                 android:textFontWeight="700"
+                 android:textSize="14sp"
+                 app:layout_constraintEnd_toStartOf="@id/tv_published_at"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tv_title"
+                 tools:text="Source Media" />
 
-        <TextView
-            android:id="@+id/tv_published_at"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="@{article.publishedAt}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_source_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="12.12.2012" />
+             <TextView
+                 android:id="@+id/tv_published_at"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:gravity="right"
+                 android:textSize="14sp"
+                 android:textFontWeight="700"
+                 android:text="@{article.publishedAt}"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toEndOf="@id/tv_source_name"
+                 app:layout_constraintTop_toBottomOf="@id/tv_title"
+                 tools:text="12.12.2012" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </layout>

@@ -1,10 +1,13 @@
 package ru.orlovvv.peter.newsapp.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.coroutines.Job
@@ -34,31 +37,27 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         binding.apply {
             lifecycleOwner = this@SearchNewsFragment
             viewModel = newsViewModel
+            etSearchNews.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?, start: Int, count: Int, after: Int) {
+                    chCategories.visibility = View.GONE
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    newsViewModel.findNews(s.toString())
+                    if (s != null) {
+                        if (s.isEmpty()) chCategories.visibility = View.VISIBLE
+                    }
+                    rvSearchedNews.visibility = View.VISIBLE
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
 
         }
-
-
-//        var job: Job? = null
-//        sv_search_news.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                if (newText != null) {
-//                    newsViewModel.findNews(newText)
-//                }
-//                return true
-//            }
-//
-//        })
-//            job?.cancel()
-//            job = MainScope().launch {
-//
-//                newsViewModel.findNews(sv_search_news.query.toString())
-//            }
-//        }
-
 
         return binding.root
     }

@@ -9,14 +9,14 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.models.news.NewsResponse
+import ru.orlovvv.peter.newsapp.models.news_sources.NewsSourceInfo
 import ru.orlovvv.peter.newsapp.repository.NewsRepository
 import ru.orlovvv.peter.newsapp.util.Resource
 import java.lang.Exception
 
 class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
-
-    private val _topNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val _topNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     val topNews: LiveData<Resource<NewsResponse>>
         get() = _topNews
 
@@ -25,10 +25,9 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         get() = _topNewsArticlesList
 
     init {
-        Log.d("123", ": init")
         getTopNews()
-    }
 
+    }
 
     private fun getTopNews() = viewModelScope.launch {
         try {
@@ -40,7 +39,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 //            _topNewsArticlesList.value = _topNews.value!!.data?.articles
 //            Log.d("123", "getTopNews: после присваивания ${_topNewsArticlesList.value}")
         } catch (e: Exception) {
-//            _topNewsArticlesList.value = ArrayList()
+            _topNewsArticlesList.value = ArrayList()
         }
 
         //TODO TRY CATCH
@@ -57,5 +56,6 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
         return Resource.Error(response.message())
     }
+
 }
 

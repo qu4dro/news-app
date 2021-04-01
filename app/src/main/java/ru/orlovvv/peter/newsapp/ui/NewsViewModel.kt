@@ -16,7 +16,7 @@ import java.lang.Exception
 
 class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
-    val _topNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    private val _topNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     val topNews: LiveData<Resource<NewsResponse>>
         get() = _topNews
 
@@ -24,36 +24,35 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
     val topNewsArticlesList: LiveData<List<Article>>
         get() = _topNewsArticlesList
 
+    private val _searchedNewsArticlesList: MutableLiveData<List<Article>> = MutableLiveData()
+    val searchedNewsArticlesList: LiveData<List<Article>>
+        get() = _searchedNewsArticlesList
+
     init {
         getTopNews()
-
     }
 
     private fun getTopNews() = viewModelScope.launch {
         try {
-//            _topNews.value = Resource.Loading()
             _topNewsArticlesList.value = newsRepository.getTopNews().body()?.articles
-//            val response = newsRepository.getTopNews()
-//            _topNews.value = handleResponse(response)
-//            Log.d("123", "getTopNews: перед присваиванием ${_topNewsArticlesList.value}")
-//            _topNewsArticlesList.value = _topNews.value!!.data?.articles
-//            Log.d("123", "getTopNews: после присваивания ${_topNewsArticlesList.value}")
         } catch (e: Exception) {
             _topNewsArticlesList.value = ArrayList()
         }
+    }
 
-        //TODO TRY CATCH
-
+    fun findNews(searchQuery: String) = viewModelScope.launch {
+        try {
+            _searchedNewsArticlesList.value = newsRepository.findNews(searchQuery).body()?.articles
+        } catch (e: Exception) {
+        }
     }
 
     private fun handleResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
         if (response.isSuccessful) {
-
             response.body()?.let {
                 return Resource.Success(it)
             }
         }
-
         return Resource.Error(response.message())
     }
 

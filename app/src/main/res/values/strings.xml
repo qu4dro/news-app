@@ -3,4 +3,5 @@
     <string name="news_feed">News feed</string>
     <string name="read_later">Read later</string>
     <string name="search">Search</string>
+    <string name="popular_categories">Popular categories</string>
 </resources>

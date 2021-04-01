@@ -5,11 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import ru.orlovvv.peter.newsapp.models.Article
-import ru.orlovvv.peter.newsapp.models.NewsResponse
+import ru.orlovvv.peter.newsapp.models.news.Article
+import ru.orlovvv.peter.newsapp.models.news.NewsResponse
 import ru.orlovvv.peter.newsapp.repository.NewsRepository
 import ru.orlovvv.peter.newsapp.util.Resource
 import java.lang.Exception

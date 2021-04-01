@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.orlovvv.peter.newsapp.databinding.ItemArticleBinding
-import ru.orlovvv.peter.newsapp.models.Article
-import ru.orlovvv.peter.newsapp.models.NewsResponse
+import ru.orlovvv.peter.newsapp.models.news.Article
 
 class NewsAdapter : ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBack()) {
 

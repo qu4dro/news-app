@@ -3,7 +3,7 @@ package ru.orlovvv.peter.newsapp.api
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.orlovvv.peter.newsapp.models.NewsResponse
+import ru.orlovvv.peter.newsapp.models.news.NewsResponse
 import ru.orlovvv.peter.newsapp.util.ApiKey.Companion.DEVELOPER_API_KEY
 
 interface Api {
@@ -16,4 +16,5 @@ interface Api {
         @Query("apiKey") apiKey: String = DEVELOPER_API_KEY
     ): Response<NewsResponse>
 
+//    @GET("v2/everything")
 }

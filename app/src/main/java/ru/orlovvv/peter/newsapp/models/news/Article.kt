@@ -1,4 +1,4 @@
-package ru.orlovvv.peter.newsapp.models
+package ru.orlovvv.peter.newsapp.models.news
 
 import java.io.Serializable
 

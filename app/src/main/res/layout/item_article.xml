@@ -7,7 +7,7 @@
 
         <variable
             name="article"
-            type="ru.orlovvv.peter.newsapp.models.Article" />
+            type="ru.orlovvv.peter.newsapp.models.news.Article" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package ru.orlovvv.peter.newsapp.models
+package ru.orlovvv.peter.newsapp.models.news
 
 data class NewsResponse(
     val articles: List<Article>?,

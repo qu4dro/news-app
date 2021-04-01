@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
-import ru.orlovvv.peter.newsapp.models.Article
+import ru.orlovvv.peter.newsapp.models.news.Article
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {

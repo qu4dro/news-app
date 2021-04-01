@@ -2,4 +2,5 @@
     <string name="app_name">News app</string>
     <string name="news_feed">News feed</string>
     <string name="read_later">Read later</string>
+    <string name="search">Search</string>
 </resources>

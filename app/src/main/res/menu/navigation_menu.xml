@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/newsFeedFragment"
-        android:title="@string/news_feed" />
+        android:title="@string/news_feed"
+        android:icon="@drawable/ic_feed"/>
     <item
         android:id="@+id/newsReadLaterFragment"
-        android:title="@string/read_later" />
+        android:title="@string/read_later"
+        android:icon="@drawable/ic_read_later"/>
+    <item
+        android:title="@string/search"
+        android:icon="@drawable/ic_search"
+        />
 </menu>

@@ -45,14 +45,18 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             etSearchNews.addTextChangedListener(object : TextWatcher {
 
                 override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int) =
-                    showOrHideSearchChips(s)
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) =
                     showSearchedNews(s)
 
-                override fun afterTextChanged(s: Editable?) =
+                override fun afterTextChanged(s: Editable?) {
+                    showOrHideSearchChips(s)
                     showOrHideNewsRecycler(s)
+                }
+
 
             })
         }
@@ -82,14 +86,11 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
     private fun showOrHideSearchChips(s: CharSequence?) {
         if (s != null) {
-            if (s.isNotEmpty() || s != "") {
-                binding.tvPopularCategories.visibility = View.GONE
-                binding.chCategories.visibility = View.GONE
+            if (s.isEmpty()) {
+                binding.clCategoriesBlock.visibility = View.VISIBLE
             } else {
-                binding.tvPopularCategories.visibility = View.VISIBLE
-                binding.chCategories.visibility = View.VISIBLE
+                binding.clCategoriesBlock.visibility = View.GONE
             }
-
         }
 
     }

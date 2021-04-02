@@ -24,6 +24,8 @@ import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
     private lateinit var newsViewModel: NewsViewModel
+    private var job: Job? = null
+    private lateinit var binding: FragmentSearchNewsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +35,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
         newsViewModel = (activity as NewsActivity).newsViewModel
 
-        val binding = FragmentSearchNewsBinding.inflate(inflater)
-
-
+        binding = FragmentSearchNewsBinding.inflate(inflater)
 
         binding.apply {
             lifecycleOwner = this@SearchNewsFragment
@@ -44,35 +44,54 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
             etSearchNews.addTextChangedListener(object : TextWatcher {
 
-                var job: Job? = null
-
                 override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int
-                ) {
-                    chCategories.visibility = View.GONE
-                    tvPopularCategories.visibility = View.GONE
-                }
+                    s: CharSequence?, start: Int, count: Int, after: Int) =
+                    showOrHideSearchChips(s)
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    job?.cancel()
-                    job = MainScope().launch {
-                        delay(500L)
-                        if (s != null) {
-                            if (s.isNotEmpty())
-                                newsViewModel.findNews(s.toString())
-                        }
-                    }
-                    rvSearchedNews.visibility = View.VISIBLE
-                }
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) =
+                    showSearchedNews(s)
 
-                override fun afterTextChanged(s: Editable?) {
-                }
+                override fun afterTextChanged(s: Editable?) =
+                    showOrHideNewsRecycler(s)
 
             })
+        }
+        return binding.root
+    }
+
+
+    private fun showSearchedNews(s: CharSequence?) {
+        job?.cancel()
+        job = MainScope().launch {
+            delay(500L)
+            if (s != null) {
+                newsViewModel.findNews(s.toString())
+            }
+        }
+    }
+
+    private fun showOrHideNewsRecycler(s: Editable?) {
+        if (s != null) {
+            if (s.isNotEmpty() || s.toString() != "") {
+                binding.rvSearchedNews.visibility = View.VISIBLE
+            } else {
+                binding.rvSearchedNews.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showOrHideSearchChips(s: CharSequence?) {
+        if (s != null) {
+            if (s.isNotEmpty() || s != "") {
+                binding.tvPopularCategories.visibility = View.GONE
+                binding.chCategories.visibility = View.GONE
+            } else {
+                binding.tvPopularCategories.visibility = View.VISIBLE
+                binding.chCategories.visibility = View.VISIBLE
+            }
 
         }
-//        newsViewModel.findNews("О")
-        return binding.root
+
     }
 
 }

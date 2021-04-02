@@ -44,6 +44,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         try {
             _searchedNewsArticlesList.value = newsRepository.findNews(searchQuery).body()?.articles
         } catch (e: Exception) {
+            _searchedNewsArticlesList.value = ArrayList()
         }
     }
 

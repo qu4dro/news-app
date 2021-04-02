@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
@@ -34,31 +35,43 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
         val binding = FragmentSearchNewsBinding.inflate(inflater)
 
+
+
         binding.apply {
             lifecycleOwner = this@SearchNewsFragment
             viewModel = newsViewModel
+            rvSearchedNews.adapter = NewsAdapter()
+
             etSearchNews.addTextChangedListener(object : TextWatcher {
+
+                var job: Job? = null
+
                 override fun beforeTextChanged(
-                    s: CharSequence?, start: Int, count: Int, after: Int) {
+                    s: CharSequence?, start: Int, count: Int, after: Int
+                ) {
                     chCategories.visibility = View.GONE
+                    tvPopularCategories.visibility = View.GONE
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    newsViewModel.findNews(s.toString())
-                    if (s != null) {
-                        if (s.isEmpty()) chCategories.visibility = View.VISIBLE
+                    job?.cancel()
+                    job = MainScope().launch {
+                        delay(500L)
+                        if (s != null) {
+                            if (s.isNotEmpty())
+                                newsViewModel.findNews(s.toString())
+                        }
                     }
                     rvSearchedNews.visibility = View.VISIBLE
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-
                 }
 
             })
 
         }
-
+//        newsViewModel.findNews("О")
         return binding.root
     }
 

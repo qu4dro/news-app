@@ -35,7 +35,17 @@ class NewsAdapter : ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBac
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = getItem(position)
-
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {
+                it(article)
+            }
+        }
         holder.bind(article)
+    }
+
+    private var onItemClickListener: ((Article) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
     }
 }

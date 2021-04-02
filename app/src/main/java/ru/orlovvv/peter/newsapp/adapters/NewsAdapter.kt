@@ -30,7 +30,7 @@ class NewsAdapter : ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBac
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        return NewsViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(parent.context)))
+        return NewsViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {

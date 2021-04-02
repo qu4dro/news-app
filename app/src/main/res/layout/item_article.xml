@@ -29,14 +29,13 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@{article.title}"
             android:textFontWeight="700"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_article_image"
             tools:text="Articleeеееe some information exampleArticle some information exampleArticle some information example" />
@@ -48,7 +47,6 @@
             android:text="@{article.source.name}"
             android:textFontWeight="700"
             android:textSize="12sp"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="Source Media" />

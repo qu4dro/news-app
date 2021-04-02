@@ -14,8 +14,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_news_feed"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:clipToPadding="true"
             app:listData="@{viewModel.topNewsArticlesList}"
             app:layout_constraintBottom_toBottomOf="parent"

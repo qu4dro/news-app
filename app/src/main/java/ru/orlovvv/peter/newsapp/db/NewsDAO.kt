@@ -11,8 +11,8 @@ interface NewsDAO {
     suspend fun insert(article: Article): Long
 
     @Delete
-    suspend fun deleteArticle(article: Article)
+    suspend fun delete(article: Article)
 
     @Query(value = "SELECT * FROM articles")
-    fun getAllArticles(): LiveData<List<Article>>
+    fun getAll(): LiveData<List<Article>>
 }

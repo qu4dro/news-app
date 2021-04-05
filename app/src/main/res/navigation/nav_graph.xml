@@ -24,7 +24,7 @@
         android:name="ru.orlovvv.peter.newsapp.ui.fragments.NewsReadLaterFragment"
         android:label="NewsReadLaterFragment" >
         <action
-            android:id="@+id/action_newsReadLaterFragment2_to_articleInfoFragment"
+            android:id="@+id/action_newsReadLaterFragment_to_articleInfoFragment"
             app:destination="@id/articleInfoFragment" />
     </fragment>
     <fragment

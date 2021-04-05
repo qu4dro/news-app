@@ -40,6 +40,17 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         }
     }
 
+
+    fun saveToReadLater(article: Article) = viewModelScope.launch {
+        newsRepository.insert(article)
+    }
+
+    fun deleteFromReadLater(article: Article) = viewModelScope.launch {
+        newsRepository.delete(article)
+    }
+
+    fun getAllSavedNews() = newsRepository.getAll()
+
     fun findNews(searchQuery: String) = viewModelScope.launch {
         try {
             _searchedNewsArticlesList.value = newsRepository.findNews(searchQuery).body()?.articles

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
 import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
+import ru.orlovvv.peter.newsapp.databinding.FragmentNewsReadLaterBinding
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
@@ -23,7 +24,7 @@ class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentNewsFeedBinding.inflate(inflater)
+        val binding = FragmentNewsReadLaterBinding.inflate(inflater)
         newsViewModel = (activity as NewsActivity).newsViewModel
 
         newsFeedAdapter = NewsAdapter()

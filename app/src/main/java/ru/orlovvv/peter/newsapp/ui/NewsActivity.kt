@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
+import ru.orlovvv.peter.newsapp.db.NewsDatabase
 import ru.orlovvv.peter.newsapp.repository.NewsRepository
 
 class NewsActivity : AppCompatActivity() {
@@ -21,7 +22,8 @@ class NewsActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val newsRepository = NewsRepository()
+        val newsDB = NewsDatabase(this)
+        val newsRepository = NewsRepository(newsDB)
         val newsViewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
         _newsViewModel =
             ViewModelProvider(this, newsViewModelProviderFactory).get(NewsViewModel::class.java)

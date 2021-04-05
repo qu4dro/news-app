@@ -36,9 +36,6 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
             findNavController().navigate(R.id.action_newsFeedFragment_to_articleInfoFragment)
         }
 
-//        val feedNewsAdapter = NewsAdapter()
-//        feedNewsAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
-
         val binding = FragmentNewsFeedBinding.inflate(inflater)
 
         binding.apply {
@@ -46,20 +43,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
             viewModel = newsViewModel
             rvNewsFeed.adapter = newsFeedAdapter
 
-
         }
-
-
-//        newsViewModel.topNews.observe(viewLifecycleOwner, Observer { response ->
-//            when (response) {
-//                is Resource.Success -> {
-//                    //TODO PROGRESS HIDE
-//                    newsViewModel.topNewsArticlesList.value = response.data?.articles
-//
-//                }
-//            }
-//
-//        })
 
         return binding.root
     }

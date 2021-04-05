@@ -6,7 +6,11 @@
     <fragment
         android:id="@+id/articleInfoFragment"
         android:name="ru.orlovvv.peter.newsapp.ui.fragments.ArticleInfoFragment"
-        android:label="ArticleInfoFragment" />
+        android:label="ArticleInfoFragment" >
+        <argument
+            android:name="article"
+            app:argType="ru.orlovvv.peter.newsapp.models.news.Article" />
+    </fragment>
     <fragment
         android:id="@+id/newsFeedFragment"
         android:name="ru.orlovvv.peter.newsapp.ui.fragments.NewsFeedFragment"

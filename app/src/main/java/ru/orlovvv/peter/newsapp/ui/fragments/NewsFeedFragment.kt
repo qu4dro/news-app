@@ -33,7 +33,13 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         newsViewModel = (activity as NewsActivity).newsViewModel
         newsFeedAdapter = NewsAdapter()
         newsFeedAdapter.setOnItemClickListener {
-            findNavController().navigate(R.id.action_newsFeedFragment_to_articleInfoFragment)
+            val bundle = Bundle().apply {
+                putSerializable("article", it)
+            }
+            findNavController().navigate(
+                R.id.action_newsFeedFragment_to_articleInfoFragment,
+                bundle
+            )
         }
 
         val binding = FragmentNewsFeedBinding.inflate(inflater)

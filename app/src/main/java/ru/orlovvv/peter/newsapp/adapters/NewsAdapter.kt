@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_article.view.*
 import ru.orlovvv.peter.newsapp.databinding.ItemArticleBinding
 import ru.orlovvv.peter.newsapp.models.news.Article
+import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
-class NewsAdapter : ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBack()) {
+class NewsAdapter(var viewModel: NewsViewModel) : ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBack()) {
 
     class NewsViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -41,6 +42,9 @@ class NewsAdapter : ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBac
             onItemClickListener?.let {
                 it(article)
             }
+        }
+        holder.itemView.btn_save.setOnClickListener {
+            viewModel.saveToReadLater(article)
         }
         holder.bind(article)
     }

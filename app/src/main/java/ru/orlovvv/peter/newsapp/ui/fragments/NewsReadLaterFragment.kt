@@ -1,11 +1,15 @@
 package ru.orlovvv.peter.newsapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
 import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
@@ -27,7 +31,31 @@ class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
         val binding = FragmentNewsReadLaterBinding.inflate(inflater)
         newsViewModel = (activity as NewsActivity).newsViewModel
 
-        newsFeedAdapter = NewsAdapter()
+        newsFeedAdapter = NewsAdapter(newsViewModel)
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback (
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+                ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.absoluteAdapterPosition
+                val article = newsFeedAdapter.getItemWithPosition(position)
+                newsViewModel.deleteFromReadLater(article)
+
+            }
+
+        }
+            
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(binding.rvNewsFeed)
+        }
         newsFeedAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)

@@ -1,6 +1,7 @@
 package ru.orlovvv.peter.newsapp.ui
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +29,12 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
     val searchedNewsArticlesList: LiveData<List<Article>>
         get() = _searchedNewsArticlesList
 
+  //  var _savedNewsArticlesList = listOf<Article>()
+    val _savedNewsArticlesList: LiveData<List<Article>> = getAllSavedNews()
+
+
     init {
+        getAllSavedNews()
         getTopNews()
     }
 
@@ -49,7 +55,9 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         newsRepository.delete(article)
     }
 
-    fun getAllSavedNews() = newsRepository.getAll()
+    fun getAllSavedNews() =
+       newsRepository.getAll()
+
 
     fun findNews(searchQuery: String) = viewModelScope.launch {
         try {
@@ -67,6 +75,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         }
         return Resource.Error(response.message())
     }
-
 }
+
+
 

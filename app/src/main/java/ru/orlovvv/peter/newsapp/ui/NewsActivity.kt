@@ -29,5 +29,6 @@ class NewsActivity : AppCompatActivity() {
             ViewModelProvider(this, newsViewModelProviderFactory).get(NewsViewModel::class.java)
 
         bn_menu.setupWithNavController(nav_host_fragment.findNavController())
+
     }
 }

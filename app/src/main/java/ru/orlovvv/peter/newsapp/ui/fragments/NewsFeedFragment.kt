@@ -10,9 +10,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_news_read_later.*
+import kotlinx.android.synthetic.main.item_article.*
+import kotlinx.android.synthetic.main.item_article.view.*
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
 import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
+import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.repository.NewsRepository
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
@@ -31,7 +35,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
     ): View? {
 
         newsViewModel = (activity as NewsActivity).newsViewModel
-        newsFeedAdapter = NewsAdapter()
+        newsFeedAdapter = NewsAdapter(newsViewModel)
         newsFeedAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)
@@ -48,7 +52,6 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
             lifecycleOwner = this@NewsFeedFragment
             viewModel = newsViewModel
             rvNewsFeed.adapter = newsFeedAdapter
-
         }
 
         return binding.root

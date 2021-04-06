@@ -38,7 +38,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
         newsViewModel = (activity as NewsActivity).newsViewModel
 
-        newsFeedAdapter = NewsAdapter()
+        newsFeedAdapter = NewsAdapter(newsViewModel)
         newsFeedAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)

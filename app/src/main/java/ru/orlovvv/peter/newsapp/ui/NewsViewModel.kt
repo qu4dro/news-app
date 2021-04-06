@@ -35,12 +35,12 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
     init {
         getAllSavedNews()
-        getTopNews(currentTopNewsPage)
+        getTopNews()
     }
 
-    private fun getTopNews(page: Int) = viewModelScope.launch {
+    fun getTopNews() = viewModelScope.launch {
         try {
-            val response = newsRepository.getTopNews(page)
+            val response = newsRepository.getTopNews(currentTopNewsPage)
             if (response.isSuccessful) {
                 response.body()?.let {
                     currentTopNewsPage++
@@ -51,6 +51,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
                         val newTopNews = it.articles
                         if (newTopNews != null) {
                             oldTopNews?.addAll(newTopNews)
+                            oldTopNews?.toList()
                         }
                     }
                     _topNewsArticlesList.value = topNewsResponse?.articles ?: it.articles

@@ -17,9 +17,8 @@ import java.lang.Exception
 
 class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
-    private val _topNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    val topNews: LiveData<Resource<NewsResponse>>
-        get() = _topNews
+    private var topNewsResponse: NewsResponse? = null
+    var currentTopNewsPage = 1
 
     private val _topNewsArticlesList: MutableLiveData<List<Article>> = MutableLiveData()
     val topNewsArticlesList: LiveData<List<Article>>
@@ -29,22 +28,39 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
     val searchedNewsArticlesList: LiveData<List<Article>>
         get() = _searchedNewsArticlesList
 
-  //  var _savedNewsArticlesList = listOf<Article>()
-    val _savedNewsArticlesList: LiveData<List<Article>> = getAllSavedNews()
+    private var _savedNewsArticlesList: LiveData<List<Article>> = MutableLiveData()
+    val savedNewsArticlesList: LiveData<List<Article>>
+        get() = _savedNewsArticlesList
 
 
     init {
         getAllSavedNews()
-        getTopNews()
+        getTopNews(currentTopNewsPage)
     }
 
-    private fun getTopNews() = viewModelScope.launch {
+    private fun getTopNews(page: Int) = viewModelScope.launch {
         try {
-            _topNewsArticlesList.value = newsRepository.getTopNews().body()?.articles
+            val response = newsRepository.getTopNews(page)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    currentTopNewsPage++
+                    if (topNewsResponse == null) {
+                        topNewsResponse = it
+                    } else {
+                        val oldTopNews = topNewsResponse?.articles
+                        val newTopNews = it.articles
+                        if (newTopNews != null) {
+                            oldTopNews?.addAll(newTopNews)
+                        }
+                    }
+                    _topNewsArticlesList.value = topNewsResponse?.articles ?: it.articles
+                }
+            }
         } catch (e: Exception) {
             _topNewsArticlesList.value = ArrayList()
         }
     }
+
 
 
     fun saveToReadLater(article: Article) = viewModelScope.launch {
@@ -55,8 +71,10 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         newsRepository.delete(article)
     }
 
-    fun getAllSavedNews() =
-       newsRepository.getAll()
+    fun getAllSavedNews()  {
+        _savedNewsArticlesList = newsRepository.getAll()
+    }
+
 
 
     fun findNews(searchQuery: String) = viewModelScope.launch {
@@ -67,14 +85,6 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         }
     }
 
-    private fun handleResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
-        if (response.isSuccessful) {
-            response.body()?.let {
-                return Resource.Success(it)
-            }
-        }
-        return Resource.Error(response.message())
-    }
 }
 
 

@@ -11,7 +11,7 @@ import ru.orlovvv.peter.newsapp.models.news.Article
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
     val adapter = recyclerView.adapter as NewsAdapter
-    adapter.submitList(data)
+    adapter.submitList(data?.toList())
 
 }
 

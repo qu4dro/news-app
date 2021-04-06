@@ -7,7 +7,7 @@ import ru.orlovvv.peter.newsapp.models.news.Article
 class NewsRepository(val newsDB: NewsDatabase) {
 
     // network
-    suspend fun getTopNews() = RetrofitInstance.api.getTopNews()
+    suspend fun getTopNews(page: Int) = RetrofitInstance.api.getTopNews(page)
     suspend fun getAllSources() = RetrofitInstance.api.getAllSources()
     suspend fun findNews(searchQuery: String) = RetrofitInstance.api.findNews(searchQuery)
 

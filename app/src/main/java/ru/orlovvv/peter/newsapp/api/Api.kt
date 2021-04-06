@@ -21,8 +21,8 @@ interface Api {
 
     @GET("v2/top-headlines")
     suspend fun getTopNews(
+        @Query("page") page: Int,
         @Query("country") country: String = "ru",
-        @Query("page") page: Int = 1,
         @Query("pageSize") pageSize: Int = 20,
         @Query("apiKey") apiKey: String = DEVELOPER_API_KEY2
     ): Response<NewsResponse>

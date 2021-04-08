@@ -14,8 +14,8 @@ interface Api {
     @GET("/v2/everything")
     suspend fun findNews(
         @Query("q") searchQuery: String,
-        @Query("page") pageNumber: Int = 1,
-        @Query("pageSize") pageSize: Int = 20,
+        @Query("page") pageNumber: Int,
+        @Query("pageSize") pageSize: Int = PAGE_SIZE,
         @Query("apiKey") apiKey: String = DEVELOPER_API_KEY2
     ): Response<NewsResponse>
 
@@ -23,7 +23,7 @@ interface Api {
     @GET("v2/top-headlines")
     suspend fun getTopNews(
         @Query("page") page: Int,
-        @Query("country") country: String = "us",
+        @Query("country") country: String = "ru",
         @Query("pageSize") pageSize: Int = PAGE_SIZE,
         @Query("apiKey") apiKey: String = DEVELOPER_API_KEY2
     ): Response<NewsResponse>

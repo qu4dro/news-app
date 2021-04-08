@@ -5,4 +5,6 @@
     <string name="search">Search</string>
     <string name="popular_categories">Popular categories</string>
     <string name="search_et">Search...</string>
+    <string name="save">SAVE</string>
+    <string name="share">SHARE</string>
 </resources>

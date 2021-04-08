@@ -3,6 +3,7 @@ package ru.orlovvv.peter.newsapp.ui.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
 import ru.orlovvv.peter.newsapp.databinding.FragmentSearchNewsBinding
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
+import ru.orlovvv.peter.newsapp.util.Pagination
 
 class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
@@ -71,11 +73,18 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             })
         }
 
+        val scrollListener = Pagination(newsViewModel, newsViewModel.searchedNewsArticlesList
+        ) { newsViewModel.findNews(binding.etSearchNews.text.toString()) }.scrollListener
+
+        binding.rvSearchedNews.addOnScrollListener(scrollListener)
+
+
         return binding.root
     }
 
 
     private fun showSearchedNews(s: CharSequence?) {
+        newsViewModel.resetArticlesList()
         job?.cancel()
         job = MainScope().launch {
             delay(500L)
@@ -91,6 +100,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                 binding.rvSearchedNews.visibility = View.VISIBLE
             } else {
                 binding.rvSearchedNews.visibility = View.GONE
+                newsViewModel.resetArticlesList()
             }
         }
     }

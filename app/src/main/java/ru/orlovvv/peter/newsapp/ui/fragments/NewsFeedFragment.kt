@@ -63,7 +63,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
             rvNewsFeed.adapter = newsFeedAdapter
         }
 
-        val scrollListener = Pagination(newsViewModel).scrollListener
+        val scrollListener = Pagination(newsViewModel, newsViewModel.topNewsArticlesList).scrollListener
 
         binding.rvNewsFeed.addOnScrollListener(scrollListener)
 

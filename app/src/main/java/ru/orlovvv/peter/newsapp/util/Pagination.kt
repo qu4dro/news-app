@@ -2,11 +2,13 @@ package ru.orlovvv.peter.newsapp.util
 
 import android.util.Log
 import android.widget.AbsListView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
-class Pagination(val newsViewModel: NewsViewModel) {
+class Pagination(val newsViewModel: NewsViewModel, val articlesList: LiveData<List<Article>>) {
 
     var isLoading = false
     var isLastPage = false
@@ -39,7 +41,7 @@ class Pagination(val newsViewModel: NewsViewModel) {
                 newsViewModel.getTopNews()
                 isScrolling = false
                 isLastPage =
-                    newsViewModel.currentTopNewsPage == newsViewModel.topNewsArticlesList.value!!.size / Constants.PAGE_SIZE + 2
+                    newsViewModel.currentTopNewsPage == articlesList.value!!.size / Constants.PAGE_SIZE + 2
             } else {
                 Log.d("123", "onScrolled: shouldNotPaginate")
             }

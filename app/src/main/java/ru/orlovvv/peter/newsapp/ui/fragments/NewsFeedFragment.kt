@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_news_read_later.*
 import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
@@ -20,10 +21,6 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsFeedAdapter: NewsAdapter
-
-    var isLoading = false
-    var isLastPage = false
-    var isScrolling = false
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -18,7 +18,9 @@ import java.lang.Exception
 class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
     private var topNewsResponse: NewsResponse? = null
+    private var searchedNewsResponse: NewsResponse? = null
     var currentTopNewsPage = 1
+    var currentSearchNewsPage = 1
 
     private val _topNewsArticlesList: MutableLiveData<List<Article>> = MutableLiveData()
     val topNewsArticlesList: LiveData<List<Article>>
@@ -62,6 +64,31 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         }
     }
 
+    fun findNews(searchQuery: String) = viewModelScope.launch {
+        try {
+            Log.d("123", "findNews: ${_searchedNewsArticlesList.value?.size} $currentSearchNewsPage")
+            val response = newsRepository.findNews(searchQuery, currentSearchNewsPage)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    currentSearchNewsPage++
+                    if (searchedNewsResponse == null) {
+                        searchedNewsResponse = it
+                    } else {
+                        val oldSearchedNews = searchedNewsResponse?.articles
+                        val newSearchedNews = it.articles
+                        if (newSearchedNews != null) {
+                            oldSearchedNews?.addAll(newSearchedNews)
+                            oldSearchedNews?.toList()
+                        }
+                    }
+                    _searchedNewsArticlesList.value = searchedNewsResponse?.articles ?: it.articles
+                }
+            }
+        } catch (e: Exception) {
+            _searchedNewsArticlesList.value = ArrayList()
+        }
+    }
+
 
 
     fun saveToReadLater(article: Article) = viewModelScope.launch {
@@ -76,16 +103,11 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         _savedNewsArticlesList = newsRepository.getAll()
     }
 
-
-
-    fun findNews(searchQuery: String) = viewModelScope.launch {
-        try {
-            _searchedNewsArticlesList.value = newsRepository.findNews(searchQuery).body()?.articles
-        } catch (e: Exception) {
-            _searchedNewsArticlesList.value = ArrayList()
-        }
+    fun resetArticlesList() {
+        _searchedNewsArticlesList.value = ArrayList()
+        searchedNewsResponse = null
+        currentSearchNewsPage = 1
     }
-
 }
 
 

@@ -24,13 +24,9 @@ fun bindImage(imgView: ImageView, urlToImage: String?) {
         val imgUri =
             urlToImage.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
-            .load(imgUri)
+            .load(if (urlToImage != "") imgUri else R.drawable.ic_broken_image)
             .format(DecodeFormat.PREFER_RGB_565)
             .centerInside()
-            .apply(
-                RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image))
             .into(imgView)
     }
 }

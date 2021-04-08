@@ -53,17 +53,13 @@ class NewsAdapter(var viewModel: NewsViewModel) :
         }
         holder.itemView.tv_save.setOnClickListener {
             viewModel.saveToReadLater(article)
+            holder.itemView.cv_article.isChecked = false
+            hideSaveAndShareButtons(holder, holder.itemView.cv_article.isChecked)
         }
         holder.itemView.cv_article.apply {
             setOnLongClickListener {
                 isChecked = !isChecked
-                if (isChecked) {
-                    tv_save.visibility = View.VISIBLE
-                    tv_share.visibility = View.VISIBLE
-                } else {
-                    tv_save.visibility = View.GONE
-                    tv_share.visibility = View.GONE
-                }
+                hideSaveAndShareButtons(holder, isChecked)
                 true
             }
 
@@ -79,5 +75,18 @@ class NewsAdapter(var viewModel: NewsViewModel) :
 
     fun getItemWithPosition(position: Int): Article {
         return getItem(position)
+    }
+
+    fun hideSaveAndShareButtons(holder: NewsViewHolder, isChecked: Boolean) {
+        holder.itemView.apply {
+            if (isChecked) {
+                tv_save.visibility = View.VISIBLE
+                tv_share.visibility = View.VISIBLE
+            } else {
+                tv_save.visibility = View.GONE
+                tv_share.visibility = View.GONE
+            }
+        }
+
     }
 }

@@ -25,6 +25,7 @@ import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 import ru.orlovvv.peter.newsapp.ui.NewsViewModelProviderFactory
 import ru.orlovvv.peter.newsapp.util.Constants.Companion.PAGE_SIZE
+import ru.orlovvv.peter.newsapp.util.Pagination
 import ru.orlovvv.peter.newsapp.util.Resource
 
 class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
@@ -62,40 +63,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
             rvNewsFeed.adapter = newsFeedAdapter
         }
 
-        val scrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    isScrolling = true
-                }
-            }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                val visibleItemCount = layoutManager.childCount
-                val totalItemCount = layoutManager.itemCount
-
-                val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
-                val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
-                val isNotAtBeginning = firstVisibleItemPosition >= 0
-                val isTotalMoreThanVisible = totalItemCount >= PAGE_SIZE
-                val shouldPaginate =
-                    isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible && isScrolling
-
-                if (shouldPaginate) {
-                    newsViewModel.getTopNews()
-                    isScrolling = false
-                    isLastPage =
-                        newsViewModel.currentTopNewsPage == newsViewModel.topNewsArticlesList.value!!.size / PAGE_SIZE + 2
-                } else {
-
-                }
-
-
-            }
-        }
+        val scrollListener = Pagination(newsViewModel).scrollListener
 
         binding.rvNewsFeed.addOnScrollListener(scrollListener)
 

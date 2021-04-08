@@ -9,7 +9,7 @@ class NewsRepository(val newsDB: NewsDatabase) {
     // network
     suspend fun getTopNews(page: Int) = RetrofitInstance.api.getTopNews(page)
     suspend fun getAllSources() = RetrofitInstance.api.getAllSources()
-    suspend fun findNews(searchQuery: String) = RetrofitInstance.api.findNews(searchQuery)
+    suspend fun findNews(searchQuery: String, page: Int) = RetrofitInstance.api.findNews(searchQuery, page)
 
     // db
     suspend fun insert(article: Article) = newsDB.getNewsDao().insert(article)

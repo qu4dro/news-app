@@ -1,10 +1,12 @@
 package ru.orlovvv.peter.newsapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_news_read_later.*
@@ -48,11 +50,26 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
             rvNewsFeed.adapter = newsFeedAdapter
         }
 
-        val scrollListener = Pagination(newsViewModel, newsViewModel.topNewsArticlesList
+        val scrollListener = Pagination(
+            newsViewModel, newsViewModel.topNewsArticlesList
         ) { newsViewModel.getTopNews() }.scrollListener
 
         binding.rvNewsFeed.addOnScrollListener(scrollListener)
 
+        newsViewModel.topNewsArticlesList.observe(viewLifecycleOwner, {
+            if (it == null || it.isEmpty()) {
+                Snackbar.make(
+                    (activity as NewsActivity).findViewById(android.R.id.content),
+                    "Check internet or API limit",
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction("Retry") {
+                    newsViewModel.getTopNews()
+                }
+                    .show()
+            }
+        })
+
         return binding.root
     }
+
 }

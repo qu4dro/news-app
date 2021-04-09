@@ -37,11 +37,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_categories_block"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sv_search_news"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sv_search_news">
 
             <TextView
                 android:id="@+id/tv_popular_categories"
@@ -59,57 +59,64 @@
                 android:id="@+id/ch_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
                 android:paddingStart="16dp"
+                android:paddingTop="8dp"
                 android:paddingEnd="16dp"
                 android:visibility="visible"
+                app:chipSpacingHorizontal="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_popular_categories">
 
                 <com.google.android.material.chip.Chip
+                    style="@style/Android.Material.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="business"
-                    app:chipCornerRadius="8dp"
                     app:chipIcon="@drawable/ic_business" />
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="entertainment"
-                    app:chipCornerRadius="8dp"
-                    app:chipIcon="@drawable/ic_entertainment" />
 
                 <com.google.android.material.chip.Chip
+                    style="@style/Android.Material.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="general"
-                    app:chipIcon="@drawable/ic_search" />
+                    app:chipIcon="@drawable/ic_general" />
 
                 <com.google.android.material.chip.Chip
+                    style="@style/Android.Material.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="health"
-                    app:chipIcon="@drawable/ic_search" />
+                    app:chipIcon="@drawable/ic_health" />
 
                 <com.google.android.material.chip.Chip
+                    style="@style/Android.Material.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="science"
-                    app:chipIcon="@drawable/ic_search" />
+                    app:chipIcon="@drawable/ic_science" />
 
                 <com.google.android.material.chip.Chip
+                    style="@style/Android.Material.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="sports"
-                    app:chipIcon="@drawable/ic_search" />
+                    app:chipIcon="@drawable/ic_sport" />
 
                 <com.google.android.material.chip.Chip
+                    style="@style/Android.Material.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="technology"
-                    app:chipIcon="@drawable/ic_search" />
+                    app:chipIcon="@drawable/ic_technology" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Android.Material.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="entertainment"
+                    app:chipIcon="@drawable/ic_entertainment" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -121,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

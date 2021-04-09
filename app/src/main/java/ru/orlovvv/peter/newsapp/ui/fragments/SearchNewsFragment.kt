@@ -64,11 +64,10 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) =
-                    showSearchedNews(s)
+                    findNews(s)
 
                 override fun afterTextChanged(s: Editable?) {
-                    showOrHideSearchChips(s)
-                    showOrHideNewsRecycler(s)
+//
                 }
             })
         }
@@ -83,34 +82,13 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
     }
 
 
-    private fun showSearchedNews(s: CharSequence?) {
+    private fun findNews(s: CharSequence?) {
         newsViewModel.resetArticlesList()
         job?.cancel()
         job = MainScope().launch {
             delay(500L)
             if (s != null) {
                 newsViewModel.findNews(s.toString())
-            }
-        }
-    }
-
-    private fun showOrHideNewsRecycler(s: Editable?) {
-        if (s != null) {
-            if (s.isNotEmpty()) {
-                binding.rvSearchedNews.visibility = View.VISIBLE
-            } else {
-                binding.rvSearchedNews.visibility = View.GONE
-                newsViewModel.resetArticlesList()
-            }
-        }
-    }
-
-    private fun showOrHideSearchChips(s: CharSequence?) {
-        if (s != null) {
-            if (s.isEmpty()) {
-                binding.clCategoriesBlock.visibility = View.VISIBLE
-            } else {
-                binding.clCategoriesBlock.visibility = View.GONE
             }
         }
     }

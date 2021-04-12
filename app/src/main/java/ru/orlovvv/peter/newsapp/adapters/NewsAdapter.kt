@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +21,8 @@ import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
 class NewsAdapter(private var viewModel: NewsViewModel) :
     ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBack()) {
+
+    var previousExpandedPosition = -1
 
     class NewsViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -51,23 +55,37 @@ class NewsAdapter(private var viewModel: NewsViewModel) :
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = getItem(position)
+//        var expandedPosition = -1
+        val isExpanded = position == -1
+
+        holder.itemView.cl_expand_information.visibility =
+            if (!isExpanded) View.GONE else View.VISIBLE
+        holder.itemView.cl_expand_information_preview.visibility =
+            if (!isExpanded) View.VISIBLE else View.GONE
+
         holder.itemView.setOnClickListener {
-            if (it.cl_expand_information.visibility == View.GONE) {
-                TransitionManager.beginDelayedTransition(holder.itemView.cv_article, AutoTransition())
-                it.cl_expand_information.visibility = View.VISIBLE;
+            previousExpandedPosition = if (isExpanded) -1 else position
+            if (it.cl_expand_information.isGone && !isExpanded) {
+//                TransitionManager.beginDelayedTransition(holder.itemView.cv_article, AutoTransition())
+//                it.iv_article_image.visibility = View.VISIBLE
+                it.cl_expand_information.visibility = View.VISIBLE
+                it.cl_expand_information_preview.visibility = View.GONE
             } else {
-                TransitionManager.beginDelayedTransition(holder.itemView.cv_article, AutoTransition())
-                it.cl_expand_information.visibility = View.GONE;
+//                TransitionManager.beginDelayedTransition(holder.itemView.cv_article, AutoTransition())
+                it.cl_expand_information.visibility = View.GONE
+                it.cl_expand_information_preview.visibility = View.VISIBLE
+//
             }
-        }
-        holder.itemView.btn_save.setOnClickListener {
-            viewModel.saveToReadLater(article)
         }
 
         holder.itemView.btn_source.setOnClickListener {
             onSourceClickListener?.let {
                 it(article)
             }
+        }
+
+        holder.itemView.btn_save.setOnClickListener {
+            viewModel.saveToReadLater(article)
         }
 
         holder.itemView.btn_share.setOnClickListener {

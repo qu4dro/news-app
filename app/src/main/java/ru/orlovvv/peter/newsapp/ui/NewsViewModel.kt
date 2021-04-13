@@ -34,10 +34,14 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
     val savedNewsArticlesList: LiveData<List<Article>>
         get() = _savedNewsArticlesList
 
+    private val _sourcesList: MutableLiveData<List<NewsSourceInfo>> = MutableLiveData()
+    val sourceList: LiveData<List<NewsSourceInfo>>
+        get() = _sourcesList
 
     init {
         getAllSavedNews()
         getTopNews()
+        getAllSources()
     }
 
     fun getTopNews() = viewModelScope.launch {
@@ -66,7 +70,10 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
     fun findNews(searchQuery: String) = viewModelScope.launch {
         try {
-            Log.d("123", "findNews: ${_searchedNewsArticlesList.value?.size} $currentSearchNewsPage")
+            Log.d(
+                "123",
+                "findNews: ${_searchedNewsArticlesList.value?.size} $currentSearchNewsPage"
+            )
             val response = newsRepository.findNews(searchQuery, currentSearchNewsPage)
             if (response.isSuccessful) {
                 response.body()?.let {
@@ -89,7 +96,19 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         }
     }
 
-
+    fun getAllSources() = viewModelScope.launch {
+        try {
+            val response = newsRepository.getAllSources()
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _sourcesList.value = response.body()!!.sources
+                    Log.d("sss", "getAllSources: ${_sourcesList.value.toString()}")
+                }
+            }
+        } catch (e: Exception) {
+            _sourcesList.value = ArrayList()
+        }
+    }
 
     fun saveToReadLater(article: Article) = viewModelScope.launch {
         newsRepository.insert(article)
@@ -99,7 +118,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         newsRepository.delete(article)
     }
 
-    fun getAllSavedNews()  {
+    fun getAllSavedNews() {
         _savedNewsArticlesList = newsRepository.getAll()
     }
 

@@ -27,6 +27,7 @@ class ArticleInfoFragment : Fragment(R.layout.fragment_article_info) {
 
         binding.wvArticleInfo.apply {
             webViewClient = WebViewClient()
+            settings.javaScriptEnabled = true
             article.url?.let { loadUrl(it) }
         }
         return binding.root

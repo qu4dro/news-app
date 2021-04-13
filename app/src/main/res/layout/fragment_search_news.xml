@@ -39,9 +39,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_categories_block"
-            android:visibility='@{!etSearchNews.text.toString().empty ? View.GONE : View.VISIBLE }'
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility='@{!etSearchNews.text.toString().empty ? View.GONE : View.VISIBLE }'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sv_search_news">
@@ -122,6 +122,33 @@
                     app:chipIcon="@drawable/ic_entertainment" />
 
             </com.google.android.material.chip.ChipGroup>
+
+
+            <TextView
+                android:id="@+id/tv_popular_sources"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/popular_sources"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ch_categories" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/ch_sources"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:visibility="visible"
+                app:chipSpacingHorizontal="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_popular_sources"
+                app:items="@{viewModel.sourceList}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

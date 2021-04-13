@@ -1,5 +1,6 @@
 package ru.orlovvv.peter.newsapp.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,12 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
                 R.id.action_newsFeedFragment_to_articleInfoFragment,
                 bundle
             )
+        }
+
+        newsFeedAdapter.setOnShareClickListener {
+            val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT, it)
+                startActivity(intent)
         }
 
         val binding = FragmentNewsFeedBinding.inflate(inflater)

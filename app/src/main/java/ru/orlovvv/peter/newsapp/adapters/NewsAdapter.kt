@@ -89,7 +89,9 @@ class NewsAdapter(private var viewModel: NewsViewModel) :
         }
 
         holder.itemView.btn_share.setOnClickListener {
-            //TODO SHARE
+            onShareClickListener?.let {
+                it(article.url)
+            }
         }
 
         holder.bind(article)

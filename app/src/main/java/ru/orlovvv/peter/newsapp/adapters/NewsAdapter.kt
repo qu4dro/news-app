@@ -97,8 +97,14 @@ class NewsAdapter(private var viewModel: NewsViewModel) :
 
     private var onSourceClickListener: ((Article) -> Unit)? = null
 
+    private var onShareClickListener: ((String?) -> Unit)? = null
+
     fun setOnSourceClickListener(listener: (Article) -> Unit) {
         onSourceClickListener = listener
+    }
+
+    fun setOnShareClickListener(listener: (String?) -> Unit) {
+        onShareClickListener = listener
     }
 
     fun getItemWithPosition(position: Int): Article {

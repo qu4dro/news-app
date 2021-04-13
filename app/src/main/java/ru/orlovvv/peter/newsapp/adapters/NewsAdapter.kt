@@ -97,7 +97,7 @@ class NewsAdapter(private var viewModel: NewsViewModel) :
 
     private var onSourceClickListener: ((Article) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Article) -> Unit) {
+    fun setOnSourceClickListener(listener: (Article) -> Unit) {
         onSourceClickListener = listener
     }
 

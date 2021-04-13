@@ -1,7 +1,6 @@
 package ru.orlovvv.peter.newsapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
-import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
 import ru.orlovvv.peter.newsapp.databinding.FragmentNewsReadLaterBinding
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
@@ -56,7 +54,7 @@ class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(binding.rvNewsFeed)
         }
-        newsFeedAdapter.setOnItemClickListener {
+        newsFeedAdapter.setOnSourceClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)
             }

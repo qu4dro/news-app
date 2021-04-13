@@ -3,12 +3,9 @@ package ru.orlovvv.peter.newsapp.ui.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_search_news.*
@@ -18,7 +15,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
-import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
 import ru.orlovvv.peter.newsapp.databinding.FragmentSearchNewsBinding
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
@@ -41,7 +37,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         newsViewModel = (activity as NewsActivity).newsViewModel
 
         newsFeedAdapter = NewsAdapter(newsViewModel)
-        newsFeedAdapter.setOnItemClickListener {
+        newsFeedAdapter.setOnSourceClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)
             }

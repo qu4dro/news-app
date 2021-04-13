@@ -1,12 +1,10 @@
 package ru.orlovvv.peter.newsapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_news_read_later.*
@@ -32,7 +30,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
         newsViewModel = (activity as NewsActivity).newsViewModel
         newsFeedAdapter = NewsAdapter(newsViewModel)
-        newsFeedAdapter.setOnItemClickListener {
+        newsFeedAdapter.setOnSourceClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)
             }

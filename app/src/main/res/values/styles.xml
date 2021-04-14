@@ -14,4 +14,8 @@
         <item name="chipCornerRadius">8dp</item>
         <item name="android:layout_margin">0dp</item>
     </style>
+
+    <style name="ProgressBarTheme" parent="@style/Theme.NewsApp">
+        <item name="colorAccent">@color/design_default_color_primary_variant</item>
+    </style>
 </resources>

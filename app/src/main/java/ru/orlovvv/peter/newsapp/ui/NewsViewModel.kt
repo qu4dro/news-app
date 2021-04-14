@@ -40,7 +40,7 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
     init {
         getAllSavedNews()
-        getTopNews()
+//        getTopNews()
         getAllSources()
     }
 

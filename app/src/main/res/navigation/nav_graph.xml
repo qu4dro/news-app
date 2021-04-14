@@ -40,7 +40,7 @@
         android:name="ru.orlovvv.peter.newsapp.ui.fragments.LoadingFragment"
         android:label="LoadingFragment" >
         <action
-            android:id="@+id/action_loadingFragment_to_newsReadLaterFragment"
-            app:destination="@id/newsReadLaterFragment" />
+            android:id="@+id/action_loadingFragment_to_newsFeedFragment"
+            app:destination="@id/newsFeedFragment" />
     </fragment>
 </navigation>

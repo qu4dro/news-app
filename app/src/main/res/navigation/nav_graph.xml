@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/newsFeedFragment">
+    app:startDestination="@id/loadingFragment">
 
     <fragment
         android:id="@+id/articleInfoFragment"
@@ -34,5 +34,13 @@
         <action
             android:id="@+id/action_searchNewsFragment_to_articleInfoFragment"
             app:destination="@id/articleInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.LoadingFragment"
+        android:label="LoadingFragment" >
+        <action
+            android:id="@+id/action_loadingFragment_to_newsReadLaterFragment"
+            app:destination="@id/newsReadLaterFragment" />
     </fragment>
 </navigation>

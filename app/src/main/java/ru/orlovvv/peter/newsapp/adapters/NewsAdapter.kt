@@ -1,20 +1,17 @@
 package ru.orlovvv.peter.newsapp.adapters
 
-import android.app.ActionBar
 import android.transition.AutoTransition
+import android.transition.ChangeBounds
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
-import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.ItemArticleBinding
 import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
@@ -65,13 +62,21 @@ class NewsAdapter(private var viewModel: NewsViewModel) :
 
         holder.itemView.setOnClickListener {
             previousExpandedPosition = if (isExpanded) -1 else position
+            val transition = ChangeBounds()
             if (it.cl_expand_information.isGone && !isExpanded) {
-//                TransitionManager.beginDelayedTransition(holder.itemView.cv_article, AutoTransition())
-//                it.iv_article_image.visibility = View.VISIBLE
+                transition.duration = 300L
+                TransitionManager.beginDelayedTransition(
+                    holder.itemView.cv_article,
+                    transition
+                )
                 it.cl_expand_information.visibility = View.VISIBLE
                 it.cl_expand_information_preview.visibility = View.GONE
             } else {
-//                TransitionManager.beginDelayedTransition(holder.itemView.cv_article, AutoTransition())
+                transition.duration = 0L
+                TransitionManager.beginDelayedTransition(
+                    holder.itemView.cv_article,
+                    transition
+                )
                 it.cl_expand_information.visibility = View.GONE
                 it.cl_expand_information_preview.visibility = View.VISIBLE
 //

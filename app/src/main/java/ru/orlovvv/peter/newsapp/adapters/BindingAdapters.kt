@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.text.method.TextKeyListener.clear
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -30,29 +31,28 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, urlToImage: String?) {
+        Glide.with(imgView.context)
+            .asBitmap()
+            .fitCenter()
+            .dontAnimate()
+            .apply(
+                RequestOptions()
+                    .error(R.drawable.ic_broken_image)
+            )
+            .format(DecodeFormat.PREFER_RGB_565)
+            .load(urlToImage ?: R.drawable.ic_broken_image)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+/*                imgView.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                imgView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT*/
+                    imgView.setImageBitmap(resource)
+                }
 
-    Glide.with(imgView.context)
-        .asBitmap()
-        .load(urlToImage)
-        .dontAnimate()
-        .format(DecodeFormat.PREFER_RGB_565)
-        .centerInside()
-        .into(object : CustomTarget<Bitmap>(){
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                val w = resource.width
-                val h = resource.height
-                imgView.setImageBitmap(resource)
-            }
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+            })
 
-            override fun onLoadCleared(placeholder: Drawable?) {
 
-            }
-
-        })
-
-    if (urlToImage.isNullOrEmpty()) {
-        Glide.with(imgView.context).clear(imgView)
-    }
 }
 
 

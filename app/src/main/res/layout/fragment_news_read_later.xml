@@ -17,7 +17,7 @@
             android:id="@+id/rv_news_feed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="true"
+            android:clipToPadding="false"
             app:listData="@{viewModel.savedNewsArticlesList}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

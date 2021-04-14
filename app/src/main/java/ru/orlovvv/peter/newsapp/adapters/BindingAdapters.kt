@@ -1,6 +1,9 @@
 package ru.orlovvv.peter.newsapp.adapters
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.text.method.TextKeyListener.clear
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -9,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import ru.orlovvv.peter.newsapp.R
@@ -25,15 +30,28 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, urlToImage: String?) {
-    urlToImage?.let {
-        val imgUri =
-            urlToImage.toUri().buildUpon().scheme("https").build()
-        Glide.with(imgView.context)
-            .load(imgUri)
-            .dontAnimate()
-            .format(DecodeFormat.PREFER_RGB_565)
-            .centerInside()
-            .into(imgView)
+
+    Glide.with(imgView.context)
+        .asBitmap()
+        .load(urlToImage)
+        .dontAnimate()
+        .format(DecodeFormat.PREFER_RGB_565)
+        .centerInside()
+        .into(object : CustomTarget<Bitmap>(){
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                val w = resource.width
+                val h = resource.height
+                imgView.setImageBitmap(resource)
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+
+            }
+
+        })
+
+    if (urlToImage.isNullOrEmpty()) {
+        Glide.with(imgView.context).clear(imgView)
     }
 }
 

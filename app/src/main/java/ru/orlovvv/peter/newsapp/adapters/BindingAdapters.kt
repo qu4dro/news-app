@@ -1,4 +1,4 @@
-package ru.orlovvv.peter.newsapp.util
+package ru.orlovvv.peter.newsapp.adapters
 
 import android.content.Context
 import android.widget.ImageView
@@ -29,7 +29,8 @@ fun bindImage(imgView: ImageView, urlToImage: String?) {
         val imgUri =
             urlToImage.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
-            .load(if (urlToImage != "") imgUri else R.drawable.ic_broken_image)
+            .load(imgUri)
+            .dontAnimate()
             .format(DecodeFormat.PREFER_RGB_565)
             .centerInside()
             .into(imgView)

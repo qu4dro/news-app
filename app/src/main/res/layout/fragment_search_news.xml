@@ -157,7 +157,6 @@
             android:id="@+id/rv_searched_news"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:clipToPadding="false"
             android:visibility='@{etSearchNews.text.toString().empty ? View.GONE : View.VISIBLE }'
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

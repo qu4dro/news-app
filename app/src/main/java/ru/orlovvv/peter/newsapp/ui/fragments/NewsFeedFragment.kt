@@ -31,20 +31,28 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
         newsViewModel = (activity as NewsActivity).newsViewModel
         newsFeedAdapter = NewsAdapter(newsViewModel)
-        newsFeedAdapter.setOnSourceClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("article", it)
-            }
-            findNavController().navigate(
-                R.id.action_newsFeedFragment_to_articleInfoFragment,
-                bundle
-            )
-        }
 
-        newsFeedAdapter.setOnShareClickListener {
-            val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, it)
+
+        newsFeedAdapter.apply {
+            setOnSaveClickListener {
+                newsViewModel.saveToReadLater(it)
+            }
+
+            setOnShareClickListener {
+                val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
+                    .putExtra(Intent.EXTRA_TEXT, it)
                 startActivity(intent)
+            }
+
+            setOnSourceClickListener {
+                val bundle = Bundle().apply {
+                    putSerializable("article", it)
+                }
+                findNavController().navigate(
+                    R.id.action_newsFeedFragment_to_articleInfoFragment,
+                    bundle
+                )
+            }
         }
 
         val binding = FragmentNewsFeedBinding.inflate(inflater)

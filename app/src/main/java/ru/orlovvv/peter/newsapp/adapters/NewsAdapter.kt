@@ -90,7 +90,9 @@ class NewsAdapter(private var viewModel: NewsViewModel) :
         }
 
         holder.itemView.btn_save.setOnClickListener {
-            viewModel.saveToReadLater(article)
+            onSaveClickListener?.let {
+                it(article)
+            }
         }
 
         holder.itemView.btn_share.setOnClickListener {
@@ -106,12 +108,18 @@ class NewsAdapter(private var viewModel: NewsViewModel) :
 
     private var onShareClickListener: ((String?) -> Unit)? = null
 
+    private var onSaveClickListener: ((Article) -> Unit)? = null
+
     fun setOnSourceClickListener(listener: (Article) -> Unit) {
         onSourceClickListener = listener
     }
 
     fun setOnShareClickListener(listener: (String?) -> Unit) {
         onShareClickListener = listener
+    }
+
+    fun setOnSaveClickListener(listener: (Article) -> Unit) {
+        onSaveClickListener = listener
     }
 
     fun getItemWithPosition(position: Int): Article {

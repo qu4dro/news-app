@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter
 
 @Entity(tableName = "articles")
 data class Article(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
+//    @PrimaryKey(autoGenerate = true)
+//    var id: Int? = null,
     val author: String?,
     val content: String?,
     val description: String?,
@@ -22,7 +22,8 @@ data class Article(
     val source: Source?,
     val title: String?,
     val url: String?,
-    val urlToImage: String?
+    @PrimaryKey
+    val urlToImage: String
 ) : Serializable {
 
     val dateFormatted: String

@@ -21,7 +21,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +40,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_margin="16dp"
             android:id="@+id/cl_categories_block"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,8 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:text="@string/popular_categories"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,77 +61,25 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/ch_categories"
+                style="@style/ChipStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:visibility="visible"
                 app:chipSpacingHorizontal="8dp"
+                app:categoriesItems="@{viewModel.categoriesList}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_popular_categories">
 
-                <com.google.android.material.chip.Chip
-                    style="@style/Android.Material.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="business"
-                    app:chipIcon="@drawable/ic_business" />
-
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Android.Material.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="general"
-                    app:chipIcon="@drawable/ic_general" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Android.Material.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="health"
-                    app:chipIcon="@drawable/ic_health" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Android.Material.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="science"
-                    app:chipIcon="@drawable/ic_science" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Android.Material.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sports"
-                    app:chipIcon="@drawable/ic_sport" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Android.Material.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="technology"
-                    app:chipIcon="@drawable/ic_technology" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Android.Material.Chip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="entertainment"
-                    app:chipIcon="@drawable/ic_entertainment" />
 
             </com.google.android.material.chip.ChipGroup>
 
 
             <TextView
+                android:layout_marginTop="16dp"
                 android:id="@+id/tv_popular_sources"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:text="@string/popular_sources"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,17 +87,14 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/ch_sources"
+                style="@style/ChipStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:visibility="visible"
                 app:chipSpacingHorizontal="8dp"
+                app:sourcesItems="@{viewModel.sourceList}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_popular_sources"
-                app:items="@{viewModel.sourceList}"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_popular_sources" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

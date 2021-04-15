@@ -56,8 +56,8 @@ fun bindImage(imgView: ImageView, urlToImage: String?) {
 }
 
 
-@BindingAdapter("items")
-fun setItems(view: ChipGroup, sources: LiveData<List<NewsSourceInfo>>?) {
+@BindingAdapter("sourcesItems")
+fun setChipSourceItems(view: ChipGroup, sources: LiveData<List<NewsSourceInfo>>?) {
     if (sources == null
         || view.childCount > 0
     ) return
@@ -66,6 +66,22 @@ fun setItems(view: ChipGroup, sources: LiveData<List<NewsSourceInfo>>?) {
     for (source in sources.value!!) {
         val chip = Chip(context)
         chip.text = source.name
+        chip.setTextAppearance(R.style.ChipStyle_Text)
+        view.addView(chip)
+    }
+}
+
+@BindingAdapter("categoriesItems")
+fun setChipCategoriesItems(view: ChipGroup, categories: List<String>?) {
+    if (categories == null
+        || view.childCount > 0
+    ) return
+
+    val context: Context = view.context
+    for (source in categories) {
+        val chip = Chip(context)
+        chip.text = source
+        chip.setTextAppearance(R.style.ChipStyle_Text)
         view.addView(chip)
     }
 }

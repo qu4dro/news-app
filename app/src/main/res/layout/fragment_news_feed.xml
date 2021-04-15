@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-    <variable
-        name="viewModel"
-        type="ru.orlovvv.peter.newsapp.ui.NewsViewModel" />
+
+        <variable
+            name="viewModel"
+            type="ru.orlovvv.peter.newsapp.ui.NewsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,17 +15,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_news_feed"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="16dp"
             android:layoutAnimation="@anim/layout_animation"
-            app:listData="@{viewModel.topNewsArticlesList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
+            app:listData="@{viewModel.topNewsArticlesList}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

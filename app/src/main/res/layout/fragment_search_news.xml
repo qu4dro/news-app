@@ -156,8 +156,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_searched_news"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingBottom="16dp"
             android:visibility='@{etSearchNews.text.toString().empty ? View.GONE : View.VISIBLE }'
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

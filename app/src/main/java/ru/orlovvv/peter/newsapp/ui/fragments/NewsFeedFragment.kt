@@ -2,12 +2,14 @@ package ru.orlovvv.peter.newsapp.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.fragment_news_read_later.*
 import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
@@ -22,6 +24,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsFeedAdapter: NewsAdapter
+    private lateinit var binding: FragmentNewsFeedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,30 +35,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         newsViewModel = (activity as NewsActivity).newsViewModel
         newsFeedAdapter = NewsAdapter(newsViewModel)
 
-
-        newsFeedAdapter.apply {
-            setOnSaveClickListener {
-                newsViewModel.saveToReadLater(it)
-            }
-
-            setOnShareClickListener {
-                val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
-                    .putExtra(Intent.EXTRA_TEXT, it)
-                startActivity(intent)
-            }
-
-            setOnSourceClickListener {
-                val bundle = Bundle().apply {
-                    putSerializable("article", it)
-                }
-                findNavController().navigate(
-                    R.id.action_newsFeedFragment_to_articleInfoFragment,
-                    bundle
-                )
-            }
-        }
-
-        val binding = FragmentNewsFeedBinding.inflate(inflater)
+        binding = FragmentNewsFeedBinding.inflate(inflater)
 
         binding.apply {
             lifecycleOwner = this@NewsFeedFragment
@@ -85,4 +65,35 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        newsFeedAdapter.apply {
+            setOnSaveClickListener { article ->
+                newsViewModel.saveToReadLater(article)
+                Snackbar.make(view, "Article saved", Snackbar.LENGTH_LONG)
+                    .setAction("Undo") {
+                        newsViewModel.deleteFromReadLater(article)
+                    }
+                    .setAnchorView((activity as NewsActivity).bn_menu)
+                    .show()
+            }
+
+            setOnShareClickListener {
+                val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
+                    .putExtra(Intent.EXTRA_TEXT, it)
+                startActivity(intent)
+            }
+
+            setOnSourceClickListener {
+                val bundle = Bundle().apply {
+                    putSerializable("article", it)
+                }
+                findNavController().navigate(
+                    R.id.action_newsFeedFragment_to_articleInfoFragment,
+                    bundle
+                )
+            }
+        }
+    }
 }

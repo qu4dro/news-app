@@ -45,7 +45,7 @@
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
+                    android:layout_marginBottom="16dp"
                     android:text="@{article.title}"
                     android:textFontWeight="700"
                     android:textSize="16sp"
@@ -57,6 +57,7 @@
                     android:id="@+id/tv_source_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/rounded_corners"
                     android:text="@{article.source.name}"
                     android:textColor="@color/white"
@@ -70,6 +71,7 @@
                     android:id="@+id/tv_published_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:gravity="end"
                     android:text="@{article.dateFormatted}"
                     android:textFontWeight="700"
@@ -120,8 +122,8 @@
                     android:id="@+id/tv_description"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:text="@{article.description}"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,65 +135,47 @@
                     android:id="@+id/tv_source_name_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_corners"
+                    android:layout_marginTop="16dp"
                     android:text="@{article.source.name}"
-                    android:textColor="@color/white"
                     android:textFontWeight="700"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_description"
                     tools:text="Source Media" />
 
-                <TextView
-                    android:id="@+id/tv_published_at_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="@{article.dateFormatted}"
-                    android:textFontWeight="700"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintTop_toBottomOf="@id/tv_description"
-                    tools:text="12.12.2012" />
-
                 <com.google.android.material.button.MaterialButton
+
                     android:id="@+id/btn_source"
-                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="@string/source"
                     app:icon="@drawable/ic_source"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_source_name_2" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_source_name_2"
+                    tools:text="Source" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_save"
-                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    style="@style/ButtonStyle.IconOnly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/save"
                     app:icon="@drawable/ic_save"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/btn_source"
+                    app:layout_constraintEnd_toStartOf="@id/btn_share"
                     app:layout_constraintTop_toBottomOf="@id/tv_source_name_2" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_share"
-                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/share"
+                    style="@style/ButtonStyle.IconOnly"
                     android:textSize="14sp"
                     app:icon="@drawable/ic_share"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/btn_save"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_source_name_2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

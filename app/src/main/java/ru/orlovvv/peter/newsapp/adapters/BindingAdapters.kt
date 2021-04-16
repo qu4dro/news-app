@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.text.method.TextKeyListener.clear
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.net.toUri
@@ -21,6 +22,8 @@ import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
 import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.models.news_sources.NewsSourceInfo
+import ru.orlovvv.peter.newsapp.ui.NewsViewModel
+import kotlin.math.log
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
@@ -31,26 +34,24 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, urlToImage: String?) {
-        Glide.with(imgView.context)
-            .asBitmap()
-            .fitCenter()
-            .dontAnimate()
-            .apply(
-                RequestOptions()
-                    .error(R.drawable.ic_broken_image)
-            )
-            .format(DecodeFormat.PREFER_RGB_565)
-            .load(urlToImage ?: R.drawable.ic_broken_image)
-            .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-/*                imgView.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-                imgView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT*/
-                    imgView.setImageBitmap(resource)
-                }
+    Glide.with(imgView.context)
+        .asBitmap()
+        .fitCenter()
+        .dontAnimate()
+        .format(DecodeFormat.PREFER_RGB_565)
+        .load(urlToImage)
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                imgView.setImageBitmap(resource)
+            }
 
-                override fun onLoadCleared(placeholder: Drawable?) {
-                }
-            })
+            override fun onLoadCleared(placeholder: Drawable?) {
+            }
+
+            override fun onLoadFailed(errorDrawable: Drawable?) {
+                imgView.setImageResource(R.drawable.ic_broken_image)
+            }
+        })
 
 
 }
@@ -71,20 +72,6 @@ fun setChipSourceItems(view: ChipGroup, sources: LiveData<List<NewsSourceInfo>>?
     }
 }
 
-@BindingAdapter("categoriesItems")
-fun setChipCategoriesItems(view: ChipGroup, categories: List<String>?) {
-    if (categories == null
-        || view.childCount > 0
-    ) return
-
-    val context: Context = view.context
-    for (source in categories) {
-        val chip = Chip(context)
-        chip.text = source
-        chip.setTextAppearance(R.style.ChipStyle_Text)
-        view.addView(chip)
-    }
-}
 //@BindingAdapter("imageUrl")
 //fun setImageUrl(imageView: ImageView, url: String) {
 //    Glide.with(imageView.context).load(url).into(imageView)

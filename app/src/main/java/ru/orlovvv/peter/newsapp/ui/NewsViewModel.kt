@@ -19,6 +19,8 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
     val categoriesList = listOf("Business", "General", "Health", "Science", "Sports", "Technology", "Entertainment")
 
+    val checkedSources = mutableListOf<String>()
+
     private var topNewsResponse: NewsResponse? = null
     private var searchedNewsResponse: NewsResponse? = null
     var currentTopNewsPage = 1

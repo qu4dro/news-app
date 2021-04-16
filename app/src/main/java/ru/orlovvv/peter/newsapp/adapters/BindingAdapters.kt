@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
@@ -58,7 +59,8 @@ fun bindImage(imgView: ImageView, urlToImage: String?) {
 
 
 @BindingAdapter("sourcesItems")
-fun setChipSourceItems(view: ChipGroup, sources: LiveData<List<NewsSourceInfo>>?) {
+fun setChipSourceItems(view: ChipGroup, viewModel: NewsViewModel) {
+    val sources = viewModel.sourceList
     if (sources == null
         || view.childCount > 0
     ) return
@@ -66,8 +68,23 @@ fun setChipSourceItems(view: ChipGroup, sources: LiveData<List<NewsSourceInfo>>?
     val context: Context = view.context
     for (source in sources.value!!) {
         val chip = Chip(context)
+        val drawable = ChipDrawable.createFromAttributes(
+            context,
+            null,
+            0,
+            R.style.Widget_MaterialComponents_Chip_Choice
+        )
         chip.text = source.name
         chip.setTextAppearance(R.style.ChipStyle_Text)
+        chip.setChipDrawable(drawable)
+        chip.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                viewModel.checkedSources.add(buttonView.text.toString())
+            } else {
+                viewModel.checkedSources.remove(buttonView.text.toString())
+            }
+            Log.d("123", "setChipSourceItems: ${viewModel.checkedSources}")
+        }
         view.addView(chip)
     }
 }

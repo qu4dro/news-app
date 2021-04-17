@@ -15,6 +15,7 @@ interface Api {
     suspend fun findNews(
         @Query("q") searchQuery: String,
         @Query("page") pageNumber: Int,
+        @Query("sources") sources: String,
         @Query("pageSize") pageSize: Int = PAGE_SIZE,
         @Query("apiKey") apiKey: String = DEVELOPER_API_KEY2
     ): Response<NewsResponse>

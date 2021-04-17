@@ -1,5 +1,6 @@
 package ru.orlovvv.peter.newsapp.ui
 
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -72,13 +73,15 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
         }
     }
 
-    fun findNews(searchQuery: String) = viewModelScope.launch {
+    fun findNews(searchQuery: String, sources: List<String>) = viewModelScope.launch {
         try {
             Log.d(
                 "123",
                 "findNews: ${_searchedNewsArticlesList.value?.size} $currentSearchNewsPage"
             )
-            val response = newsRepository.findNews(searchQuery, currentSearchNewsPage)
+            val t = sources.toString().replace(", ", ",").replace("[", "").replace("]", "")
+            val response = newsRepository.findNews(searchQuery, currentSearchNewsPage, TextUtils.join(",", sources))
+            Log.d("123", "findNews: $t")
             if (response.isSuccessful) {
                 response.body()?.let {
                     currentSearchNewsPage++

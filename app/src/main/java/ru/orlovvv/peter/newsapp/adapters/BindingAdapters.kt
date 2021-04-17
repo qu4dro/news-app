@@ -74,7 +74,7 @@ fun setChipSourceItems(view: ChipGroup, viewModel: NewsViewModel) {
             0,
             R.style.Widget_MaterialComponents_Chip_Choice
         )
-        chip.text = source.name
+        chip.text = source.id
         chip.setTextAppearance(R.style.ChipStyle_Text)
         chip.setChipDrawable(drawable)
         chip.setOnCheckedChangeListener { buttonView, isChecked ->

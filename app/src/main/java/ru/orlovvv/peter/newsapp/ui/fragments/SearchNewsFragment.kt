@@ -69,7 +69,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         }
 
         val scrollListener = Pagination(newsViewModel, newsViewModel.searchedNewsArticlesList
-        ) { newsViewModel.findNews(binding.etSearchNews.text.toString()) }.scrollListener
+        ) { newsViewModel.findNews(binding.etSearchNews.text.toString(), newsViewModel.checkedSources) }.scrollListener
 
         binding.rvSearchedNews.addOnScrollListener(scrollListener)
 
@@ -84,7 +84,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         job = MainScope().launch {
             delay(500L)
             if (s != null) {
-                newsViewModel.findNews(s.toString())
+                newsViewModel.findNews(s.toString(), newsViewModel.checkedSources)
             }
         }
     }

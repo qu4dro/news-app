@@ -69,7 +69,7 @@ class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
                     putSerializable("article", it)
                 }
                 findNavController().navigate(
-                    R.id.action_newsFeedFragment_to_articleInfoFragment,
+                    R.id.action_newsReadLaterFragment_to_articleInfoFragment,
                     bundle
                 )
             }

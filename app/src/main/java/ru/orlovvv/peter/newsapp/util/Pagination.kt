@@ -9,7 +9,7 @@ import kotlinx.coroutines.Job
 import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
-class Pagination(val newsViewModel: NewsViewModel, val articlesList: LiveData<List<Article>>, getNews: () -> Job) {
+class Pagination(val newsViewModel: NewsViewModel, val articlesList: MutableList<Article>, getNews: () -> Job) {
 
     var isLoading = false
     var isLastPage = false
@@ -42,7 +42,7 @@ class Pagination(val newsViewModel: NewsViewModel, val articlesList: LiveData<Li
                 getNews()
                 isScrolling = false
                 isLastPage =
-                    newsViewModel.currentTopNewsPage == articlesList.value!!.size / Constants.PAGE_SIZE + 2
+                    newsViewModel.currentTopNewsPage == articlesList.size / Constants.PAGE_SIZE + 2
             } else {
                 Log.d("123", "onScrolled: shouldNotPaginate")
             }

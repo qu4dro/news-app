@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import ru.orlovvv.peter.newsapp.models.news.Article
@@ -14,11 +15,13 @@ import ru.orlovvv.peter.newsapp.models.news.NewsResponse
 import ru.orlovvv.peter.newsapp.models.news_sources.NewsSourceInfo
 import ru.orlovvv.peter.newsapp.repository.NewsRepository
 import ru.orlovvv.peter.newsapp.util.Resource
+import java.lang.Error
 import java.lang.Exception
 
 class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
-    val categoriesList = listOf("Business", "General", "Health", "Science", "Sports", "Technology", "Entertainment")
+    val categoriesList =
+        listOf("Business", "General", "Health", "Science", "Sports", "Technology", "Entertainment")
 
     val checkedSources = mutableListOf<String>()
 
@@ -27,8 +30,8 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
     var currentTopNewsPage = 1
     var currentSearchNewsPage = 1
 
-    private val _topNewsArticlesList: MutableLiveData<List<Article>> = MutableLiveData()
-    val topNewsArticlesList: LiveData<List<Article>>
+    private val _topNewsArticlesList: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val topNewsArticlesList: LiveData<Resource<NewsResponse>>
         get() = _topNewsArticlesList
 
     private val _searchedNewsArticlesList: MutableLiveData<List<Article>> = MutableLiveData()
@@ -51,27 +54,37 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
     fun getTopNews() = viewModelScope.launch {
         try {
-            val response = newsRepository.getTopNews(currentTopNewsPage)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    currentTopNewsPage++
-                    if (topNewsResponse == null) {
-                        topNewsResponse = it
-                    } else {
-                        val oldTopNews = topNewsResponse?.articles
-                        val newTopNews = it.articles
-                        if (newTopNews != null) {
-                            oldTopNews?.addAll(newTopNews)
-                            oldTopNews?.toList()
-                        }
-                    }
-                    _topNewsArticlesList.value = topNewsResponse?.articles ?: it.articles
-                }
-            }
+            Log.d("123", "LOADING: ")
+            _topNewsArticlesList.value = Resource.Loading()
+            val response = newsRepository.getTopNews(currentSearchNewsPage)
+            _topNewsArticlesList.value = handleTopNewsResponse(response)
         } catch (e: Exception) {
-            _topNewsArticlesList.value = ArrayList()
+            _topNewsArticlesList.value = Resource.Success(NewsResponse(ArrayList(), "Success", 0))
         }
+
     }
+
+    private fun handleTopNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let {
+                currentTopNewsPage++
+                if (topNewsResponse == null) {
+                    topNewsResponse = it
+                } else {
+                    val oldTopNews = topNewsResponse?.articles
+                    val newTopNews = it.articles
+                    if (newTopNews != null) {
+                        oldTopNews?.addAll(newTopNews)
+                    }
+                }
+                Log.d("123", "SUCCES: ${Resource.Success(topNewsResponse ?: it)}")
+                return Resource.Success(topNewsResponse ?: it)
+            }
+        }
+        Log.d("123", "NOT SUCCES:)}")
+        return Resource.Error(response.message())
+    }
+
 
     fun findNews(searchQuery: String, sources: List<String>) = viewModelScope.launch {
         try {
@@ -80,7 +93,11 @@ class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
                 "findNews: ${_searchedNewsArticlesList.value?.size} $currentSearchNewsPage"
             )
             val t = sources.toString().replace(", ", ",").replace("[", "").replace("]", "")
-            val response = newsRepository.findNews(searchQuery, currentSearchNewsPage, TextUtils.join(",", sources))
+            val response = newsRepository.findNews(
+                searchQuery,
+                currentSearchNewsPage,
+                TextUtils.join(",", sources)
+            )
             Log.d("123", "findNews: $t")
             if (response.isSuccessful) {
                 response.body()?.let {

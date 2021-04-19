@@ -25,6 +25,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:listData="@{viewModel.topNewsArticlesList}" />
+            app:listData="@{viewModel.topNewsArticlesList.data.articles}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

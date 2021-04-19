@@ -63,16 +63,16 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             })
         }
 
-        val scrollListener = Pagination(
-            newsViewModel, newsViewModel.searchedNewsArticlesList
-        ) {
-            newsViewModel.findNews(
-                binding.etSearchNews.text.toString(),
-                newsViewModel.checkedSources
-            )
-        }.scrollListener
-
-        binding.rvSearchedNews.addOnScrollListener(scrollListener)
+//        val scrollListener = Pagination(
+//            newsViewModel, newsViewModel.searchedNewsArticlesList
+//        ) {
+//            newsViewModel.findNews(
+//                binding.etSearchNews.text.toString(),
+//                newsViewModel.checkedSources
+//            )
+//        }.scrollListener
+//
+//        binding.rvSearchedNews.addOnScrollListener(scrollListener)
 
 
         return binding.root

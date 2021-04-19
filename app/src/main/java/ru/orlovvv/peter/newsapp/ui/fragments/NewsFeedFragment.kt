@@ -44,24 +44,26 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         }
 
         val scrollListener = Pagination(
-            newsViewModel, newsViewModel.topNewsArticlesList
+            newsViewModel, newsViewModel.topNewsArticlesList.value?.data?.articles!!
         ) { newsViewModel.getTopNews() }.scrollListener
 
         binding.rvNewsFeed.addOnScrollListener(scrollListener)
 
         newsViewModel.topNewsArticlesList.observe(viewLifecycleOwner, {
-            if (it == null || it.isEmpty()) {
-                Snackbar.make(
+            val snackbar = Snackbar
+                .make(
                     (activity as NewsActivity).findViewById(android.R.id.content),
                     "Check internet or API limit",
                     Snackbar.LENGTH_INDEFINITE
-                ).setAction("Retry") {
-                    newsViewModel.getTopNews()
-                }
-                    .show()
+                ).setAnchorView((activity as NewsActivity).bn_menu)
+            snackbar.setAction("Retry") {
+                newsViewModel.getTopNews()
+                snackbar.dismiss()
+            }
+            if (it.data?.articles?.isEmpty() == true) {
+                snackbar.show()
             }
         })
-
         return binding.root
     }
 

@@ -9,9 +9,13 @@
  * Retrofit
  * Room
  * Recycler view
+ * Data binding
+ * Material components
+
  * Glide
 
 ## To do list
+ * DI
  * Fix pagination
  * More filters in search
  * Response rework

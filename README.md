@@ -12,6 +12,7 @@
  * Data binding
  * Material components
  * Glide
+ * [News api](https://newsapi.org)
 
 ## To do list
  * DI

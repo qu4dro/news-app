@@ -14,10 +14,13 @@
  * Glide
  * [News api](https://newsapi.org)
 
-## To do list
+## In progress
  * DI
  * Tests
  * Fix pagination
  * More filters in search
  * Response rework
  * Check internet connection
+ * Background manager
+ * Refresh feed on swipe
+ * Loading search and refresh animation

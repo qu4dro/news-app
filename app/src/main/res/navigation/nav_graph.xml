@@ -41,6 +41,8 @@
         android:label="LoadingFragment" >
         <action
             android:id="@+id/action_loadingFragment_to_newsFeedFragment"
-            app:destination="@id/newsFeedFragment" />
+            app:destination="@id/newsFeedFragment"
+            app:popUpTo="@id/loadingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

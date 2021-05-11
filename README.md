@@ -8,6 +8,7 @@
  * MVVM
  * Navigation
  * Retrofit + Moshi
+ * Coroutines
  * Room
  * Recycler view
  * Data binding
@@ -26,3 +27,4 @@
  * Refresh feed on swipe
  * Loading search and refresh animation
  * Icon
+ * Support for multiple languages

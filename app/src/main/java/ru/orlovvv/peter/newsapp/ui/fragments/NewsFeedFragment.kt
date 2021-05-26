@@ -2,11 +2,11 @@ package ru.orlovvv.peter.newsapp.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_news.*
@@ -22,7 +22,7 @@ import ru.orlovvv.peter.newsapp.util.Pagination
 
 class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
-    private lateinit var newsViewModel: NewsViewModel
+    private val newsViewModel: NewsViewModel by activityViewModels()
     private lateinit var newsFeedAdapter: NewsAdapter
     private lateinit var binding: FragmentNewsFeedBinding
 
@@ -32,7 +32,6 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         savedInstanceState: Bundle?
     ): View? {
 
-        newsViewModel = (activity as NewsActivity).newsViewModel
         newsFeedAdapter = NewsAdapter(newsViewModel)
 
         binding = FragmentNewsFeedBinding.inflate(inflater)

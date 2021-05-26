@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -17,8 +18,10 @@ import ru.orlovvv.peter.newsapp.repository.NewsRepository
 import ru.orlovvv.peter.newsapp.util.Resource
 import java.lang.Error
 import java.lang.Exception
+import javax.inject.Inject
 
-class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
+@HiltViewModel
+class NewsViewModel @Inject constructor(private val newsRepository: NewsRepository) : ViewModel() {
 
     val categoriesList =
         listOf("Business", "General", "Health", "Science", "Sports", "Technology", "Entertainment")

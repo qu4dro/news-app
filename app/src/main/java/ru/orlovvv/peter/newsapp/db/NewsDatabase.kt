@@ -13,20 +13,4 @@ abstract class NewsDatabase : RoomDatabase() {
 
     abstract fun getNewsDao(): NewsDAO
 
-    companion object {
-
-        @Volatile
-        private var instance: NewsDatabase? = null
-        private var LOCK = Any()
-
-        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-            instance ?: createDatabase(context).also { instance = it }
-        }
-
-        private fun createDatabase(context: Context) = Room.databaseBuilder(
-            context.applicationContext,
-            NewsDatabase::class.java,
-            "news_db.db"
-        ).build()
-    }
 }

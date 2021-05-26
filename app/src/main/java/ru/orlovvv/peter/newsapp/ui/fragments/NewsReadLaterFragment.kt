@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
@@ -23,7 +25,7 @@ import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
 
     private lateinit var newsFeedAdapter: NewsAdapter
-    private lateinit var newsViewModel: NewsViewModel
+    private val newsViewModel: NewsViewModel by activityViewModels()
     private lateinit var binding: FragmentNewsReadLaterBinding
 
     override fun onCreateView(
@@ -33,7 +35,6 @@ class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
     ): View? {
 
         binding = FragmentNewsReadLaterBinding.inflate(inflater)
-        newsViewModel = (activity as NewsActivity).newsViewModel
 
         newsFeedAdapter = NewsAdapter(newsViewModel)
 

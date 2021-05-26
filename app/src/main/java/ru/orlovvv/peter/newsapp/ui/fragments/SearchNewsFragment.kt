@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.coroutines.Job
@@ -26,7 +28,7 @@ import ru.orlovvv.peter.newsapp.util.Pagination
 
 class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
-    private lateinit var newsViewModel: NewsViewModel
+    private val newsViewModel: NewsViewModel by activityViewModels()
     private var job: Job? = null
     private lateinit var binding: FragmentSearchNewsBinding
     private lateinit var newsFeedAdapter: NewsAdapter
@@ -37,8 +39,6 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchNewsBinding.inflate(inflater)
-
-        newsViewModel = (activity as NewsActivity).newsViewModel
 
         newsFeedAdapter = NewsAdapter(newsViewModel)
 

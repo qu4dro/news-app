@@ -3,18 +3,17 @@ package ru.orlovvv.peter.newsapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.activity.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
-import ru.orlovvv.peter.newsapp.db.NewsDatabase
-import ru.orlovvv.peter.newsapp.repository.NewsRepository
 
+@AndroidEntryPoint
 class NewsActivity : AppCompatActivity() {
 
-    private lateinit var _newsViewModel: NewsViewModel
+    private val _newsViewModel: NewsViewModel by viewModels ()
     val newsViewModel: NewsViewModel
         get() = _newsViewModel
 
@@ -23,12 +22,6 @@ class NewsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_news)
 
         supportActionBar?.hide()
-
-        val newsDB = NewsDatabase(this)
-        val newsRepository = NewsRepository(newsDB)
-        val newsViewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
-        _newsViewModel =
-            ViewModelProvider(this, newsViewModelProviderFactory).get(NewsViewModel::class.java)
 
         bn_menu.setupWithNavController(nav_host_fragment.findNavController())
 

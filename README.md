@@ -17,7 +17,6 @@
  * [News api](https://newsapi.org)
 
 ## In progress
- * DI
  * Tests
  * Fix pagination
  * More filters in search

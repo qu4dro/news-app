@@ -23,6 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(private val newsRepository: NewsRepository) : ViewModel() {
 
+    var isFirstFeedOpen = true
+
     val categoriesList =
         listOf("Business", "General", "Health", "Science", "Sports", "Technology", "Entertainment")
 

@@ -1,15 +1,13 @@
 package ru.orlovvv.peter.newsapp.models.news
 
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import ru.orlovvv.peter.newsapp.util.formatDate
 import java.io.Serializable
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 @Entity(tableName = "articles")
 data class Article(
@@ -26,11 +24,7 @@ data class Article(
     val urlToImage: String?
 ) : Serializable {
 
-    val dateFormatted: String
-        @RequiresApi(Build.VERSION_CODES.O)
-        get() = LocalDateTime.parse(
-            publishedAt,
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZZZZZ")
-        ).format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")).toString()
+    val dateFormatted: String?
+        get() = publishedAt?.formatDate()
 
 }

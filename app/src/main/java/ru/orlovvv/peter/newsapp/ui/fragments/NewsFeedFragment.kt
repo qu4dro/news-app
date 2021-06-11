@@ -48,6 +48,10 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
 
         binding.rvNewsFeed.addOnScrollListener(scrollListener)
 
+        if (!newsViewModel.isFirstFeedOpen) {
+            binding.rvNewsFeed.layoutAnimation = null
+        }
+
         newsViewModel.topNewsArticlesList.observe(viewLifecycleOwner, {
             val snackbar = Snackbar
                 .make(
@@ -96,5 +100,11 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
                 )
             }
         }
+        newsViewModel.isFirstFeedOpen = false
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        newsViewModel.isFirstFeedOpen = false
     }
 }

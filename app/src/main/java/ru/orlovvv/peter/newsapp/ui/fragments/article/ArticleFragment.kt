@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.FragmentArticleBinding
@@ -37,6 +38,9 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
         binding.apply {
             viewModel = newsViewModel
             article = args.article
+            toolbar.setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
             ivArticleImage.transitionName = "image_trans_${args.article.url}"
             tvArticleTitle.transitionName = "title_trans_${args.article.url}"
             tvArticleSource.transitionName = "source_trans_${args.article.url}"

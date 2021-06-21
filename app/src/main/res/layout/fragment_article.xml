@@ -28,12 +28,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:foreground="@drawable/image_scrim"
                 android:scaleType="fitXY"
                 android:visibility="visible"
                 app:imageUrl="@{article.urlToImage}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:minHeight="?attr/actionBarSize"
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/article_menu"
+                app:navigationIcon="@drawable/ic_back">
+
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -74,12 +90,12 @@
                     tools:text="Source" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:gravity="end"
                     android:id="@+id/tv_article_date"
                     style="@style/TextStyleRegularSource"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="end"
                     android:text="@{article.dateFormatted}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_article_source"

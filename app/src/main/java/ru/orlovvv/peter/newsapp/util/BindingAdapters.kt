@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.chip.Chip
@@ -32,6 +33,7 @@ fun bindImage(imgView: ImageView, urlToImage: String?) {
         .asBitmap()
         .fitCenter()
         .dontAnimate()
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .format(DecodeFormat.PREFER_RGB_565)
         .load(urlToImage)
         .into(object : CustomTarget<Bitmap>() {

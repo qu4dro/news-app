@@ -1,6 +1,7 @@
 package ru.orlovvv.peter.newsapp.ui.fragments.article
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.FragmentArticleBinding
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
+
 
 class ArticleFragment : Fragment(R.layout.fragment_article) {
 
@@ -32,11 +34,22 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.apply {
             viewModel = newsViewModel
             article = args.article
+            ivArticleImage.transitionName = "image_trans_${args.article.url}"
+            tvArticleTitle.transitionName = "title_trans_${args.article.url}"
+            tvArticleSource.transitionName = "source_trans_${args.article.url}"
+            tvArticleDate.transitionName = "date_trans_${args.article.url}"
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        sharedElementReturnTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
     override fun onDestroy() {

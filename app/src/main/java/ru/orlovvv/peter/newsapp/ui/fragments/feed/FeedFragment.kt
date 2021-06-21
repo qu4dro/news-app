@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.item_article.view.*
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.FragmentFeedBinding
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
-import timber.log.Timber
 
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
@@ -42,14 +41,22 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             lifecycleOwner = this@FeedFragment
             viewModel = newsViewModel
             rvNewsFeed.adapter = newsFeedAdapter
+            rvNewsFeed.apply {
+                postponeEnterTransition()
+                viewTreeObserver
+                    .addOnPreDrawListener {
+                        startPostponedEnterTransition()
+                        true
+                    }
+            }
 
         }
 
-        newsFeedAdapter.setOnItemClickListener {
+        newsFeedAdapter.setOnItemClickListener {article, extras ->
             val bundle = Bundle().apply {
-                putSerializable("article", it)
+                putSerializable("article", article)
             }
-            findNavController().navigate(R.id.action_feedFragment_to_articleFragment, bundle)
+            findNavController().navigate(R.id.action_feedFragment_to_articleFragment, bundle, null, extras)
         }
 
     }

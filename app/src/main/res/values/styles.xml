@@ -13,8 +13,9 @@
 
     <style name="CardViewStyle.ItemStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardPreventCornerOverlap">false</item>
-        <item name="cardElevation">8dp</item>
-        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="cardCornerRadius">0dp</item>
+
     </style>
 
 <!--    <style name="AppBottomSheetDialogTheme" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">-->
@@ -49,36 +50,25 @@
 <!--        <item name="android:textSize">12sp</item>-->
     </style>
 
-    <style name="TextStyleBoldHead" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/rubik_bold</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="TextStyleMediumHead" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="TextStyleRegularTitle" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/rubik_medium</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="TextStyleBoldName" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/rubik_bold</item>
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="TextStyleRegularName" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/rubik_regular</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="TextStyleBoldDescription" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="fontFamily">@font/rubik_bold</item>
-        <item name="android:textSize">16sp</item>
-        <item name="lineHeight">24sp</item>
-    </style>
-
-    <style name="TextStyleRegularDescription" parent="TextAppearance.MaterialComponents.Headline1">
+    <style name="TextStyleRegularText" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/rubik_regular</item>
         <item name="android:textSize">16sp</item>
-        <item name="lineHeight">24sp</item>
     </style>
+
+    <style name="TextStyleRegularSource" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/rubik_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextStyleRegularDate" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/rubik_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 
     <style name="ButtonStyle.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="iconTint">?attr/colorPrimary</item>

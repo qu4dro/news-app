@@ -1,23 +1,18 @@
 package ru.orlovvv.peter.newsapp.ui.fragments.feed
 
-import android.transition.ChangeBounds
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_article.view.*
+import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.ItemArticleBinding
 import ru.orlovvv.peter.newsapp.models.news.Article
-import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
-class NewsAdapter() :
+class NewsAdapter :
     ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBack()) {
-
-    var previousExpandedPosition = -1
 
     class NewsViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -50,77 +45,21 @@ class NewsAdapter() :
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = getItem(position)
-//        var expandedPosition = -1
-        val isExpanded = position == -1
-
-        holder.itemView.cl_expand_information.visibility =
-            if (!isExpanded) View.GONE else View.VISIBLE
-        holder.itemView.cl_expand_information_preview.visibility =
-            if (!isExpanded) View.VISIBLE else View.GONE
 
         holder.itemView.setOnClickListener {
-            previousExpandedPosition = if (isExpanded) -1 else position
-            val transition = ChangeBounds()
-            if (it.cl_expand_information.isGone && !isExpanded) {
-                transition.duration = 300L
-                TransitionManager.beginDelayedTransition(
-                    holder.itemView.cv_article,
-                    transition
-                )
-                it.cl_expand_information.visibility = View.VISIBLE
-                it.cl_expand_information_preview.visibility = View.GONE
-            } else {
-                transition.duration = 0L
-                TransitionManager.beginDelayedTransition(
-                    holder.itemView.cv_article,
-                    transition
-                )
-                it.cl_expand_information.visibility = View.GONE
-                it.cl_expand_information_preview.visibility = View.VISIBLE
-//
-            }
-        }
-
-        holder.itemView.btn_source.setOnClickListener {
-            onSourceClickListener?.let {
+            onClickListener?.let {
                 it(article)
-            }
-        }
-
-        holder.itemView.btn_save.setOnClickListener {
-            onSaveClickListener?.let {
-                it(article)
-            }
-        }
-
-        holder.itemView.btn_share.setOnClickListener {
-            onShareClickListener?.let {
-                it(article.url)
             }
         }
 
         holder.bind(article)
     }
 
-    private var onSourceClickListener: ((Article) -> Unit)? = null
+    private var onClickListener: ((Article) -> Unit)? = null
 
-    private var onShareClickListener: ((String?) -> Unit)? = null
-
-    private var onSaveClickListener: ((Article) -> Unit)? = null
-
-    fun setOnSourceClickListener(listener: (Article) -> Unit) {
-        onSourceClickListener = listener
+    fun setOnClickListener(listener: (Article) -> Unit) {
+        onClickListener = listener
     }
 
-    fun setOnShareClickListener(listener: (String?) -> Unit) {
-        onShareClickListener = listener
-    }
 
-    fun setOnSaveClickListener(listener: (Article) -> Unit) {
-        onSaveClickListener = listener
-    }
-
-    fun getItemWithPosition(position: Int): Article {
-        return getItem(position)
-    }
 }

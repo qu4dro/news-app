@@ -49,63 +49,63 @@ class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        newsFeedAdapter.apply {
-            setOnSaveClickListener { article ->
-                newsViewModel.deleteFromReadLater(article)
-                Snackbar.make(view, "Article deleted", Snackbar.LENGTH_LONG)
-                showSnackBar(article, view)
-            }
-
-            setOnShareClickListener {
-                val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
-                    .putExtra(Intent.EXTRA_TEXT, it)
-                startActivity(intent)
-            }
-
-            setOnSourceClickListener {
-                val bundle = Bundle().apply {
-                    putSerializable("article", it)
-                }
-                findNavController().navigate(
-                    R.id.action_newsReadLaterFragment_to_articleInfoFragment,
-                    bundle
-                )
-            }
+//        newsFeedAdapter.apply {
+//            setOnSaveClickListener { article ->
+//                newsViewModel.deleteFromReadLater(article)
+//                Snackbar.make(view, "Article deleted", Snackbar.LENGTH_LONG)
+//                showSnackBar(article, view)
+//            }
+//
+//            setOnShareClickListener {
+//                val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
+//                    .putExtra(Intent.EXTRA_TEXT, it)
+//                startActivity(intent)
+//            }
+//
+//            setOnSourceClickListener {
+//                val bundle = Bundle().apply {
+//                    putSerializable("article", it)
+//                }
+//                findNavController().navigate(
+//                    R.id.action_newsReadLaterFragment_to_articleInfoFragment,
+//                    bundle
+//                )
+//            }
         }
 
-        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return true
-            }
+//        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+//            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+//            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+//        ) {
+//            override fun onMove(
+//                recyclerView: RecyclerView,
+//                viewHolder: RecyclerView.ViewHolder,
+//                target: RecyclerView.ViewHolder
+//            ): Boolean {
+//                return true
+//            }
+//
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                val position = viewHolder.absoluteAdapterPosition
+//                val article = newsFeedAdapter.getItemWithPosition(position)
+//                newsViewModel.deleteFromReadLater(article)
+//                showSnackBar(article, view)
+//            }
+//        }
+//
+//        ItemTouchHelper(itemTouchHelperCallback).apply {
+//            attachToRecyclerView(binding.rvNewsFeed)
+//        }
+//    }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.absoluteAdapterPosition
-                val article = newsFeedAdapter.getItemWithPosition(position)
-                newsViewModel.deleteFromReadLater(article)
-                showSnackBar(article, view)
-            }
-        }
-
-        ItemTouchHelper(itemTouchHelperCallback).apply {
-            attachToRecyclerView(binding.rvNewsFeed)
-        }
-    }
-
-    fun showSnackBar(article: Article, view: View) {
-        Snackbar.make(view, "Article deleted", Snackbar.LENGTH_LONG)
-            .setAction("Undo") {
-                newsViewModel.saveToReadLater(article)
-            }
-            .setAnchorView((activity as NewsActivity).bn_menu)
-            .show()
-    }
+//    fun showSnackBar(article: Article, view: View) {
+//        Snackbar.make(view, "Article deleted", Snackbar.LENGTH_LONG)
+//            .setAction("Undo") {
+//                newsViewModel.saveToReadLater(article)
+//            }
+//            .setAnchorView((activity as NewsActivity).bn_menu)
+//            .show()
+//    }
 }
 
 

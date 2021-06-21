@@ -90,32 +90,32 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        newsFeedAdapter.apply {
-            setOnSaveClickListener { article ->
-                newsViewModel.saveToReadLater(article)
-                Snackbar.make(view, "Article saved", Snackbar.LENGTH_LONG)
-                    .setAction("Undo") {
-                        newsViewModel.saveToReadLater(article)
-                    }
-                    .setAnchorView((activity as NewsActivity).bn_menu)
-                    .show()
-            }
-
-            setOnShareClickListener {
-                val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
-                    .putExtra(Intent.EXTRA_TEXT, it)
-                startActivity(intent)
-            }
-
-            setOnSourceClickListener {
-                val bundle = Bundle().apply {
-                    putSerializable("article", it)
-                }
-                findNavController().navigate(
-                    R.id.action_searchNewsFragment_to_articleInfoFragment,
-                    bundle
-                )
-            }
-        }
+//        newsFeedAdapter.apply {
+//            setOnSaveClickListener { article ->
+//                newsViewModel.saveToReadLater(article)
+//                Snackbar.make(view, "Article saved", Snackbar.LENGTH_LONG)
+//                    .setAction("Undo") {
+//                        newsViewModel.saveToReadLater(article)
+//                    }
+//                    .setAnchorView((activity as NewsActivity).bn_menu)
+//                    .show()
+//            }
+//
+//            setOnShareClickListener {
+//                val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
+//                    .putExtra(Intent.EXTRA_TEXT, it)
+//                startActivity(intent)
+//            }
+//
+//            setOnSourceClickListener {
+//                val bundle = Bundle().apply {
+//                    putSerializable("article", it)
+//                }
+//                findNavController().navigate(
+//                    R.id.action_searchNewsFragment_to_articleInfoFragment,
+//                    bundle
+//                )
+//            }
+//        }
     }
 }

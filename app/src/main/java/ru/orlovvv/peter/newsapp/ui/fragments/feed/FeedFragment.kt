@@ -7,20 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.activity_news.*
-import kotlinx.android.synthetic.main.fragment_news_read_later.*
 import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
 import ru.orlovvv.peter.newsapp.R
-import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
+import ru.orlovvv.peter.newsapp.databinding.FragmentFeedBinding
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 import timber.log.Timber
 
 
-class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
+class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     private val newsViewModel: NewsViewModel by activityViewModels()
-    private val newsFeedAdapter = NewsAdapter()
-    private var _binding: FragmentNewsFeedBinding? = null
+    private val newsFeedAdapter = FeedAdapter()
+    private var _binding: FragmentFeedBinding? = null
     val binding
         get() = _binding!!
 
@@ -30,7 +29,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentNewsFeedBinding.inflate(inflater)
+        _binding = FragmentFeedBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -39,9 +38,9 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            lifecycleOwner = this@NewsFeedFragment
+            lifecycleOwner = this@FeedFragment
             viewModel = newsViewModel
-            rvNewsFeed.adapter = NewsAdapter()
+            rvNewsFeed.adapter = FeedAdapter()
 
         }
 

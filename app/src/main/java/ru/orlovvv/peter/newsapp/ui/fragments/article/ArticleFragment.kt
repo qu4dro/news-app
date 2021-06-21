@@ -1,21 +1,18 @@
-package ru.orlovvv.peter.newsapp.ui.fragments
+package ru.orlovvv.peter.newsapp.ui.fragments.article
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navArgs
 import ru.orlovvv.peter.newsapp.R
-import ru.orlovvv.peter.newsapp.databinding.FragmentArticleInfoBinding
+import ru.orlovvv.peter.newsapp.databinding.FragmentArticleBinding
 
-class ArticleInfoFragment : Fragment(R.layout.fragment_article_info) {
+class ArticleFragment : Fragment(R.layout.fragment_article) {
 
-    val args: ArticleInfoFragmentArgs by navArgs()
+    val args: ArticleFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +20,7 @@ class ArticleInfoFragment : Fragment(R.layout.fragment_article_info) {
         savedInstanceState: Bundle?
     ): View? {
         val article = args.article
-        val binding = FragmentArticleInfoBinding.inflate(inflater)
+        val binding = FragmentArticleBinding.inflate(inflater)
 
         binding.wvArticleInfo.apply {
             webViewClient = WebViewClient()

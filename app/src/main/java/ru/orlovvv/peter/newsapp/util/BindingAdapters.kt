@@ -15,13 +15,13 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import ru.orlovvv.peter.newsapp.R
-import ru.orlovvv.peter.newsapp.ui.fragments.feed.NewsAdapter
+import ru.orlovvv.peter.newsapp.ui.fragments.feed.FeedAdapter
 import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
-    val adapter = recyclerView.adapter as NewsAdapter
+    val adapter = recyclerView.adapter as FeedAdapter
     adapter.submitList(data?.toList())
 
 }

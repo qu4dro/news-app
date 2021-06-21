@@ -1,29 +1,22 @@
 package ru.orlovvv.peter.newsapp.ui.fragments.saved
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
-import ru.orlovvv.peter.newsapp.ui.fragments.feed.NewsAdapter
-import ru.orlovvv.peter.newsapp.databinding.FragmentNewsReadLaterBinding
-import ru.orlovvv.peter.newsapp.models.news.Article
-import ru.orlovvv.peter.newsapp.ui.NewsActivity
+import ru.orlovvv.peter.newsapp.databinding.FragmentSavedBinding
+import ru.orlovvv.peter.newsapp.ui.fragments.feed.FeedAdapter
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
-class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
+class SavedFragment : Fragment(R.layout.fragment_saved) {
 
-    private lateinit var newsFeedAdapter: NewsAdapter
+    private lateinit var feedFeedAdapter: FeedAdapter
     private val newsViewModel: NewsViewModel by activityViewModels()
-    private lateinit var binding: FragmentNewsReadLaterBinding
+    private lateinit var binding: FragmentSavedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,15 +24,15 @@ class NewsReadLaterFragment : Fragment(R.layout.fragment_news_read_later) {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentNewsReadLaterBinding.inflate(inflater)
+        binding = FragmentSavedBinding.inflate(inflater, container, false)
 
-        newsFeedAdapter = NewsAdapter()
+        feedFeedAdapter = FeedAdapter()
 
 
         binding.apply {
-            lifecycleOwner = this@NewsReadLaterFragment
+            lifecycleOwner = this@SavedFragment
             viewModel = newsViewModel
-            rvNewsFeed.adapter = newsFeedAdapter
+            rvNewsFeed.adapter = feedFeedAdapter
         }
 
         return binding.root

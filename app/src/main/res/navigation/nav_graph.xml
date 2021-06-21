@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/articleInfoFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.ArticleInfoFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.article.ArticleFragment"
         android:label="ArticleInfoFragment" >
         <argument
             android:name="article"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFeedFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.feed.NewsFeedFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.feed.FeedFragment"
         android:label="NewsFeedFragment" >
         <action
             android:id="@+id/action_newsFeedFragment_to_articleInfoFragment"
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsReadLaterFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.saved.NewsReadLaterFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.saved.SavedFragment"
         android:label="NewsReadLaterFragment" >
         <action
             android:id="@+id/action_newsReadLaterFragment_to_articleInfoFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchNewsFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.search.SearchNewsFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.search.SearchFragment"
         android:label="SearchNewsFragment" >
         <action
             android:id="@+id/action_searchNewsFragment_to_articleInfoFragment"

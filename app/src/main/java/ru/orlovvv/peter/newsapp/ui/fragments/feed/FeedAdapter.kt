@@ -1,18 +1,15 @@
 package ru.orlovvv.peter.newsapp.ui.fragments.feed
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.ItemArticleBinding
 import ru.orlovvv.peter.newsapp.models.news.Article
 
-class NewsAdapter :
-    ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBack()) {
+class FeedAdapter :
+    ListAdapter<Article, FeedAdapter.NewsViewHolder>(NewsCallBack()) {
 
     class NewsViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {

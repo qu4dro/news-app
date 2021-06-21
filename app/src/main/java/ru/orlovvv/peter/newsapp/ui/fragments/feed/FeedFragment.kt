@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
@@ -40,12 +41,15 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         binding.apply {
             lifecycleOwner = this@FeedFragment
             viewModel = newsViewModel
-            rvNewsFeed.adapter = FeedAdapter()
+            rvNewsFeed.adapter = newsFeedAdapter
 
         }
 
-        newsFeedAdapter.setOnClickListener {
-            Timber.d(it.toString())
+        newsFeedAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("article", it)
+            }
+            findNavController().navigate(R.id.action_feedFragment_to_articleFragment, bundle)
         }
 
     }

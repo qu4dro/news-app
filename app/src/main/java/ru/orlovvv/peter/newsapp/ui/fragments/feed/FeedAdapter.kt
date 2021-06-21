@@ -44,7 +44,7 @@ class FeedAdapter :
         val article = getItem(position)
 
         holder.itemView.setOnClickListener {
-            onClickListener?.let {
+            onItemClickListener?.let {
                 it(article)
             }
         }
@@ -52,10 +52,10 @@ class FeedAdapter :
         holder.bind(article)
     }
 
-    private var onClickListener: ((Article) -> Unit)? = null
+    private var onItemClickListener: ((Article) -> Unit)? = null
 
-    fun setOnClickListener(listener: (Article) -> Unit) {
-        onClickListener = listener
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
     }
 
 

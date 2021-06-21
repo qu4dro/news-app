@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFeedFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.NewsFeedFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.feed.NewsFeedFragment"
         android:label="NewsFeedFragment" >
         <action
             android:id="@+id/action_newsFeedFragment_to_articleInfoFragment"
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsReadLaterFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.NewsReadLaterFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.saved.NewsReadLaterFragment"
         android:label="NewsReadLaterFragment" >
         <action
             android:id="@+id/action_newsReadLaterFragment_to_articleInfoFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchNewsFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.SearchNewsFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.search.SearchNewsFragment"
         android:label="SearchNewsFragment" >
         <action
             android:id="@+id/action_searchNewsFragment_to_articleInfoFragment"

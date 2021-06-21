@@ -1,4 +1,4 @@
-package ru.orlovvv.peter.newsapp.ui.fragments
+package ru.orlovvv.peter.newsapp.ui.fragments.search
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.coroutines.Job
@@ -19,12 +18,10 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.orlovvv.peter.newsapp.R
-import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
+import ru.orlovvv.peter.newsapp.ui.fragments.feed.NewsAdapter
 import ru.orlovvv.peter.newsapp.databinding.FragmentSearchNewsBinding
-import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
-import ru.orlovvv.peter.newsapp.util.Pagination
 
 class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
@@ -40,7 +37,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
     ): View? {
         binding = FragmentSearchNewsBinding.inflate(inflater)
 
-        newsFeedAdapter = NewsAdapter(newsViewModel)
+        newsFeedAdapter = NewsAdapter()
 
         binding.apply {
             lifecycleOwner = this@SearchNewsFragment

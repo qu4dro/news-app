@@ -1,4 +1,4 @@
-package ru.orlovvv.peter.newsapp.ui.fragments
+package ru.orlovvv.peter.newsapp.ui.fragments.feed
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_news_read_later.*
 import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
 import ru.orlovvv.peter.newsapp.R
-import ru.orlovvv.peter.newsapp.adapters.NewsAdapter
 import ru.orlovvv.peter.newsapp.databinding.FragmentNewsFeedBinding
 import ru.orlovvv.peter.newsapp.ui.NewsActivity
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
@@ -32,7 +31,7 @@ class NewsFeedFragment : Fragment(R.layout.fragment_news_feed) {
         savedInstanceState: Bundle?
     ): View? {
 
-        newsFeedAdapter = NewsAdapter(newsViewModel)
+        newsFeedAdapter = NewsAdapter()
 
         binding = FragmentNewsFeedBinding.inflate(inflater)
 

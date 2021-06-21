@@ -1,6 +1,5 @@
-package ru.orlovvv.peter.newsapp.adapters
+package ru.orlovvv.peter.newsapp.ui.fragments.feed
 
-import android.transition.AutoTransition
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -10,13 +9,12 @@ import androidx.core.view.isGone
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.item_article.view.*
 import ru.orlovvv.peter.newsapp.databinding.ItemArticleBinding
 import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
 
-class NewsAdapter(private var viewModel: NewsViewModel) :
+class NewsAdapter() :
     ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsCallBack()) {
 
     var previousExpandedPosition = -1

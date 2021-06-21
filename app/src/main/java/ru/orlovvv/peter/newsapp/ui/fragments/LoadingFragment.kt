@@ -32,7 +32,7 @@ class LoadingFragment : Fragment(R.layout.fragment_loading) {
         newsViewModel.topNewsArticlesList.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    findNavController().navigate(R.id.action_loadingFragment_to_newsFeedFragment)
+                    findNavController().navigate(R.id.action_loadingFragment_to_feedFragment)
                 }
                 is Resource.Loading -> {
                     //

@@ -27,7 +27,7 @@ class NewsActivity : AppCompatActivity() {
 
         nav_host_fragment.findNavController()
             .addOnDestinationChangedListener { controller, destination, arguments ->
-                if (destination.id == R.id.loadingFragment || destination.id == R.id.articleInfoFragment) {
+                if (destination.id == R.id.loadingFragment || destination.id == R.id.articleFragment) {
                     bn_menu.visibility = View.GONE
                 } else {
                     bn_menu.visibility = View.VISIBLE

@@ -1,48 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/loadingFragment">
 
     <fragment
-        android:id="@+id/articleInfoFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.ArticleInfoFragment"
-        android:label="ArticleInfoFragment" >
+        android:id="@+id/articleFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.article.ArticleFragment"
+        android:label="ArticleFragment">
         <argument
             android:name="article"
             app:argType="ru.orlovvv.peter.newsapp.models.news.Article" />
+        <action
+            android:id="@+id/action_articleInfoFragment_to_webSourceFragment"
+            app:destination="@id/webSourceFragment" />
     </fragment>
     <fragment
-        android:id="@+id/newsFeedFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.NewsFeedFragment"
-        android:label="NewsFeedFragment" >
+        android:id="@+id/feedFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.feed.FeedFragment"
+        android:label="FeedFragment">
         <action
-            android:id="@+id/action_newsFeedFragment_to_articleInfoFragment"
-            app:destination="@id/articleInfoFragment" />
+            android:id="@+id/action_feedFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
-        android:id="@+id/newsReadLaterFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.NewsReadLaterFragment"
-        android:label="NewsReadLaterFragment" >
+        android:id="@+id/savedFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.saved.SavedFragment"
+        android:label="SavedFragment">
         <action
-            android:id="@+id/action_newsReadLaterFragment_to_articleInfoFragment"
-            app:destination="@id/articleInfoFragment" />
+            android:id="@+id/action_savedFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchNewsFragment"
-        android:name="ru.orlovvv.peter.newsapp.ui.fragments.SearchNewsFragment"
-        android:label="SearchNewsFragment" >
+        android:id="@+id/searchFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.search.SearchFragment"
+        android:label="SearchFragment">
         <action
-            android:id="@+id/action_searchNewsFragment_to_articleInfoFragment"
-            app:destination="@id/articleInfoFragment" />
+            android:id="@+id/action_searchFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
         android:name="ru.orlovvv.peter.newsapp.ui.fragments.LoadingFragment"
         android:label="LoadingFragment" >
         <action
-            android:id="@+id/action_loadingFragment_to_newsFeedFragment"
-            app:destination="@id/newsFeedFragment"
+            android:id="@+id/action_loadingFragment_to_feedFragment"
+            app:destination="@id/feedFragment"
             app:popUpTo="@id/loadingFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/webSourceFragment"
+        android:name="ru.orlovvv.peter.newsapp.ui.fragments.article.WebSourceFragment"
+        android:label="WebSourceFragment" >
+        <argument
+            android:name="article"
+            app:argType="ru.orlovvv.peter.newsapp.models.news.Article" />
     </fragment>
 </navigation>

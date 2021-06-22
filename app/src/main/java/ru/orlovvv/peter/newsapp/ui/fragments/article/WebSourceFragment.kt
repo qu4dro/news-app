@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.FragmentWebSourceBinding
@@ -31,10 +32,15 @@ class WebSourceFragment : Fragment(R.layout.fragment_web_source) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val article = args.article
-        binding.wvArticleWebSource.apply {
-            webViewClient = WebViewClient()
-            settings.javaScriptEnabled = true
-            loadUrl(article.url)
+        binding.apply {
+            toolbar.setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
+            wvArticleWebSource.apply {
+                webViewClient = WebViewClient()
+                settings.javaScriptEnabled = true
+                loadUrl(article.url)
+            }
         }
     }
 

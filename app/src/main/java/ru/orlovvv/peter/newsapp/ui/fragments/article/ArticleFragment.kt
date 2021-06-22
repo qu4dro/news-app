@@ -1,6 +1,8 @@
 package ru.orlovvv.peter.newsapp.ui.fragments.article
 
+import android.animation.LayoutTransition
 import android.os.Bundle
+import android.transition.Transition
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
@@ -45,15 +47,41 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             tvArticleTitle.transitionName = "title_trans_${args.article.url}"
             tvArticleSource.transitionName = "source_trans_${args.article.url}"
             tvArticleDate.transitionName = "date_trans_${args.article.url}"
+
+            fabSource.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putSerializable("article", article)
+                }
+                findNavController().navigate(R.id.action_articleInfoFragment_to_webSourceFragment, bundle, null, null)
+            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move).addListener(object : Transition.TransitionListener{
+                override fun onTransitionStart(transition: Transition?) {
+                    binding.fabSource.visibility = View.GONE
+                    binding.toolbar.visibility = View.GONE
+                }
+
+                override fun onTransitionEnd(transition: Transition?) {
+                    binding.fabSource.visibility = View.VISIBLE
+                    binding.toolbar.visibility = View.VISIBLE
+                }
+
+                override fun onTransitionCancel(transition: Transition?) {}
+                override fun onTransitionPause(transition: Transition?) {}
+                override fun onTransitionResume(transition: Transition?) {}
+
+            })
         sharedElementReturnTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
     override fun onDestroy() {

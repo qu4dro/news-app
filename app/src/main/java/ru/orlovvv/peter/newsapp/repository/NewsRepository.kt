@@ -18,5 +18,6 @@ class NewsRepository @Inject constructor(private val newsDAO: NewsDAO, private v
     suspend fun insert(article: Article) = newsDAO.insert(article)
     suspend fun delete(article: Article) = newsDAO.delete(article)
     fun getAll() = newsDAO.getAll()
+    suspend fun isExist(url: String) = newsDAO.isExist(url)
 
 }

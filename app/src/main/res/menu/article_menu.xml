@@ -6,4 +6,17 @@
         android:icon="@drawable/ic_read_later"
         android:title="@string/save_article"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/deleteArticle"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/delete"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/shareArticle"
+        android:icon="@drawable/ic_share"
+        android:title="@string/share"
+        app:showAsAction="always" />
+
 </menu>

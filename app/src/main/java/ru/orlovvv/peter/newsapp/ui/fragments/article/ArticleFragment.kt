@@ -1,6 +1,5 @@
 package ru.orlovvv.peter.newsapp.ui.fragments.article
 
-import android.animation.LayoutTransition
 import android.os.Bundle
 import android.transition.Transition
 import android.transition.TransitionInflater
@@ -59,6 +58,10 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        makeTransition()
+    }
+
+    private fun makeTransition() {
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move).addListener(object : Transition.TransitionListener{
                 override fun onTransitionStart(transition: Transition?) {
@@ -78,10 +81,6 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
             })
         sharedElementReturnTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun onDestroy() {

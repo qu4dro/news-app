@@ -1,4 +1,4 @@
-package ru.orlovvv.peter.newsapp.adapters
+package ru.orlovvv.peter.newsapp.util
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -19,10 +19,18 @@ import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.ui.fragments.feed.FeedAdapter
 import ru.orlovvv.peter.newsapp.models.news.Article
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
+import ru.orlovvv.peter.newsapp.ui.fragments.saved.SavedAdapter
 
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
+@BindingAdapter("listDataFeed")
+fun bindRecyclerViewFeed(recyclerView: RecyclerView, data: List<Article>?) {
     val adapter = recyclerView.adapter as FeedAdapter
+    adapter.submitList(data?.toList())
+
+}
+
+@BindingAdapter("listDataSaved")
+fun bindRecyclerViewSaved(recyclerView: RecyclerView, data: List<Article>?) {
+    val adapter = recyclerView.adapter as SavedAdapter
     adapter.submitList(data?.toList())
 
 }

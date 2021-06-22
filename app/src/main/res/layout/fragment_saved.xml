@@ -14,17 +14,20 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:paddingTop="2dp"
+            android:paddingHorizontal="4dp"
             android:id="@+id/rv_news_feed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="16dp"
-            app:listData="@{viewModel.savedNewsArticlesList}"
+            android:paddingBottom="56dp"
+            app:listDataSaved="@{viewModel.savedNewsArticlesList}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

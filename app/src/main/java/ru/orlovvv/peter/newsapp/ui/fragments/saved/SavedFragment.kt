@@ -6,34 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.FragmentSavedBinding
 import ru.orlovvv.peter.newsapp.ui.fragments.feed.FeedAdapter
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
+import ru.orlovvv.peter.newsapp.util.setStickersSpacing
 
 class SavedFragment : Fragment(R.layout.fragment_saved) {
 
-    private lateinit var feedFeedAdapter: FeedAdapter
+    private var savedAdapter = SavedAdapter()
     private val newsViewModel: NewsViewModel by activityViewModels()
-    private lateinit var binding: FragmentSavedBinding
+    private var _binding: FragmentSavedBinding? = null
+    val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        binding = FragmentSavedBinding.inflate(inflater, container, false)
-
-        feedFeedAdapter = FeedAdapter()
-
-
-        binding.apply {
-            lifecycleOwner = this@SavedFragment
-            viewModel = newsViewModel
-            rvNewsFeed.adapter = feedFeedAdapter
-        }
+        _binding = FragmentSavedBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -41,6 +36,33 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            lifecycleOwner = this@SavedFragment
+            viewModel = newsViewModel
+            rvNewsFeed.adapter = savedAdapter
+            rvNewsFeed.apply {
+                setStickersSpacing()
+                postponeEnterTransition()
+                viewTreeObserver
+                    .addOnPreDrawListener {
+                        startPostponedEnterTransition()
+                        true
+                    }
+            }
+        }
+
+        savedAdapter.setOnItemClickListener { article, extras ->
+            val bundle = Bundle().apply {
+                putSerializable("article", article)
+            }
+            findNavController().navigate(
+                R.id.action_savedFragment_to_articleFragment,
+                bundle,
+                null,
+                extras
+            )
+        }
 
 //        newsFeedAdapter.apply {
 //            setOnSaveClickListener { article ->
@@ -64,7 +86,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
 //                    bundle
 //                )
 //            }
-        }
+    }
 
 //        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
 //            ItemTouchHelper.UP or ItemTouchHelper.DOWN,

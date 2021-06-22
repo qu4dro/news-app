@@ -9,4 +9,6 @@
     <string name="source">SOURCE</string>
     <string name="popular_sources">Popular sources</string>
     <string name="newsit">Newsit!</string>
+    <string name="save_article">Save article</string>
+    <string name="delete">Delete</string>
 </resources>

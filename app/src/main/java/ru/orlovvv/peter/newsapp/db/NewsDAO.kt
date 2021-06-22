@@ -15,4 +15,7 @@ interface NewsDAO {
 
     @Query(value = "SELECT * FROM articles")
     fun getAll(): LiveData<List<Article>>
+
+    @Query("SELECT EXISTS(SELECT * FROM articles WHERE url = :url)")
+    suspend fun isExist(url : String) : Boolean
 }

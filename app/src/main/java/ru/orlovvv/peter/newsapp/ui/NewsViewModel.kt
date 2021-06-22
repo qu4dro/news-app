@@ -35,6 +35,10 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
     var currentTopNewsPage = 1
     var currentSearchNewsPage = 1
 
+    private val _articleIsExist: MutableLiveData<Boolean> = MutableLiveData(false)
+    val articleIsExist
+        get() = _articleIsExist
+
     private val _topNewsArticlesList: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     val topNewsArticlesList: LiveData<Resource<NewsResponse>>
         get() = _topNewsArticlesList
@@ -141,10 +145,12 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
 
     fun saveToReadLater(article: Article) = viewModelScope.launch {
         newsRepository.insert(article)
+        _articleIsExist.value = true
     }
 
     fun deleteFromReadLater(article: Article) = viewModelScope.launch {
         newsRepository.delete(article)
+        _articleIsExist.value = false
     }
 
     fun getAllSavedNews() {
@@ -155,6 +161,10 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
         _searchedNewsArticlesList.value = ArrayList()
         searchedNewsResponse = null
         currentSearchNewsPage = 1
+    }
+
+    fun isExist(url: String) = viewModelScope.launch {
+        _articleIsExist.value = newsRepository.isExist(url)
     }
 }
 

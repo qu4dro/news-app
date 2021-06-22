@@ -1,14 +1,18 @@
 package ru.orlovvv.peter.newsapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.ActivityNewsBinding
+
 
 @AndroidEntryPoint
 class NewsActivity : AppCompatActivity() {
@@ -38,8 +42,21 @@ class NewsActivity : AppCompatActivity() {
                 binding.bnMenu.visibility = View.GONE
             } else {
                 binding.bnMenu.visibility = View.VISIBLE
+                slideMenu()
             }
 
+        }
+    }
+
+    private fun slideMenu() {
+        val layoutParams = binding.bnMenu.layoutParams
+        if (layoutParams is CoordinatorLayout.LayoutParams) {
+            val behavior = layoutParams.behavior
+            if (behavior is HideBottomViewOnScrollBehavior<*>) {
+                val hideShowBehavior =
+                    behavior as HideBottomViewOnScrollBehavior<BottomNavigationView>
+                hideShowBehavior.slideUp(binding.bnMenu)
+            }
         }
     }
 

@@ -10,9 +10,8 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.activity_news.*
 import ru.orlovvv.peter.newsapp.R
 import ru.orlovvv.peter.newsapp.databinding.FragmentSavedBinding
-import ru.orlovvv.peter.newsapp.ui.fragments.feed.FeedAdapter
 import ru.orlovvv.peter.newsapp.ui.NewsViewModel
-import ru.orlovvv.peter.newsapp.util.setStickersSpacing
+import ru.orlovvv.peter.newsapp.util.setItemsSpacing
 
 class SavedFragment : Fragment(R.layout.fragment_saved) {
 
@@ -42,7 +41,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
             viewModel = newsViewModel
             rvNewsFeed.adapter = savedAdapter
             rvNewsFeed.apply {
-                setStickersSpacing()
+                setItemsSpacing()
                 postponeEnterTransition()
                 viewTreeObserver
                     .addOnPreDrawListener {

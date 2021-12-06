@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/trendingFragment"
+        android:icon="@drawable/ic_trending"
+        android:title="@string/trending" />
+
+    <item
+        android:id="@+id/savedFragment"
+        android:icon="@drawable/ic_not_turned"
+        android:title="@string/saved" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
+</menu>

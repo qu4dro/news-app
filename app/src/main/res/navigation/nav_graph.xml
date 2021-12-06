@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/trendingFragment">
+
+    <fragment
+        android:id="@+id/trendingFragment"
+        android:name="ru.orlovvv.newsapp.ui.trending.TrendingFragment"
+        android:label="TrendingFragment"
+        tools:layout="@layout/fragment_trending">
+        <action
+            android:id="@+id/action_trendingFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="ru.orlovvv.newsapp.ui.article.ArticleFragment"
+        android:label="ArticleFragment"
+        tools:layout="@layout/fragment_article">
+        <action
+            android:id="@+id/action_articleFragment_to_sourceFragment"
+            app:destination="@id/sourceFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_top" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="ru.orlovvv.newsapp.ui.saved.SavedFragment"
+        android:label="SavedFragment"
+        tools:layout="@layout/fragment_saved">
+        <action
+            android:id="@+id/action_savedFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/sourceFragment"
+        android:name="ru.orlovvv.newsapp.ui.source.SourceFragment"
+        android:label="SourceFragment"
+        tools:layout="@layout/fragment_source" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="ru.orlovvv.newsapp.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_articleFragment"
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+</navigation>

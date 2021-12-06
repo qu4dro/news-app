@@ -86,3 +86,4 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+/app/src/main/java/ru/orlovvv/newsapp/utils/ApiKey.kt

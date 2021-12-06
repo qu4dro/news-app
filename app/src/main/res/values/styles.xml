@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomNavigation.CleanStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="labelVisibilityMode">unlabeled</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+</resources>

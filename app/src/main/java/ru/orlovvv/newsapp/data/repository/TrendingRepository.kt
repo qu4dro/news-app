@@ -10,4 +10,7 @@ class TrendingRepository @Inject constructor(
     private val cacheDao: CacheDao,
     private val savedDao: SavedDao
 ) {
+
+    suspend fun getTrendingNews() = apiHelper.getTrendingNews()
+
 }

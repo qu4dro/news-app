@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.databinding.ActivityNewsBinding
 import ru.orlovvv.newsapp.utils.NetworkHelper
@@ -20,6 +21,7 @@ import ru.orlovvv.newsapp.workers.NetworkBroadcastReceiver
 import timber.log.Timber
 import java.lang.Exception
 
+@AndroidEntryPoint
 class NewsActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController

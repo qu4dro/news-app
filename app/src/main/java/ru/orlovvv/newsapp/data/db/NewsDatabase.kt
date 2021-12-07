@@ -7,9 +7,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import ru.orlovvv.newsapp.data.Converters
+import ru.orlovvv.newsapp.data.model.Data
 import ru.orlovvv.newsapp.utils.Constants.DATABASE_NAME
 
-@Database(entities = [], exportSchema = false, version = 1)
+@Database(entities = [Data::class], exportSchema = false, version = 1)
 @TypeConverters(Converters::class)
 abstract class NewsDatabase : RoomDatabase() {
 

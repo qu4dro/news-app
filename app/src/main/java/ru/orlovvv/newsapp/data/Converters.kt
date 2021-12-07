@@ -1,11 +1,17 @@
 package ru.orlovvv.newsapp.data
 
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 
 class Converters {
 
     @TypeConverter
-    fun currentToString(any: Any): String = Gson().toJson(any)
+    fun fromCategories(value: List<String>): String {
+        return value.joinToString()
+    }
+
+    @TypeConverter
+    fun toCategories(value: String): List<String> {
+        return value.split(", ")
+    }
 
 }

@@ -1,11 +1,11 @@
 package ru.orlovvv.newsapp.di
 
-import android.app.Application
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +17,7 @@ import ru.orlovvv.newsapp.data.api.NewsApiHelperImpl
 import javax.inject.Singleton
 
 @Module
-@InstallIn(Application::class)
+@InstallIn(SingletonComponent::class)
 class ApiModule {
 
     @Provides

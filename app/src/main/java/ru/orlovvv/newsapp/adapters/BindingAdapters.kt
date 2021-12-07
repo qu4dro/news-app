@@ -10,12 +10,18 @@ import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.textview.MaterialTextView
 import ru.orlovvv.newsapp.data.model.Data
 
 @BindingAdapter("articleList")
 fun bindArticleList(recyclerView: RecyclerView, data: List<Data>?) {
     val adapter = recyclerView.adapter as ArticleAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("category")
+fun bindCategory(textView: MaterialTextView, categories: List<String>?) {
+    textView.text = categories?.get(0)?.replaceFirstChar { c: Char -> c.uppercaseChar() }
 }
 
 @BindingAdapter("imageUrl")

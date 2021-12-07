@@ -35,7 +35,6 @@
     <style name="TextAppearance.News.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
     <style name="TextAppearance.News.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
@@ -59,6 +58,17 @@
         <item name="fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.News.NewsPreviewHeadline" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/montserrat_semi_bold</item>
+        <item name="lineHeight">18sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.News.NewsPreviewSource" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

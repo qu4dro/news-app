@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.adapters.ArticleAdapter
 import ru.orlovvv.newsapp.data.model.Data
 import ru.orlovvv.newsapp.databinding.FragmentTrendingBinding
 import ru.orlovvv.newsapp.utils.Resource
+import ru.orlovvv.newsapp.viewmodels.CacheViewModel
 import ru.orlovvv.newsapp.viewmodels.TrendingNewsViewModel
 import timber.log.Timber
 
@@ -25,6 +27,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
         get() = _trendingFragmentBinding!!
 
     private val trendingNewsViewModel: TrendingNewsViewModel by activityViewModels()
+    private val cacheViewModel: CacheViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,6 +79,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
     }
 
     override fun onArticleClick(cardView: View, article: Data) {
-        Timber.d("Article clicked")
+        cacheViewModel.selectArticle(article)
+        findNavController().navigate(R.id.action_trendingFragment_to_articleFragment)
     }
 }

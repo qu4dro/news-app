@@ -1,14 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="article"
+            type="ru.orlovvv.newsapp.data.model.Data" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/ic_launcher_foreground"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.appbar.AppBarLayout
+            style="@style/AppBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
+
+                <ImageButton
+                    android:id="@+id/ib_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/actionBarItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/ib_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/actionBarItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_not_turned"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="28dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="28dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="28dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_end="28dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_image_preview"
+                    style="@style/CardViewStyle.ImageCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_preview"
+                        imageUrl="@{article.image_url}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@{article.title}"
+                    android:textAppearance="@style/TextAppearance.News.NewsHeadline"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/cv_image_preview"
+                    tools:text="Short title with main information about this article" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/group_badges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="tv_categories,tv_source" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_categories"
+                    category="@{article.categories}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:alpha="0.6"
+                    android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"
+                    app:layout_constraintEnd_toStartOf="@id/tv_source"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"
+                    tools:text="Sport" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_source"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.6"
+                    android:gravity="end"
+                    android:text="@{article.source}"
+                    android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toEndOf="@id/tv_categories"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"
+                    tools:text="Source.com" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@{article.description}"
+                    android:textAppearance="@style/TextAppearance.News.Body2"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/tv_snippet"
+                    tools:text="Short description" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_snippet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@{article.snippet}"
+                    android:textAppearance="@style/TextAppearance.News.Body2"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/group_badges"
+                    tools:text="Short snippet" />
+
+                <View
+                    android:id="@+id/delimiter"
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="18dp"
+                    android:background="#B6B6B6"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/tv_text" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_article" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

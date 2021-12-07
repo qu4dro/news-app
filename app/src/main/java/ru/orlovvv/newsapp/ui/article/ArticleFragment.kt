@@ -5,14 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.databinding.FragmentArticleBinding
+import ru.orlovvv.newsapp.viewmodels.CacheViewModel
 
+@AndroidEntryPoint
 class ArticleFragment : Fragment(R.layout.fragment_article) {
 
     private var _articleFragmentBinding: FragmentArticleBinding? = null
     val articleFragmentBinding
         get() = _articleFragmentBinding!!
+
+    private val cacheViewModel: CacheViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +33,22 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupObservers()
+        setupUI()
+    }
+
+    private fun setupObservers() {
+        cacheViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {
+            articleFragmentBinding.article = it
+        })
+    }
+
+    private fun setupUI() {
+        articleFragmentBinding.apply {
+            ibBack.setOnClickListener { findNavController().navigateUp() }
+            ibSave.setOnClickListener {  }
+            fabSource.setOnClickListener { findNavController().navigate(R.id.action_articleFragment_to_sourceFragment) }
+        }
     }
 
     override fun onDestroyView() {

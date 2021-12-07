@@ -1,5 +1,6 @@
 package ru.orlovvv.newsapp.data.model
 
+import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -20,3 +21,18 @@ data class Data(
     @PrimaryKey(autoGenerate = false)
     var uuid: String
 )
+
+object ArticleCallback : DiffUtil.ItemCallback<Data>() {
+    override fun areItemsTheSame(
+        oldItem: Data,
+        newItem: Data
+    ) =
+        oldItem.uuid == newItem.uuid
+
+    override fun areContentsTheSame(
+        oldItem: Data,
+        newItem: Data
+    ) =
+        oldItem == newItem
+
+}

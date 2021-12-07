@@ -12,7 +12,6 @@ import ru.orlovvv.newsapp.data.model.TrendingNews
 import ru.orlovvv.newsapp.data.repository.TrendingRepository
 import ru.orlovvv.newsapp.utils.NetworkHelper
 import ru.orlovvv.newsapp.utils.Resource
-import java.lang.Error
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -28,10 +27,10 @@ class TrendingNewsViewModel @Inject constructor(
         get() = _trending
 
     init {
-        getTrendingNews()
+        getTrendingNewsFromServer()
     }
 
-    fun getTrendingNews() = viewModelScope.launch(Dispatchers.IO) {
+    fun getTrendingNewsFromServer() = viewModelScope.launch(Dispatchers.IO) {
         try {
             if (networkHelper.isNetworkConnected()) {
                 _trending.postValue(Resource.Loading())

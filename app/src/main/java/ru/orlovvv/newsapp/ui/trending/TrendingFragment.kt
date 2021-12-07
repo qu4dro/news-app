@@ -9,13 +9,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.newsapp.R
+import ru.orlovvv.newsapp.adapters.ArticleAdapter
+import ru.orlovvv.newsapp.data.model.Data
 import ru.orlovvv.newsapp.databinding.FragmentTrendingBinding
 import ru.orlovvv.newsapp.utils.Resource
 import ru.orlovvv.newsapp.viewmodels.TrendingNewsViewModel
 import timber.log.Timber
 
 @AndroidEntryPoint
-class TrendingFragment : Fragment(R.layout.fragment_trending) {
+class TrendingFragment : Fragment(R.layout.fragment_trending),
+    ArticleAdapter.ArticleAdapterListener {
 
     private var _trendingFragmentBinding: FragmentTrendingBinding? = null
     val trendingFragmentBinding
@@ -58,12 +61,21 @@ class TrendingFragment : Fragment(R.layout.fragment_trending) {
     }
 
     private fun setupUI() {
-
+        trendingFragmentBinding.apply {
+            lifecycleOwner = this@TrendingFragment
+            trendViewModel = trendingNewsViewModel
+            rvTrendingNews.adapter =
+                ArticleAdapter(listener = this@TrendingFragment, isSmall = false)
+        }
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         _trendingFragmentBinding = null
+    }
+
+    override fun onArticleClick(cardView: View, article: Data) {
+        Timber.d("Article clicked")
     }
 }

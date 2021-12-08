@@ -132,10 +132,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="tv_categories,tv_source" />
+                    app:constraint_referenced_ids="tv_badges" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_categories"
+                    android:id="@+id/tv_badges"
+                    categories="@{article.categories}"
+                    source="@{article.source}"
                     category="@{article.categories}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -144,33 +146,18 @@
                     android:layout_marginEnd="10dp"
                     android:alpha="0.6"
                     android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"
-                    app:layout_constraintEnd_toStartOf="@id/tv_source"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@id/tv_title"
-                    tools:text="Sport" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_source"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:alpha="0.6"
-                    android:gravity="end"
-                    android:text="@{article.source}"
-                    android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                    app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintStart_toEndOf="@id/tv_categories"
-                    app:layout_constraintTop_toBottomOf="@id/tv_title"
-                    tools:text="Source.com" />
+                    tools:text="Sport Google.com" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text="@{article.description}"
+                    articleText="@{article.description}"
                     android:textAppearance="@style/TextAppearance.News.Body2"
                     app:layout_constraintEnd_toEndOf="@id/guideline_right"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -182,11 +169,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text="@{article.snippet}"
+                    articleText="@{article.snippet}"
                     android:textAppearance="@style/TextAppearance.News.Body2"
                     app:layout_constraintEnd_toEndOf="@id/guideline_right"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
-                    app:layout_constraintTop_toBottomOf="@id/group_badges"
+                    app:layout_constraintTop_toBottomOf="@id/tv_badges"
                     tools:text="Short snippet" />
 
                 <View

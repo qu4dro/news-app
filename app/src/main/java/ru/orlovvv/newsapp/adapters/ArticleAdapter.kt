@@ -18,6 +18,11 @@ class ArticleAdapter(
 ) :
     ListAdapter<Data, RecyclerView.ViewHolder>(ArticleCallback) {
 
+    companion object {
+        const val VIEW_TYPE_ONE = 1
+        const val VIEW_TYPE_TWO = 2
+    }
+
     interface ArticleAdapterListener {
         fun onArticleClick(cardView: View, article: Data)
     }
@@ -54,8 +59,15 @@ class ArticleAdapter(
         }
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (position % 5 == 0) VIEW_TYPE_ONE
+        else {
+            VIEW_TYPE_TWO
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (isSmall) {
+        if (isSmall || viewType == VIEW_TYPE_TWO) {
             return ArticleSmallViewHolder(
                 ItemArticleSmallBinding.inflate(
                     LayoutInflater.from(parent.context),

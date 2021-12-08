@@ -26,10 +26,10 @@
         <action
             android:id="@+id/action_articleFragment_to_sourceFragment"
             app:destination="@id/sourceFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
@@ -48,7 +48,11 @@
         android:id="@+id/sourceFragment"
         android:name="ru.orlovvv.newsapp.ui.source.SourceFragment"
         android:label="SourceFragment"
-        tools:layout="@layout/fragment_source" />
+        tools:layout="@layout/fragment_source" >
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="ru.orlovvv.newsapp.ui.search.SearchFragment"

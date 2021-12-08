@@ -81,7 +81,12 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
             rvSimilarNews.adapter = ArticleAdapter(this@ArticleFragment, isSmall = true)
             ibBack.setOnClickListener { findNavController().navigateUp() }
             ibSave.setOnClickListener { }
-            fabSource.setOnClickListener { findNavController().navigate(R.id.action_articleFragment_to_sourceFragment) }
+            fabSource.setOnClickListener {
+                val link = cacheViewModel.selectedArticle.value?.url ?: ""
+                val action =
+                    ArticleFragmentDirections.actionArticleFragmentToSourceFragment(link)
+                findNavController().navigate(action)
+            }
         }
     }
 

@@ -58,7 +58,7 @@
                 app:layout_constrainedHeight="true"
                 android:layout_marginStart="12dp"
                 articleText="@{article.title}"
-                android:textAppearance="@style/TextAppearance.News.NewsPreviewHeadline"
+                android:textAppearance="@style/TextAppearance.News.NewsPreviewHeadline2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cv_image_preview"
                 app:layout_constraintTop_toTopOf="parent"

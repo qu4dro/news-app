@@ -66,6 +66,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TextAppearance.News.NewsPreviewHeadline2" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/lora_semi_bold</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="TextAppearance.News.NewsPreviewText" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/montserrat_semi_bold</item>
         <item name="lineHeight">22sp</item>

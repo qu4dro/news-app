@@ -12,8 +12,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.textview.MaterialTextView
+import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.data.model.Article
 import java.lang.Exception
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,13 +30,14 @@ fun bindCategory(textView: MaterialTextView, categories: List<String>?) {
     textView.text = categories?.get(0)?.replaceFirstChar { c: Char -> c.uppercaseChar() }
 }
 
+
 @BindingAdapter("articleText")
-fun bindArticleText(textView: MaterialTextView, text: String?) {
-    if (text.isNullOrEmpty()) {
-        textView.visibility = View.GONE
-    } else {
-        textView.visibility = View.VISIBLE
+fun bindArticleText(textView: MaterialTextView, text: String) {
+    if(text.endsWith(".")) {
         textView.text = text
+    } else {
+        val newText = "$text."
+        textView.text = newText
     }
 }
 
@@ -56,7 +59,7 @@ fun bindImage(imgView: ImageView, urlToImage: String?) {
             }
 
             override fun onLoadFailed(errorDrawable: Drawable?) {
-//                imgView.setImageResource(R.drawable.ic_broken_image)
+                imgView.setImageResource(R.drawable.ic_article)
             }
         })
 }
@@ -66,17 +69,21 @@ fun bindToday(textView: MaterialTextView, parameter: Int?) {
     textView.text = getToday()
 }
 
-@BindingAdapter("categories","source")
-fun bindBadges(textView: MaterialTextView, categories: List<String>?, source: String?) {
-    val formattedCategories = try {
-        categories?.get(0)?.replaceFirstChar { c: Char -> c.uppercaseChar() }
-    } catch (e: Exception) {
-        "News"
-    }
-    val formattedSource = source?.replaceFirstChar { c: Char -> c.uppercaseChar() }
+@BindingAdapter("author","source", "date")
+fun bindBadges(textView: MaterialTextView, author: String?, source: String?, date: String) {
+    val formattedAuthor = author?.replaceFirstChar { c: Char -> c.uppercaseChar() } ?: "Author"
+    val formattedSource = source?.replaceFirstChar { c: Char -> c.uppercaseChar() } ?: "Global"
+    val formattedDate = formatDate(date)
     val delimiter = " \u00b7 "
-    val text = formattedCategories + delimiter + formattedSource
+    val text = formattedSource + delimiter + formattedAuthor + delimiter + formattedDate
     textView.text = text
+}
+
+
+fun formatDate(date: String): String {
+    val outputFormat: DateFormat = SimpleDateFormat("EEEE, d MMM HH:mm", Locale.ENGLISH)
+    val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+    return outputFormat.format(inputFormat.parse(date))
 }
 
 fun getToday(): String =

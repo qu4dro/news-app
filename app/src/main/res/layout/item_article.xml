@@ -22,74 +22,79 @@
         android:onClick="@{(view) -> listener.onArticleClick(view,article)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="#D1CAA8"
-            android:paddingHorizontal="32dp"
-            android:paddingVertical="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp">
 
-            <ImageView
-                android:id="@+id/iv_article_preview"
-                imageUrl="@{article.urlToImage}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
+            <com.google.android.material.card.MaterialCardView
+                android:backgroundTint="?attr/colorPrimary"
+                style="@style/CardViewStyle.ImageCard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                android:id="@+id/cv_article_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_article_preview"
+                    imageUrl="@{article.urlToImage}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            </com.google.android.material.card.MaterialCardView>
+
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_title"
+                articleText="@{article.title}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@{article.title}"
                 android:textAppearance="@style/TextAppearance.News.NewsPreviewHeadline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_article_preview"
+                app:layout_constraintTop_toBottomOf="@id/cv_article_preview"
                 tools:text="Short title with main information about this article" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_description"
+                articleText="@{article.description}"
                 android:layout_width="0dp"
-                android:alpha="0.9"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@{article.description}"
                 android:textAppearance="@style/TextAppearance.News.NewsPreviewText"
+                android:textColor="?android:textColorSecondary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
                 tools:text="Short title with main information about this article" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_badges"
+                author="@{article.author}"
+                date="@{article.publishedAt}"
+                source="@{article.source.name}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textAppearance="@style/TextAppearance.News.NewsPreviewText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_description"
+                tools:text="Google.com Ivan Ivanov" />
 
-            <!--            <com.google.android.material.textview.MaterialTextView-->
-            <!--                android:id="@+id/tv_badges"-->
-            <!--                categories="@{article.categories}"-->
-            <!--                source="@{article.source}"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="0dp"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:alpha="0.6"-->
-            <!--                android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintHorizontal_bias="0"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@id/tv_title"-->
-            <!--                tools:text="Sport Google.com" />-->
-
-            <!--            <View-->
-            <!--                android:id="@+id/delimiter"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="0.4dp"-->
-            <!--                android:layout_marginTop="18dp"-->
-            <!--                android:background="#B6B6B6"-->
-            <!--                app:layout_constraintTop_toBottomOf="@id/tv_badges" />-->
-
+            <View
+                android:id="@+id/delimiter"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="?android:dividerHorizontal"
+                app:layout_constraintTop_toBottomOf="@id/tv_badges" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

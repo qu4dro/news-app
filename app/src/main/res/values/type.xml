@@ -73,7 +73,7 @@
     </style>
 
     <style name="TextAppearance.News.NewsHeadline" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/roboto_slab_bold</item>
+        <item name="fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textSize">18sp</item>
     </style>
 

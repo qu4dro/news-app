@@ -13,6 +13,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.textview.MaterialTextView
 import ru.orlovvv.newsapp.data.model.Data
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -66,9 +67,13 @@ fun bindToday(textView: MaterialTextView, parameter: Int?) {
 }
 
 @BindingAdapter("categories","source")
-fun bindBadges(textView: MaterialTextView, categories: List<String>?, source: String) {
-    val formattedCategories = categories?.get(0)?.replaceFirstChar { c: Char -> c.uppercaseChar() }
-    val formattedSource = source.replaceFirstChar { c: Char -> c.uppercaseChar() }
+fun bindBadges(textView: MaterialTextView, categories: List<String>?, source: String?) {
+    val formattedCategories = try {
+        categories?.get(0)?.replaceFirstChar { c: Char -> c.uppercaseChar() }
+    } catch (e: Exception) {
+        "News"
+    }
+    val formattedSource = source?.replaceFirstChar { c: Char -> c.uppercaseChar() }
     val delimiter = " \u00b7 "
     val text = formattedCategories + delimiter + formattedSource
     textView.text = text

@@ -80,6 +80,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
 
     override fun onArticleClick(cardView: View, article: Data) {
         cacheViewModel.selectArticle(article)
+        trendingNewsViewModel.getSimilarNewsFromServer(article.uuid)
         findNavController().navigate(R.id.action_trendingFragment_to_articleFragment)
     }
 }

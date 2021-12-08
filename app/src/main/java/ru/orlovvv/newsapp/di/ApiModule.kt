@@ -14,6 +14,7 @@ import ru.orlovvv.newsapp.BuildConfig
 import ru.orlovvv.newsapp.data.api.NewsApi
 import ru.orlovvv.newsapp.data.api.NewsApiHelper
 import ru.orlovvv.newsapp.data.api.NewsApiHelperImpl
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -22,17 +23,20 @@ class ApiModule {
 
     @Provides
     fun provideBaseUrl() = BuildConfig.BASE_URL
-
     @Provides
     @Singleton
     fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
         val loggingInterceptor =
             HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) }
         OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .build()
     } else {
         OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
             .build()
     }
 

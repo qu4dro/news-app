@@ -12,6 +12,7 @@ import ru.orlovvv.newsapp.data.model.TrendingNews
 import ru.orlovvv.newsapp.data.repository.TrendingRepository
 import ru.orlovvv.newsapp.utils.NetworkHelper
 import ru.orlovvv.newsapp.utils.Resource
+import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -22,9 +23,13 @@ class TrendingNewsViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _trending = MutableLiveData<Resource<TrendingNews>>()
+    private val _trendingNews = MutableLiveData<Resource<TrendingNews>>()
     val trendingNews: LiveData<Resource<TrendingNews>>
-        get() = _trending
+        get() = _trendingNews
+
+    private val _similarNews = MutableLiveData<Resource<TrendingNews>>()
+    val similarNews: LiveData<Resource<TrendingNews>>
+        get() = _similarNews
 
     init {
         getTrendingNewsFromServer()
@@ -33,18 +38,41 @@ class TrendingNewsViewModel @Inject constructor(
     fun getTrendingNewsFromServer() = viewModelScope.launch(Dispatchers.IO) {
         try {
             if (networkHelper.isNetworkConnected()) {
-                _trending.postValue(Resource.Loading())
+                _trendingNews.postValue(Resource.Loading())
                 val response = trendingRepository.getTrendingNews()
-                _trending.postValue(handleTrendingNewsResponse(response))
+                _trendingNews.postValue(handleTrendingNewsResponse(response))
             } else {
-                _trending.postValue(Resource.Error("Check internet connection"))
+                _trendingNews.postValue(Resource.Error("Check internet connection"))
             }
         } catch (e: Exception) {
-            _trending.postValue(Resource.Error("Can't get news: ${e.message}"))
+            _trendingNews.postValue(Resource.Error("Can't get news: ${e.message}"))
         }
     }
 
     private fun handleTrendingNewsResponse(response: Response<TrendingNews>): Resource<TrendingNews> {
+        if (response.isSuccessful) {
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.errorBody().toString())
+    }
+
+    fun getSimilarNewsFromServer(uuid: String) = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            if (networkHelper.isNetworkConnected()) {
+                _similarNews.postValue(Resource.Loading())
+                val response = trendingRepository.getSimilarNews(uuid)
+                _similarNews.postValue(handleSimilarNewsResponse(response))
+            } else {
+                _similarNews.postValue(Resource.Error("Check internet connection"))
+            }
+        } catch (e: Exception) {
+            _similarNews.postValue(Resource.Error("Can't get news: ${e.message}"))
+        }
+    }
+
+    private fun handleSimilarNewsResponse(response: Response<TrendingNews>): Resource<TrendingNews> {
         if (response.isSuccessful) {
             response.body()?.let {
                 return Resource.Success(it)

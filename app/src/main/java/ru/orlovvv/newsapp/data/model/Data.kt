@@ -11,7 +11,7 @@ data class Data(
     var image_url: String,
     var keywords: String,
     var language: String,
-    var locale: String,
+    var locale: String = "",
     var published_at: String,
     var relevance_score: Double?,
     var snippet: String,

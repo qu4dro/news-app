@@ -12,5 +12,5 @@ class TrendingRepository @Inject constructor(
 ) {
 
     suspend fun getTrendingNews() = apiHelper.getTrendingNews()
-
+    suspend fun getSimilarNews(uuid: String) = apiHelper.getSimilarNews(uuid)
 }

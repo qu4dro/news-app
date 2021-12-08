@@ -4,11 +4,10 @@ package ru.orlovvv.newsapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.data.model.ArticleCallback
-import ru.orlovvv.newsapp.data.model.Data
 import ru.orlovvv.newsapp.databinding.ItemArticleBinding
 import ru.orlovvv.newsapp.databinding.ItemArticleSmallBinding
 
@@ -16,7 +15,7 @@ class ArticleAdapter(
     private val listener: ArticleAdapterListener,
     private val isSmall: Boolean = false
 ) :
-    ListAdapter<Data, RecyclerView.ViewHolder>(ArticleCallback) {
+    ListAdapter<Article, RecyclerView.ViewHolder>(ArticleCallback) {
 
     companion object {
         const val VIEW_TYPE_ONE = 1
@@ -24,7 +23,7 @@ class ArticleAdapter(
     }
 
     interface ArticleAdapterListener {
-        fun onArticleClick(cardView: View, article: Data)
+        fun onArticleClick(cardView: View, article: Article)
     }
 
     class ArticleViewHolder(
@@ -37,7 +36,7 @@ class ArticleAdapter(
             binding.listener = listener
         }
 
-        fun bind(article: Data) {
+        fun bind(article: Article) {
             binding.article = article
             binding.executePendingBindings()
         }
@@ -53,7 +52,7 @@ class ArticleAdapter(
             binding.listener = listener
         }
 
-        fun bind(article: Data) {
+        fun bind(article: Article) {
             binding.article = article
             binding.executePendingBindings()
         }

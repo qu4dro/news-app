@@ -4,26 +4,18 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import ru.orlovvv.newsapp.data.model.TrendingNews
+import ru.orlovvv.newsapp.data.model.News
 import ru.orlovvv.newsapp.utils.ApiKey.API_KEY
 
 interface NewsApi {
 
-    @GET("news/top")
-    suspend fun getTrendingNews(
-        @Query("api_token") api_token: String = API_KEY,
-        @Query("locale") locale: String = "ru",
-        @Query("limit") limit: Int = 5,
-        @Query("page") page: Int = 1
-    ): Response<TrendingNews>
+    @GET("top-headlines")
+    suspend fun getTopNews(
+        @Query("page") page: Int = 1,
+        @Query("country") country: String = "ru",
+        @Query("pageSize") pageSize: Int = 20,
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Response<News>
 
-    @GET("news/similar/{uuid}")
-    suspend fun getSimilarNews(
-        @Path("uuid") uuid: String,
-        @Query("api_token") api_token: String = API_KEY,
-        @Query("locale") locale: String = "ru",
-        @Query("limit") limit: Int = 5,
-        @Query("page") page: Int = 1
-    ): Response<TrendingNews>
 
 }

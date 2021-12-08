@@ -1,17 +1,17 @@
 package ru.orlovvv.newsapp.data
 
 import androidx.room.TypeConverter
+import com.google.gson.Gson
+import ru.orlovvv.newsapp.data.model.Article
+import ru.orlovvv.newsapp.data.model.Source
 
 class Converters {
 
     @TypeConverter
-    fun fromCategories(value: List<String>): String {
-        return value.joinToString()
-    }
+    fun sourceToString(source: Source): String = Gson().toJson(source)
 
     @TypeConverter
-    fun toCategories(value: String): List<String> {
-        return value.split(", ")
-    }
+    fun stringToSource(currentForecast: String): Source =
+        Gson().fromJson(currentForecast, Source::class.java)
 
 }

@@ -11,12 +11,10 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.adapters.ArticleAdapter
-import ru.orlovvv.newsapp.data.model.Data
+import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.databinding.FragmentArticleBinding
 import ru.orlovvv.newsapp.utils.Resource
-import ru.orlovvv.newsapp.viewmodels.CacheViewModel
-import ru.orlovvv.newsapp.viewmodels.TrendingNewsViewModel
-import timber.log.Timber
+import ru.orlovvv.newsapp.viewmodels.NewsViewModel
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.ArticleAdapterListener {
@@ -25,8 +23,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
     val articleFragmentBinding
         get() = _articleFragmentBinding!!
 
-    private val cacheViewModel: CacheViewModel by activityViewModels()
-    private val trendingNewsViewModel: TrendingNewsViewModel by activityViewModels()
+    private val newsViewModel: NewsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,47 +41,22 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
     }
 
     private fun setupObservers() {
-        cacheViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {
+        newsViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {
             articleFragmentBinding.article = it
-        })
-        trendingNewsViewModel.similarNews.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
-                is Resource.Loading -> {
-                    articleFragmentBinding.apply {
-                        loadingIndicator.visibility = View.VISIBLE
-                        groupSimilar.visibility = View.GONE
-                    }
-                }
-                is Resource.Error -> {
-                    articleFragmentBinding.apply {
-                        loadingIndicator.visibility = View.VISIBLE
-                        groupSimilar.visibility = View.GONE
-                    }
-                }
-                is Resource.Success -> {
-                    articleFragmentBinding.apply {
-                        loadingIndicator.visibility = View.GONE
-                        groupSimilar.visibility = View.VISIBLE
-                    }
-                    response.data?.let {
-                        Timber.d(it.toString())
-                    }
-                }
-            }
         })
     }
 
     private fun setupUI() {
         articleFragmentBinding.apply {
             lifecycleOwner = this@ArticleFragment
-            trendViewModel = trendingNewsViewModel
-            rvSimilarNews.adapter = ArticleAdapter(this@ArticleFragment, isSmall = true)
-            fabSource.setOnClickListener {
-                val link = cacheViewModel.selectedArticle.value?.url ?: ""
-                val action =
-                    ArticleFragmentDirections.actionArticleFragmentToSourceFragment(link)
-                findNavController().navigate(action)
-            }
+            newsViewModel = newsViewModel
+//            rvSimilarNews.adapter = ArticleAdapter(this@ArticleFragment, isSmall = true)
+//            fabSource.setOnClickListener {
+//                val link = newsViewModel.selectedArticle.value?.url ?: ""
+//                val action =
+//                    ArticleFragmentDirections.actionArticleFragmentToSourceFragment(link)
+//                findNavController().navigate(action)
+//            }
         }
     }
 
@@ -93,7 +65,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
         _articleFragmentBinding = null
     }
 
-    override fun onArticleClick(cardView: View, article: Data) {
+    override fun onArticleClick(cardView: View, article: Article) {
 
     }
 }

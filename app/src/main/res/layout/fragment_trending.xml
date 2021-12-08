@@ -6,18 +6,18 @@
     <data>
 
         <variable
-            name="trendViewModel"
-            type="ru.orlovvv.newsapp.viewmodels.TrendingNewsViewModel" />
+            name="viewModelNews"
+            type="ru.orlovvv.newsapp.viewmodels.NewsViewModel" />
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_trending_news"
-            articleList="@{trendViewModel.trendingNews.data.data}"
+            articleList="@{viewModelNews.topNews.data.articles}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -25,5 +25,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_article" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </layout>

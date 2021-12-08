@@ -12,13 +12,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.textview.MaterialTextView
-import ru.orlovvv.newsapp.data.model.Data
+import ru.orlovvv.newsapp.data.model.Article
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 @BindingAdapter("articleList")
-fun bindArticleList(recyclerView: RecyclerView, data: List<Data>?) {
+fun bindArticleList(recyclerView: RecyclerView, data: List<Article>?) {
     val adapter = recyclerView.adapter as ArticleAdapter
     adapter.submitList(data)
 }

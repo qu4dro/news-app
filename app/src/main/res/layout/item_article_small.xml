@@ -7,7 +7,7 @@
 
         <variable
             name="article"
-            type="ru.orlovvv.newsapp.data.model.Data" />
+            type="ru.orlovvv.newsapp.data.model.Article" />
 
         <variable
             name="listener"
@@ -37,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    imageUrl="@{article.image_url}"
+                    imageUrl="@{article.urlToImage}"
                     android:id="@+id/iv_preview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -60,20 +60,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Short title with main information about this article" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_badges"
-                android:layout_width="0dp"
-                android:alpha="0.6"
-                categories="@{article.categories}"
-                source="@{article.source}"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
-                tools:text="Sport Google.com" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/tv_badges"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:alpha="0.6"-->
+<!--                categories="@{article.categories}"-->
+<!--                source="@{article.source}"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"-->
+<!--                app:layout_constraintHorizontal_bias="0"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_title"-->
+<!--                tools:text="Sport Google.com" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

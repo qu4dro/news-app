@@ -61,14 +61,15 @@
     </style>
 
     <style name="TextAppearance.News.NewsPreviewHeadline" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
-        <item name="lineHeight">18sp</item>
-        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/lora_bold</item>
+        <item name="lineHeight">24sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="TextAppearance.News.NewsPreviewSource" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="fontFamily">@font/montserrat_bold</item>
-        <item name="android:textSize">12sp</item>
+    <style name="TextAppearance.News.NewsPreviewText" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/montserrat_semi_bold</item>
+        <item name="lineHeight">22sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.News.NewsHeadline" parent="TextAppearance.MaterialComponents.Body1">

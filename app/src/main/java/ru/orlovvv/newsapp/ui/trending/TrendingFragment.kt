@@ -11,11 +11,10 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.adapters.ArticleAdapter
-import ru.orlovvv.newsapp.data.model.Data
+import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.databinding.FragmentTrendingBinding
 import ru.orlovvv.newsapp.utils.Resource
-import ru.orlovvv.newsapp.viewmodels.CacheViewModel
-import ru.orlovvv.newsapp.viewmodels.TrendingNewsViewModel
+import ru.orlovvv.newsapp.viewmodels.NewsViewModel
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -26,8 +25,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
     val trendingFragmentBinding
         get() = _trendingFragmentBinding!!
 
-    private val trendingNewsViewModel: TrendingNewsViewModel by activityViewModels()
-    private val cacheViewModel: CacheViewModel by activityViewModels()
+    private val newsViewModel: NewsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,16 +43,17 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
     }
 
     private fun setupObservers() {
-        trendingNewsViewModel.trendingNews.observe(viewLifecycleOwner, Observer { response ->
+        newsViewModel.topNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
 
                 }
                 is Resource.Error -> {
-
+                    response.message?.let {
+                        Timber.d(it.toString())
+                    }
                 }
                 is Resource.Success -> {
-
                     response.data?.let {
                         Timber.d(it.toString())
                     }
@@ -66,7 +65,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
     private fun setupUI() {
         trendingFragmentBinding.apply {
             lifecycleOwner = this@TrendingFragment
-            trendViewModel = trendingNewsViewModel
+            viewModelNews = newsViewModel
             rvTrendingNews.adapter =
                 ArticleAdapter(listener = this@TrendingFragment, isSmall = false)
         }
@@ -78,9 +77,8 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
         _trendingFragmentBinding = null
     }
 
-    override fun onArticleClick(cardView: View, article: Data) {
-        cacheViewModel.selectArticle(article)
-        trendingNewsViewModel.getSimilarNewsFromServer(article.uuid)
+    override fun onArticleClick(cardView: View, article: Article) {
+        newsViewModel.selectArticle(article)
         findNavController().navigate(R.id.action_trendingFragment_to_articleFragment)
     }
 }

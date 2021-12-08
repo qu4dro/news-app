@@ -79,8 +79,6 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
             lifecycleOwner = this@ArticleFragment
             trendViewModel = trendingNewsViewModel
             rvSimilarNews.adapter = ArticleAdapter(this@ArticleFragment, isSmall = true)
-            ibBack.setOnClickListener { findNavController().navigateUp() }
-            ibSave.setOnClickListener { }
             fabSource.setOnClickListener {
                 val link = cacheViewModel.selectedArticle.value?.url ?: ""
                 val action =

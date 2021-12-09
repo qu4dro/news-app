@@ -47,6 +47,7 @@ class NewsActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.trendingFragment, R.id.savedFragment, R.id.searchFragment),
+            newsActivityBinding.drawerLayout
         )
 
         val navHostFragment =
@@ -61,6 +62,10 @@ class NewsActivity : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
             setupWithNavController(navController)
             setOnItemReselectedListener { }
+        }
+
+        newsActivityBinding.navView.apply {
+            setupWithNavController(navController)
         }
     }
 

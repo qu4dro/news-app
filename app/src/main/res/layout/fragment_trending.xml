@@ -23,7 +23,7 @@
             android:clipToPadding="false"
             android:paddingBottom="64dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_article" />
+            tools:listitem="@layout/item_article_v1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

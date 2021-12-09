@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.data.model.ArticleCallback
-import ru.orlovvv.newsapp.databinding.ItemArticleBinding
-import ru.orlovvv.newsapp.databinding.ItemArticleSmallBinding
+import ru.orlovvv.newsapp.databinding.ItemArticleV1Binding
+import ru.orlovvv.newsapp.databinding.ItemArticleV2Binding
 
 class ArticleAdapter(
     private val listener: ArticleAdapterListener,
@@ -27,7 +27,7 @@ class ArticleAdapter(
     }
 
     class ArticleViewHolder(
-        private val binding: ItemArticleBinding,
+        private val binding: ItemArticleV1Binding,
         private val listener: ArticleAdapterListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,7 +43,7 @@ class ArticleAdapter(
     }
 
     class ArticleSmallViewHolder(
-        private val binding: ItemArticleSmallBinding,
+        private val binding: ItemArticleV2Binding,
         private val listener: ArticleAdapterListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -56,6 +56,7 @@ class ArticleAdapter(
             binding.article = article
             binding.executePendingBindings()
         }
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -68,7 +69,7 @@ class ArticleAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (isSmall || viewType == VIEW_TYPE_TWO) {
             return ArticleSmallViewHolder(
-                ItemArticleSmallBinding.inflate(
+                ItemArticleV2Binding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -77,7 +78,7 @@ class ArticleAdapter(
             )
         } else {
             return ArticleViewHolder(
-                ItemArticleBinding.inflate(
+                ItemArticleV1Binding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

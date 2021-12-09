@@ -62,7 +62,7 @@
 
     <style name="TextAppearance.News.NewsPreviewHeadline" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/lora_bold</item>
-        <item name="lineHeight">24sp</item>
+        <item name="lineHeight">26sp</item>
         <item name="android:textSize">18sp</item>
     </style>
 
@@ -74,13 +74,24 @@
 
     <style name="TextAppearance.News.NewsPreviewText" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/montserrat_semi_bold</item>
-        <item name="lineHeight">22sp</item>
+        <item name="lineHeight">24sp</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.News.NewsPreviewBadges" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextAppearance.News.NewsHeadline" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.News.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="fontFamily">@font/maragsa</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
 

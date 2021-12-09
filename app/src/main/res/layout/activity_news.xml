@@ -13,6 +13,7 @@
         tools:context=".ui.NewsActivity">
 
         <androidx.appcompat.widget.Toolbar
+            app:titleTextAppearance="@style/TextAppearance.News.Title"
             app:title="12313"
             android:background="?attr/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"

@@ -24,22 +24,23 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginVertical="16dp">
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:backgroundTint="?attr/colorPrimary"
-                app:layout_constraintVertical_bias="0"
                 android:id="@+id/cv_image_preview"
                 style="@style/CardViewStyle.ImageCard"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_title"
-                app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintDimensionRatio="1:1"
+                android:backgroundTint="?attr/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    cardView="@{cvImagePreview}"
                     android:id="@+id/iv_preview"
                     imageUrl="@{article.urlToImage}"
                     android:layout_width="match_parent"
@@ -52,17 +53,24 @@
 
 
             <com.google.android.material.textview.MaterialTextView
+                app:layout_goneMarginLeft="0dp"
                 android:id="@+id/tv_title"
+                articleText="@{article.title}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constrainedHeight="true"
                 android:layout_marginStart="12dp"
-                articleText="@{article.title}"
+                android:maxLines="4"
+                android:minLines="4"
+                android:ellipsize="end"
                 android:textAppearance="@style/TextAppearance.News.NewsPreviewHeadline2"
+                app:layout_constrainedHeight="true"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintBottom_toBottomOf="@id/cv_image_preview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cv_image_preview"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Short title with main information about this artisfd;lksdfsl;dfklsafklsmlfdaklmfkldsmklvdklmkldvmdkvdmklfvdlkvmdfkldlkcle" />
+                app:layout_constraintTop_toTopOf="@id/cv_image_preview"
+                tools:text="Short title with main information about thiskdljfsldkjfklsdfjskldafjlkcmdslkcmdslkdcslkcmkls artisfd;lksdfsl;dfklsafklsmlfdaklmfkldsmklvdklmkldvmdkvdmklfvdlkvmdfkldlkcle" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier_top"
@@ -73,30 +81,33 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_description"
+                app:layout_goneMarginTop="12dp"
                 articleText="@{article.description}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:maxLines="3"
+                android:ellipsize="end"
                 android:textAppearance="@style/TextAppearance.News.NewsPreviewText"
                 android:textColor="?android:textColorSecondary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/barrier_top"
-                app:layout_constraintBottom_toTopOf="@id/tv_badges"
+                app:layout_constraintTop_toBottomOf="@id/tv_badges"
                 tools:text="Short title with main information about this article" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_badges"
                 author="@{article.author}"
                 date="@{article.publishedAt}"
+                android:visibility="gone"
                 source="@{article.source.name}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textAppearance="@style/TextAppearance.News.NewsPreviewText"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.News.NewsPreviewBadges"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_description"
+                app:layout_constraintTop_toBottomOf="@id/barrier_top"
                 tools:text="Google.com Ivan Ivanov" />
 
             <View
@@ -105,7 +116,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 android:background="?android:dividerHorizontal"
-                app:layout_constraintTop_toBottomOf="@id/tv_badges" />
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

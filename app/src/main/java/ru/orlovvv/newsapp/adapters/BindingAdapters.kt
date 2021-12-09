@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,6 +12,7 @@ import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.data.model.Article
@@ -32,17 +34,22 @@ fun bindCategory(textView: MaterialTextView, categories: List<String>?) {
 
 
 @BindingAdapter("articleText")
-fun bindArticleText(textView: MaterialTextView, text: String) {
-    if(text.endsWith(".")) {
-        textView.text = text
-    } else {
-        val newText = "$text."
-        textView.text = newText
+fun bindArticleText(textView: MaterialTextView, text: String?) {
+    if (text != null) {
+        if(text.endsWith(".")) {
+            textView.text = text
+        } else {
+            val newText = "$text."
+            textView.text = newText
+        }
     }
 }
 
-@BindingAdapter("imageUrl")
-fun bindImage(imgView: ImageView, urlToImage: String?) {
+@BindingAdapter("imageUrl", "cardView")
+fun bindImage(imgView: ImageView, urlToImage: String?, cardView: MaterialCardView?) {
+    Glide.with(imgView.context)
+        .clear(imgView)
+    imgView.setImageBitmap(null)
     Glide.with(imgView.context)
         .asBitmap()
         .fitCenter()
@@ -53,13 +60,17 @@ fun bindImage(imgView: ImageView, urlToImage: String?) {
         .into(object : CustomTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 imgView.setImageBitmap(resource)
+                imgView.visibility = View.VISIBLE
+                cardView?.visibility = View.VISIBLE
             }
 
             override fun onLoadCleared(placeholder: Drawable?) {
             }
 
             override fun onLoadFailed(errorDrawable: Drawable?) {
-                imgView.setImageResource(R.drawable.ic_article)
+               // imgView.setImageResource(R.drawable.ic_article)
+                imgView.visibility = View.GONE
+                cardView?.visibility = View.GONE
             }
         })
 }

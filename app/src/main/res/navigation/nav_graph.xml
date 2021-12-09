@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/trendingFragment"
         android:name="ru.orlovvv.newsapp.ui.trending.TrendingFragment"
-        android:label="Trending"
+        android:label="Trending News"
         tools:layout="@layout/fragment_trending">
         <action
             android:id="@+id/action_trendingFragment_to_articleFragment"

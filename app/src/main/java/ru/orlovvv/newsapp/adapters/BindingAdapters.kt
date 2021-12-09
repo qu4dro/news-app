@@ -16,6 +16,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.data.model.Article
+import timber.log.Timber
 import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -36,7 +37,7 @@ fun bindCategory(textView: MaterialTextView, categories: List<String>?) {
 @BindingAdapter("articleText")
 fun bindArticleText(textView: MaterialTextView, text: String?) {
     if (text != null) {
-        if(text.endsWith(".")) {
+        if (text.endsWith(".")) {
             textView.text = text
         } else {
             val newText = "$text."
@@ -49,7 +50,6 @@ fun bindArticleText(textView: MaterialTextView, text: String?) {
 fun bindImage(imgView: ImageView, urlToImage: String?, cardView: MaterialCardView?) {
     Glide.with(imgView.context)
         .clear(imgView)
-    imgView.setImageBitmap(null)
     Glide.with(imgView.context)
         .asBitmap()
         .fitCenter()
@@ -65,12 +65,15 @@ fun bindImage(imgView: ImageView, urlToImage: String?, cardView: MaterialCardVie
             }
 
             override fun onLoadCleared(placeholder: Drawable?) {
+                imgView.setImageBitmap(null)
             }
 
             override fun onLoadFailed(errorDrawable: Drawable?) {
-               // imgView.setImageResource(R.drawable.ic_article)
-                imgView.visibility = View.GONE
-                cardView?.visibility = View.GONE
+                imgView.setImageBitmap(null)
+                    Timber.d("Error image $urlToImage")
+                    imgView.visibility = View.GONE
+                    cardView?.visibility = View.GONE
+                // imgView.setImageResource(R.drawable.ic_article)
             }
         })
 }
@@ -80,11 +83,11 @@ fun bindToday(textView: MaterialTextView, parameter: Int?) {
     textView.text = getToday()
 }
 
-@BindingAdapter("author","source", "date")
-fun bindBadges(textView: MaterialTextView, author: String?, source: String?, date: String) {
+@BindingAdapter("author", "source", "date")
+fun bindBadges(textView: MaterialTextView, author: String?, source: String?, date: String?) {
     val formattedAuthor = author?.replaceFirstChar { c: Char -> c.uppercaseChar() } ?: "Author"
     val formattedSource = source?.replaceFirstChar { c: Char -> c.uppercaseChar() } ?: "Global"
-    val formattedDate = formatDate(date)
+    val formattedDate = date?.let { formatDate(it) }
     val delimiter = " \u00b7 "
     val text = formattedSource + delimiter + formattedAuthor + delimiter + formattedDate
     textView.text = text

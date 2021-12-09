@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="newsViewModel"
-            type="ru.orlovvv.newsapp.viewmodels.NewsViewModel" />
-
-        <variable
             name="article"
             type="ru.orlovvv.newsapp.data.model.Article" />
 
@@ -19,121 +15,112 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <androidx.core.widget.NestedScrollView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-<!--                <androidx.constraintlayout.widget.Guideline-->
-<!--                    android:id="@+id/guideline_left"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    app:layout_constraintGuide_begin="28dp" />-->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="16dp" />
 
-<!--                <androidx.constraintlayout.widget.Guideline-->
-<!--                    android:id="@+id/guideline_right"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    app:layout_constraintGuide_end="28dp" />-->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
 
-<!--                <androidx.constraintlayout.widget.Guideline-->
-<!--                    android:id="@+id/guideline_top"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:layout_constraintGuide_begin="28dp" />-->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="16dp" />
 
-<!--                <androidx.constraintlayout.widget.Guideline-->
-<!--                    android:id="@+id/guideline_bottom"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:layout_constraintGuide_end="28dp" />-->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_end="16dp" />
 
-<!--                <com.google.android.material.card.MaterialCardView-->
-<!--                    android:id="@+id/cv_image_preview"-->
-<!--                    style="@style/CardViewStyle.ImageCard"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
-<!--                    app:layout_constraintStart_toStartOf="@id/guideline_left"-->
-<!--                    app:layout_constraintTop_toTopOf="@id/guideline_top">-->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_image_preview"
+                    style="@style/CardViewStyle.ImageCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toTopOf="@id/guideline_top">
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/iv_preview"-->
-<!--                        imageUrl="@{article.urlToImage}"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:scaleType="fitXY"-->
-<!--                        tools:srcCompat="@tools:sample/backgrounds/scenic" />-->
-<!--                </com.google.android.material.card.MaterialCardView>-->
+                    <ImageView
+                        android:id="@+id/iv_preview"
+                        imageUrl="@{article.urlToImage}"
+                        cardView="@{cvImagePreview}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                </com.google.android.material.card.MaterialCardView>
 
-<!--                <com.google.android.material.textview.MaterialTextView-->
-<!--                    android:id="@+id/tv_title"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="18dp"-->
-<!--                    android:text="@{article.title}"-->
-<!--                    android:textAppearance="@style/TextAppearance.News.NewsHeadline"-->
-<!--                    app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
-<!--                    app:layout_constraintStart_toStartOf="@id/guideline_left"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/cv_image_preview"-->
-<!--                    tools:text="Short title with main information about this article" />-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    app:layout_goneMarginTop="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@{article.title}"
+                    android:textAppearance="@style/TextAppearance.News.NewsPreviewHeadline"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/cv_image_preview"
+                    tools:text="Short title with main information about this article" />
 
-<!--                <androidx.constraintlayout.widget.Barrier-->
-<!--                    android:id="@+id/group_badges"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:barrierDirection="bottom"-->
-<!--                    app:constraint_referenced_ids="tv_badges" />-->
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/group_badges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="tv_badges" />
 
-<!--&lt;!&ndash;                <com.google.android.material.textview.MaterialTextView&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/tv_badges"&ndash;&gt;-->
-<!--&lt;!&ndash;                    categories="@{article.categories}"&ndash;&gt;-->
-<!--&lt;!&ndash;                    category="@{article.categories}"&ndash;&gt;-->
-<!--&lt;!&ndash;                    source="@{article.source}"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginStart="0dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginTop="10dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_marginEnd="10dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:alpha="0.6"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:textAppearance="@style/TextAppearance.News.NewsPreviewSource"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintHorizontal_bias="0"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintStart_toStartOf="@id/guideline_left"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@id/tv_title"&ndash;&gt;-->
-<!--&lt;!&ndash;                    tools:text="Sport Google.com" />&ndash;&gt;-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_badges"
+                    author="@{article.author}"
+                    date="@{article.publishedAt}"
+                    source="@{article.source.name}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="4dp"
+                    android:alpha="0.6"
+                    android:textAppearance="@style/TextAppearance.News.NewsPreviewBadges"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"
+                    tools:text="Sport Google.com" />
 
-<!--                <com.google.android.material.textview.MaterialTextView-->
-<!--                    android:id="@+id/tv_text"-->
-<!--                    articleText="@{article.description}"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="18dp"-->
-<!--                    android:textAppearance="@style/TextAppearance.News.Body2"-->
-<!--                    app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
-<!--                    app:layout_constraintStart_toStartOf="@id/guideline_left"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_snippet"-->
-<!--                    tools:text="Short description" />-->
-
-<!--                <com.google.android.material.textview.MaterialTextView-->
-<!--                    android:id="@+id/tv_snippet"-->
-<!--                    articleText="@{article.snippet}"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="18dp"-->
-<!--                    android:textAppearance="@style/TextAppearance.News.Body2"-->
-<!--                    app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
-<!--                    app:layout_constraintStart_toStartOf="@id/guideline_left"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_badges"-->
-<!--                    tools:text="Short snippet" />-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_text"
+                    articleText="@{article.description}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="?android:textColorSecondary"
+                    android:textAppearance="@style/TextAppearance.News.NewsPreviewText"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                    app:layout_constraintStart_toStartOf="@id/guideline_left"
+                    app:layout_constraintTop_toBottomOf="@id/tv_badges"
+                    app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+                    tools:text="Short description" />
 
 <!--                <View-->
 <!--                    android:id="@+id/delimiter"-->
@@ -149,56 +136,23 @@
 <!--                    android:id="@+id/loading_indicator"-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="18dp"-->
 <!--                    android:indeterminate="true"-->
 <!--                    android:visibility="gone"-->
-<!--                    android:layout_marginTop="18dp"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_text"-->
-<!--                    app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
-<!--                    app:layout_constraintStart_toStartOf="@id/guideline_left" />-->
-
-<!--                <com.google.android.material.textview.MaterialTextView-->
-<!--                    android:id="@+id/tv_similar"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="18dp"-->
-<!--                    android:text="@string/similar"-->
-<!--                    android:textAppearance="@style/TextAppearance.News.Body1"-->
 <!--                    app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
 <!--                    app:layout_constraintStart_toStartOf="@id/guideline_left"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/delimiter" />-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_text" />-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/rv_similar_news"-->
-<!--                    articleList="@{trendViewModel.similarNews.data.data}"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:clipToPadding="false"-->
-<!--                    android:nestedScrollingEnabled="true"-->
-<!--                    android:paddingBottom="64dp"-->
-<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_similar"-->
-<!--                    tools:listitem="@layout/item_article_small" />-->
+        </androidx.core.widget.NestedScrollView>
 
-<!--                <androidx.constraintlayout.widget.Group-->
-<!--                    android:id="@+id/group_similar"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="0dp"-->
-<!--                    android:visibility="gone"-->
-<!--                    app:constraint_referenced_ids="tv_similar,rv_similar_news,delimiter" />-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </androidx.core.widget.NestedScrollView>-->
-
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab_source"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="end|bottom"-->
-<!--            android:layout_margin="16dp"-->
-<!--            android:src="@drawable/ic_article" />-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_article" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

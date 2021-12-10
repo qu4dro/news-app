@@ -11,6 +11,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:background="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,14 +31,16 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:paddingHorizontal="12dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:id="@+id/rv_bookmarked_articles"
             articleList="@{viewModelNews.bookmarkedArticles}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_article_v2" />
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_article_v3" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

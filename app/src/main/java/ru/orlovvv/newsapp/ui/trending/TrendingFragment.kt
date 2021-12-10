@@ -64,7 +64,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
             lifecycleOwner = this@TrendingFragment
             viewModelNews = newsViewModel
             rvTrendingNews.adapter =
-                ArticleAdapter(listener = this@TrendingFragment, isSmall = false)
+                ArticleAdapter(listener = this@TrendingFragment, isSaved = false)
         }
     }
 

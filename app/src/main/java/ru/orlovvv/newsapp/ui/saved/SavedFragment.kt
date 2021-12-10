@@ -41,7 +41,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved), ArticleAdapter.ArticleA
         savedFragmentBinding.apply {
             viewModelNews = newsViewModel
             lifecycleOwner = this@SavedFragment
-            rvBookmarkedArticles.adapter = ArticleAdapter(listener = this@SavedFragment, isSmall = true)
+            rvBookmarkedArticles.adapter = ArticleAdapter(listener = this@SavedFragment, isSaved  = true)
         }
     }
 

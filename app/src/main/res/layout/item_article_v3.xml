@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="article"
+            type="ru.orlovvv.newsapp.data.model.Article" />
+
+        <variable
+            name="listener"
+            type="ru.orlovvv.newsapp.adapters.ArticleAdapter.ArticleAdapterListener" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="4dp"
+        style="@style/CardViewStyle.Flat.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> listener.onArticleClick(view,article)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/iv_article_preview"
+                cardView="@{null}"
+                app:layout_constraintDimensionRatio="4:3"
+                imageUrl="@{article.urlToImage}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/tv_title"
+                articleText="@{article.title}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="3"
+                android:textAppearance="@style/TextAppearance.News.Subtitle1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_source"
+                tools:text="Short title with main information about this article" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_source"
+                android:text="@{article.source.name}"
+                android:textAllCaps="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.News.Caption"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/iv_article_preview"
+                tools:text="Google.com" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -49,7 +49,15 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
     private fun setupUI() {
         articleFragmentBinding.apply {
             lifecycleOwner = this@ArticleFragment
+
+            fabSource.setOnClickListener {
+                article?.let { val action =
+                    ArticleFragmentDirections.actionArticleFragmentToSourceFragment(it.url)
+                    findNavController().navigate(action) }
+            }
+
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+
             toolbar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.saveArticle -> {

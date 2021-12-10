@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.databinding.FragmentSourceBinding
@@ -33,6 +34,9 @@ class SourceFragment : Fragment(R.layout.fragment_source) {
     }
 
     private fun setupUI() {
+
+        sourceFragmentBinding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+
         sourceFragmentBinding.wvSource.apply {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true

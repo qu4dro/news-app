@@ -24,7 +24,6 @@ class NewsActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var networkReceiver: NetworkBroadcastReceiver
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private var _newsActivityBinding: ActivityNewsBinding? = null
     val newsActivityBinding
@@ -39,21 +38,11 @@ class NewsActivity : AppCompatActivity() {
     }
 
     private fun setNavigation() {
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.trendingFragment, R.id.savedFragment, R.id.searchFragment)
-        )
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
 
-        newsActivityBinding.toolbar.apply {
-            setSupportActionBar(this)
-        }
-
         newsActivityBinding.bottomNavigation.apply {
-            setupActionBarWithNavController(navController, appBarConfiguration)
             setupWithNavController(navController)
             setOnItemReselectedListener { }
         }
@@ -109,10 +98,6 @@ class NewsActivity : AppCompatActivity() {
     override fun onPause() {
         unregisterNetworkReceiver()
         super.onPause()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
 }

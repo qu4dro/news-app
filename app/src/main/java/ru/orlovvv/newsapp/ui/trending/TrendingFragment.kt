@@ -46,17 +46,14 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
         newsViewModel.topNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
-
+                    trendingFragmentBinding.progress.visibility = View.VISIBLE
                 }
                 is Resource.Error -> {
-                    response.message?.let {
-                        Timber.d(it.toString())
-                    }
+                    trendingFragmentBinding.progress.visibility = View.GONE
                 }
                 is Resource.Success -> {
-                    response.data?.let {
-                        Timber.d(it.toString())
-                    }
+                    trendingFragmentBinding.progress.visibility = View.GONE
+
                 }
             }
         })

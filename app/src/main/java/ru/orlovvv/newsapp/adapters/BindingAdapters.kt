@@ -2,6 +2,7 @@ package ru.orlovvv.newsapp.adapters
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.view.RoundedCorner
 import android.view.View
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
@@ -74,6 +75,26 @@ fun bindImage(imgView: ImageView, urlToImage: String?, cardView: MaterialCardVie
                     imgView.visibility = View.GONE
                     cardView?.visibility = View.GONE
                 // imgView.setImageResource(R.drawable.ic_article)
+            }
+        })
+}
+
+@BindingAdapter("bigImageUrl")
+fun bindBigImage(imgView: ImageView, urlToImage: String?) {
+    Glide.with(imgView.context)
+        .asBitmap()
+        .fitCenter()
+        .dontAnimate()
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .format(DecodeFormat.PREFER_RGB_565)
+        .load(urlToImage)
+        .into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                imgView.setImageBitmap(resource)
+            }
+            override fun onLoadCleared(placeholder: Drawable?) {
+            }
+            override fun onLoadFailed(errorDrawable: Drawable?) {
             }
         })
 }

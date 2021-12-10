@@ -13,7 +13,6 @@ import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.adapters.ArticleAdapter
 import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.databinding.FragmentArticleBinding
-import ru.orlovvv.newsapp.utils.Resource
 import ru.orlovvv.newsapp.viewmodels.NewsViewModel
 
 @AndroidEntryPoint
@@ -43,6 +42,7 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
     private fun setupObservers() {
         newsViewModel.selectedArticle.observe(viewLifecycleOwner, Observer {
             articleFragmentBinding.article = it
+            changeIcon(it.isBookmarked)
         })
     }
 
@@ -50,6 +50,37 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
         articleFragmentBinding.apply {
             lifecycleOwner = this@ArticleFragment
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+            toolbar.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.saveArticle -> {
+                        article?.let {
+                            if (it.isBookmarked) {
+                                it.isBookmarked = false
+                                newsViewModel.deleteArticle(it)
+                                changeIcon(it.isBookmarked)
+                                findNavController().navigateUp()
+                            } else {
+                                it.isBookmarked = true
+                                newsViewModel.saveArticle(it)
+                                changeIcon(it.isBookmarked)
+                            }
+                        }
+                        true
+                    }
+                    R.id.shareArticle -> {
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+    }
+
+    private fun changeIcon(isBookmarked: Boolean) {
+        if (isBookmarked) {
+            articleFragmentBinding.toolbar.menu.findItem(R.id.saveArticle).setIcon(R.drawable.ic_bookmark_remove)
+        } else {
+            articleFragmentBinding.toolbar.menu.findItem(R.id.saveArticle).setIcon(R.drawable.ic_bookmark)
         }
     }
 

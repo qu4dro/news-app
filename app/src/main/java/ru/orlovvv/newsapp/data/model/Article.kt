@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "articles")
 data class Article(
     var author: String? = "Author",
     var content: String? = "Content not found",
@@ -15,7 +15,9 @@ data class Article(
     @PrimaryKey(autoGenerate = false)
     var url: String,
     var urlToImage: String? = "Url not found"
-)
+) {
+    var isBookmarked: Boolean = false
+}
 
 object ArticleCallback : DiffUtil.ItemCallback<Article>() {
     override fun areItemsTheSame(

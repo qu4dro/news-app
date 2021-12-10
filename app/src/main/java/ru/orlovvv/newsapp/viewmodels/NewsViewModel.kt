@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.data.model.News
+import ru.orlovvv.newsapp.data.repository.SavedRepository
 import ru.orlovvv.newsapp.data.repository.TrendingRepository
 import ru.orlovvv.newsapp.utils.NetworkHelper
 import ru.orlovvv.newsapp.utils.Resource
@@ -19,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     private val trendingRepository: TrendingRepository,
+    private val savedRepository: SavedRepository,
     private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
@@ -29,6 +31,10 @@ class NewsViewModel @Inject constructor(
     private val _selectedArticle = MutableLiveData<Article>()
     val selectedArticle
         get() = _selectedArticle
+
+    private val _bookmarkedArticles = savedRepository.getAllBookmarkArticles()
+    val bookmarkedArticles
+        get() = _bookmarkedArticles
 
     init {
         getTopNewsFromServer()
@@ -59,6 +65,14 @@ class NewsViewModel @Inject constructor(
 
     fun selectArticle(article: Article) {
         _selectedArticle.value = article
+    }
+
+    fun deleteArticle(article: Article) = viewModelScope.launch {
+        savedRepository.deleteBookmarkArticle(article)
+    }
+
+    fun saveArticle(article: Article) = viewModelScope.launch {
+        savedRepository.insertBookmarkArticle(article)
     }
 
 }

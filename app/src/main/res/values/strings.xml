@@ -11,4 +11,6 @@
     <string name="similar">Similar</string>
     <string name="save_article">Save article</string>
     <string name="share_article">Share article</string>
+    <string name="delete_article">Delete article</string>
+    <string name="top_headlines">Top headlines</string>
 </resources>

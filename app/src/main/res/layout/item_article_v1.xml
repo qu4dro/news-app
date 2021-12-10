@@ -16,11 +16,11 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_marginBottom="8dp"
-        android:layout_marginHorizontal="16dp"
         style="@style/CardViewStyle.Flat.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
         android:onClick="@{(view) -> listener.onArticleClick(view,article)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,29 +28,29 @@
             android:layout_height="match_parent">
 
             <ImageView
-                app:layout_constraintTop_toTopOf="@id/tv_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/tv_source"
                 android:id="@+id/iv_article_preview"
                 cardView="@{null}"
-                app:layout_constraintDimensionRatio="1:1"
                 imageUrl="@{article.urlToImage}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/tv_source"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:paddingHorizontal="16dp"
-                android:paddingTop="16dp"
                 android:id="@+id/tv_title"
                 articleText="@{article.title}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="2"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
                 android:textAppearance="@style/TextAppearance.News.Subtitle1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_article_preview"
@@ -62,9 +62,9 @@
                 articleText="@{article.description}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:ellipsize="end"
                 android:maxLines="4"
+                android:padding="16dp"
                 android:textAppearance="@style/TextAppearance.News.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,14 +73,15 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_source"
-                android:text="@{article.source.name}"
-                android:textAllCaps="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:lines="1"
                 android:ellipsize="end"
-                android:textAppearance="@style/TextAppearance.News.Caption"
+                android:lines="1"
+                android:padding="16dp"
+                android:text="@{article.source.name}"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.News.Overline"
+                android:textColor="?attr/colorSecondaryVariant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_article_preview"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"

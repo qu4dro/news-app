@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModelNews"
             type="ru.orlovvv.newsapp.viewmodels.NewsViewModel" />
@@ -11,7 +12,6 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:background="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,24 +21,27 @@
             app:liftOnScroll="true"
             app:liftOnScrollTargetViewId="@id/rv_trending_news">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways|snap"/>
+            <androidx.appcompat.widget.Toolbar
+                app:titleTextColor="?attr/colorOnPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:title="@string/read_later" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingHorizontal="12dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingTop="4dp"
             android:id="@+id/rv_bookmarked_articles"
             articleList="@{viewModelNews.bookmarkedArticles}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:paddingHorizontal="12dp"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:spanCount="2"
             tools:listitem="@layout/item_article_v3" />
 

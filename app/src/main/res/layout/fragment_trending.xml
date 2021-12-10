@@ -12,45 +12,47 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:background="?attr/colorPrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:fitsSystemWindows="true"
+            android:backgroundTint="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:liftOnScroll="true"
             app:liftOnScrollTargetViewId="@id/rv_trending_news">
 
-        <androidx.appcompat.widget.Toolbar
-            app:title="@string/top_headlines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways|snap"/>
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:title="@string/top_headlines"
+                app:titleTextColor="?attr/colorOnPrimary" />
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:visibility="gone"
-                app:indicatorColor="@color/white"
                 android:id="@+id/progress"
-                android:indeterminate="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorColor="?attr/colorSecondary" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingTop="4dp"
             android:id="@+id/rv_trending_news"
             articleList="@{viewModelNews.topNews.data.articles}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_article_v1" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 
 </layout>

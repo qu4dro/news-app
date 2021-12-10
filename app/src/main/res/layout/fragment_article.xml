@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:background="?attr/colorSurface"
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -65,6 +66,7 @@
                     tools:text="Short title with main information about this article" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:textColor="?attr/colorSecondaryVariant"
                     android:id="@+id/tv_badges"
                     author="@{article.author}"
                     date="@{article.publishedAt}"
@@ -78,7 +80,6 @@
                     android:textAppearance="@style/TextAppearance.News.Body2"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_preview"
                     tools:text="Sport Google.com" />

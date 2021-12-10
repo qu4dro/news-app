@@ -49,12 +49,12 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
     private fun setupUI() {
         articleFragmentBinding.apply {
             lifecycleOwner = this@ArticleFragment
-            fabSource.setOnClickListener {
-                val link = newsViewModel.selectedArticle.value?.url ?: ""
-                val action =
-                    ArticleFragmentDirections.actionArticleFragmentToSourceFragment(link)
-                findNavController().navigate(action)
-            }
+//            fabSource.setOnClickListener {
+//                val link = newsViewModel.selectedArticle.value?.url ?: ""
+//                val action =
+//                    ArticleFragmentDirections.actionArticleFragmentToSourceFragment(link)
+//                findNavController().navigate(action)
+//            }
         }
     }
 

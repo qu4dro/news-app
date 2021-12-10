@@ -12,6 +12,13 @@
         <item name="cardCornerRadius">8dp</item>
     </style>
 
+    <style name="CardViewStyle.ImageCardOneCorner" parent="Widget.MaterialComponents.CardView">
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+    </style>
+
     <style name="CardViewStyle.FlatCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardElevation">0dp</item>

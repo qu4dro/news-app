@@ -6,15 +6,10 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import ru.orlovvv.newsapp.R
@@ -46,8 +41,7 @@ class NewsActivity : AppCompatActivity() {
     private fun setNavigation() {
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.trendingFragment, R.id.savedFragment, R.id.searchFragment),
-            newsActivityBinding.drawerLayout
+            setOf(R.id.trendingFragment, R.id.savedFragment, R.id.searchFragment)
         )
 
         val navHostFragment =
@@ -62,10 +56,6 @@ class NewsActivity : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
             setupWithNavController(navController)
             setOnItemReselectedListener { }
-        }
-
-        newsActivityBinding.navView.apply {
-            setupWithNavController(navController)
         }
     }
 

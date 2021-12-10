@@ -43,7 +43,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
     }
 
     private fun setupObservers() {
-        newsViewModel.topNews.observe(this.requireActivity(), Observer { response ->
+        newsViewModel.topNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
 

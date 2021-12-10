@@ -9,4 +9,6 @@
     <string name="settings">Settings</string>
     <string name="trending_">Trending,</string>
     <string name="similar">Similar</string>
+    <string name="save_article">Save article</string>
+    <string name="share_article">Share article</string>
 </resources>

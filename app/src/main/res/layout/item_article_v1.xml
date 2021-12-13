@@ -28,6 +28,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+
                 android:id="@+id/iv_article_preview"
                 cardView="@{null}"
                 imageUrl="@{article.urlToImage}"
@@ -68,7 +69,7 @@
                 android:textAppearance="@style/TextAppearance.News.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_article_preview"
+                app:layout_constraintTop_toBottomOf="@id/tv_source"
                 tools:text="Short title with main information about this article" />
 
             <com.google.android.material.textview.MaterialTextView

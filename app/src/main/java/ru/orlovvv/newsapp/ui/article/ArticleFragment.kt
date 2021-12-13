@@ -1,5 +1,6 @@
 package ru.orlovvv.newsapp.ui.article
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,9 +52,11 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
             lifecycleOwner = this@ArticleFragment
 
             fabSource.setOnClickListener {
-                article?.let { val action =
-                    ArticleFragmentDirections.actionArticleFragmentToSourceFragment(it.url)
-                    findNavController().navigate(action) }
+                article?.let {
+                    val action =
+                        ArticleFragmentDirections.actionArticleFragmentToSourceFragment(it.url)
+                    findNavController().navigate(action)
+                }
             }
 
             toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
@@ -76,6 +79,9 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
                         true
                     }
                     R.id.shareArticle -> {
+                        val intent = Intent(Intent.ACTION_SEND).setType("text/plain")
+                            .putExtra(Intent.EXTRA_TEXT, article?.url!!)
+                        startActivity(intent)
                         true
                     }
                     else -> false
@@ -86,9 +92,11 @@ class ArticleFragment : Fragment(R.layout.fragment_article), ArticleAdapter.Arti
 
     private fun changeIcon(isBookmarked: Boolean) {
         if (isBookmarked) {
-            articleFragmentBinding.toolbar.menu.findItem(R.id.saveArticle).setIcon(R.drawable.ic_bookmark_remove)
+            articleFragmentBinding.toolbar.menu.findItem(R.id.saveArticle)
+                .setIcon(R.drawable.ic_bookmark_remove)
         } else {
-            articleFragmentBinding.toolbar.menu.findItem(R.id.saveArticle).setIcon(R.drawable.ic_bookmark)
+            articleFragmentBinding.toolbar.menu.findItem(R.id.saveArticle)
+                .setIcon(R.drawable.ic_bookmark)
         }
     }
 

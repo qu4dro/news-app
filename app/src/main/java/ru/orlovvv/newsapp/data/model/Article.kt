@@ -17,6 +17,7 @@ data class Article(
     var urlToImage: String? = "Url not found"
 ) {
     var isBookmarked: Boolean = false
+    var isCached: Boolean = true
 }
 
 object ArticleCallback : DiffUtil.ItemCallback<Article>() {

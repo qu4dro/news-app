@@ -49,7 +49,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_trending_news"
-                articleList="@{viewModelNews.topNews.data.articles}"
+                articleList="@{viewModelNews.topNewsCache}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"

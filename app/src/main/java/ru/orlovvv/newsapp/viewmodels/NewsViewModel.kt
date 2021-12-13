@@ -10,10 +10,12 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.data.model.News
+import ru.orlovvv.newsapp.data.repository.CacheRepository
 import ru.orlovvv.newsapp.data.repository.SavedRepository
 import ru.orlovvv.newsapp.data.repository.TrendingRepository
 import ru.orlovvv.newsapp.utils.NetworkHelper
 import ru.orlovvv.newsapp.utils.Resource
+import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -21,12 +23,17 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(
     private val trendingRepository: TrendingRepository,
     private val savedRepository: SavedRepository,
+    private val cacheRepository: CacheRepository,
     private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
     private val _topNews = MutableLiveData<Resource<News>>()
     val topNews: LiveData<Resource<News>>
         get() = _topNews
+
+    private val _topNewsCache = cacheRepository.getTrendingCache()
+    val topNewsCache
+        get() = _topNewsCache
 
     private val _selectedArticle = MutableLiveData<Article>()
     val selectedArticle
@@ -72,7 +79,13 @@ class NewsViewModel @Inject constructor(
     }
 
     fun saveArticle(article: Article) = viewModelScope.launch {
+        article.isCached = false
         savedRepository.insertBookmarkArticle(article)
+    }
+
+    fun updateCache(articlesList: List<Article>) = viewModelScope.launch {
+            cacheRepository.updateCache(articlesList)
+
     }
 
 }

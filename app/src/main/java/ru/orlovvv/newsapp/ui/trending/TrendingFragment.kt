@@ -15,7 +15,6 @@ import ru.orlovvv.newsapp.data.model.Article
 import ru.orlovvv.newsapp.databinding.FragmentTrendingBinding
 import ru.orlovvv.newsapp.utils.Resource
 import ru.orlovvv.newsapp.viewmodels.NewsViewModel
-import timber.log.Timber
 
 @AndroidEntryPoint
 class TrendingFragment : Fragment(R.layout.fragment_trending),
@@ -43,6 +42,11 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
     }
 
     private fun setupObservers() {
+
+        newsViewModel.topNewsCache.observe(viewLifecycleOwner, Observer {
+
+        })
+
         newsViewModel.topNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Loading -> {
@@ -56,7 +60,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
                 is Resource.Success -> {
                     trendingFragmentBinding.progress.visibility = View.GONE
                     trendingFragmentBinding.swipeRefresh.isRefreshing = false
-
+                    response.data?.let { newsViewModel.updateCache(it.articles) }
                 }
             }
         })

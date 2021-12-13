@@ -2,10 +2,8 @@ package ru.orlovvv.newsapp.adapters
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.view.RoundedCorner
 import android.view.View
 import android.widget.ImageView
-import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,10 +13,8 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
-import ru.orlovvv.newsapp.R
 import ru.orlovvv.newsapp.data.model.Article
 import timber.log.Timber
-import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*

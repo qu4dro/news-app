@@ -6,4 +6,7 @@ import ru.orlovvv.newsapp.data.model.News
 interface NewsApiHelper {
 
     suspend fun getTopNews(): Response<News>
+
+    suspend fun searchNews(searchQuery: String): Response<News>
+
 }

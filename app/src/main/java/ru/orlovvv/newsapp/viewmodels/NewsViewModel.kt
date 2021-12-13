@@ -27,9 +27,15 @@ class NewsViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
+    val searchQuery = MutableLiveData<String>()
+
     private val _topNews = MutableLiveData<Resource<News>>()
     val topNews: LiveData<Resource<News>>
         get() = _topNews
+
+    private val _searchedNews = MutableLiveData<Resource<News>>()
+    val searchedNews: LiveData<Resource<News>>
+        get() = _searchedNews
 
     private val _topNewsCache = cacheRepository.getTrendingCache()
     val topNewsCache
@@ -70,6 +76,29 @@ class NewsViewModel @Inject constructor(
         return Resource.Error(response.errorBody().toString())
     }
 
+    fun searchNewsFromServer(searchQuery: String) = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            if (networkHelper.isNetworkConnected()) {
+                _searchedNews.postValue(Resource.Loading())
+                val response = trendingRepository.searchNews(searchQuery)
+                _searchedNews.postValue(handleSearchNewsResponse(response))
+            } else {
+                _searchedNews.postValue(Resource.Error("Check internet connection"))
+            }
+        } catch (e: Exception) {
+            _searchedNews.postValue(Resource.Error("Can't get news: ${e.message}"))
+        }
+    }
+
+    private fun handleSearchNewsResponse(response: Response<News>): Resource<News> {
+        if (response.isSuccessful) {
+            response.body()?.let {
+                return Resource.Success(it)
+            }
+        }
+        return Resource.Error(response.errorBody().toString())
+    }
+
     fun selectArticle(article: Article) {
         _selectedArticle.value = article
     }
@@ -84,7 +113,7 @@ class NewsViewModel @Inject constructor(
     }
 
     fun updateCache(articlesList: List<Article>) = viewModelScope.launch {
-            cacheRepository.updateCache(articlesList)
+        cacheRepository.updateCache(articlesList)
 
     }
 

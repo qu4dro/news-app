@@ -14,4 +14,5 @@
     <string name="delete_article">Delete article</string>
     <string name="top_headlines">Top headlines</string>
     <string name="read_later">Read later</string>
+    <string name="search_articles">Search articles</string>
 </resources>

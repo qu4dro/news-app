@@ -11,5 +11,6 @@ class TrendingRepository @Inject constructor(
 ) {
 
     suspend fun getTopNews() = apiHelper.getTopNews()
+    suspend fun searchNews(searchQuery: String) = apiHelper.searchNews(searchQuery)
 
 }

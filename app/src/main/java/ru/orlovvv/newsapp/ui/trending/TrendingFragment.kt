@@ -47,12 +47,15 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
             when (response) {
                 is Resource.Loading -> {
                     trendingFragmentBinding.progress.visibility = View.VISIBLE
+                    trendingFragmentBinding.swipeRefresh.isRefreshing = false
                 }
                 is Resource.Error -> {
                     trendingFragmentBinding.progress.visibility = View.GONE
+                    trendingFragmentBinding.swipeRefresh.isRefreshing = false
                 }
                 is Resource.Success -> {
                     trendingFragmentBinding.progress.visibility = View.GONE
+                    trendingFragmentBinding.swipeRefresh.isRefreshing = false
 
                 }
             }
@@ -65,6 +68,11 @@ class TrendingFragment : Fragment(R.layout.fragment_trending),
             viewModelNews = newsViewModel
             rvTrendingNews.adapter =
                 ArticleAdapter(listener = this@TrendingFragment, isSaved = false)
+
+            swipeRefresh.setOnRefreshListener {
+                newsViewModel.getTopNewsFromServer()
+                swipeRefresh.isRefreshing = true
+            }
         }
     }
 
